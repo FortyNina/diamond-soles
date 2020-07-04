@@ -16,9 +16,12 @@ public class GameData : Singleton<GameData>
 
 	public List<Dictionary<TileType, int>> playerOreSupplies = new List<Dictionary<TileType, int>>();
 
-	public List<int> energyLevels = new List<int>();
+	public List<float> energyLevels = new List<float>();
 	public List<int> durabilityLevels = new List<int>();
 	public List<int> thirdLevels = new List<int>();
+
+
+	public List<int> playerMoney = new List<int>();
 
 
 

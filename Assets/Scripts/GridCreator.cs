@@ -60,8 +60,8 @@ public class GridCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _adjustedX = -1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2;
-        _adjustedY = -1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2;
+        _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
+        _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
 
         CreateNewLayout();
 

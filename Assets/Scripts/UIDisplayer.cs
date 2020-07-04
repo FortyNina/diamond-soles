@@ -15,6 +15,9 @@ public class UIDisplayer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI[] _jellyCollectedDisplay;
 
+    [SerializeField]
+    private TextMeshProUGUI[] _moneyDisplay;
+
 
     // Update is called once per frame
     void Update()
@@ -26,12 +29,18 @@ public class UIDisplayer : MonoBehaviour
 
         for(int i = 0; i < _ironCollectedDisplay.Length; i++)
         {
-            _ironCollectedDisplay[i].text = "Iron ore: " + GameData.Instance.playerOreSupplies[0][TileType.Iron];
+            _ironCollectedDisplay[i].text = "Iron ore: " + GameData.Instance.playerOreSupplies[i][TileType.Iron];
         }
 
         for (int i = 0; i < _jellyCollectedDisplay.Length; i++)
         {
-            _jellyCollectedDisplay[i].text = "Food: " + GameData.Instance.playerOreSupplies[0][TileType.Jelly];
+            _jellyCollectedDisplay[i].text = "Food: " + GameData.Instance.playerOreSupplies[i][TileType.Jelly];
+        }
+
+
+        for(int i = 0; i < _moneyDisplay.Length;i++)
+        {
+            _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
         }
     }
 }
