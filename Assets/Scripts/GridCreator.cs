@@ -39,6 +39,9 @@ public class GridCreator : MonoBehaviour
     [SerializeField]
     private GameObject _ironTile;
 
+    [SerializeField]
+    private GameObject _jellyTile;
+
 
     [Space(9)]
     [SerializeField]
@@ -68,7 +71,7 @@ public class GridCreator : MonoBehaviour
     public void CreateNewLayout()
     {
         DestroyCurrentTiles();
-        _tiles = CreateIronMine();
+        _tiles = CreateRandomMine();
         DrawGrid();
     }
 
@@ -118,6 +121,8 @@ public class GridCreator : MonoBehaviour
                     prefabToGenerate = _stairTile;
                 else if (currentTile.TileType == TileType.Iron)
                     prefabToGenerate = _ironTile;
+                else if (currentTile.TileType == TileType.Jelly)
+                    prefabToGenerate = _jellyTile;
 
                 if (prefabToGenerate != _blankTile)
                 {
@@ -153,7 +158,7 @@ public class GridCreator : MonoBehaviour
         }
     }
 
-    private Tile GetRandomTile(int blank, int basic, int iron)
+    private Tile GetRandomTile(int blank, int basic, int iron, int jelly, int third)
     {
         int rand = Random.Range(0, 100);
         int marker = 0;
@@ -176,6 +181,18 @@ public class GridCreator : MonoBehaviour
                 return new Tile(TileType.Iron, playerID);
         }
         marker += iron;
+        for (int i = marker; i < jelly + marker; i++)
+        {
+            if (rand == i)
+                return new Tile(TileType.Jelly, playerID);
+        }
+        marker += jelly;
+        for (int i = marker; i < third + marker; i++)
+        {
+            if (rand == i)
+                return new Tile(TileType.Third, playerID);
+        }
+        marker += third;
 
 
 
@@ -183,32 +200,58 @@ public class GridCreator : MonoBehaviour
         
     }
 
-    private Tile[] CreateIronMine()
+    private Tile[] CreateRandomMine()
     {
         int floor = GameData.Instance.ironFloors[playerID];
 
         int percentBlank = 0;
         int percentBasic = 0;
         int percentIron = 0;
-        
+        int percentJelly = 0;
+        int percentThird = 0;
 
-        if (floor < 10)
+        if (mineType == Mine.IronMine)
         {
-            percentBlank = 90;
-            percentBasic = 7;
-            percentIron = 3;
+            if (floor < 10)
+            {
+                percentBlank = 90;
+                percentBasic = 7;
+                percentIron = 3;
+            }
+            else if (floor < 20)
+            {
+                percentBlank = 80;
+                percentBasic = 13;
+                percentIron = 7;
+            }
+            else if (floor < 30)
+            {
+                percentBlank = 80;
+                percentBasic = 9;
+                percentIron = 11;
+            }
         }
-        else if(floor < 20)
+
+        else if(mineType == Mine.JellyMine)
         {
-            percentBlank = 80;
-            percentBasic = 13;
-            percentIron = 7;
-        }
-        else if (floor < 30)
-        {
-            percentBlank = 80;
-            percentBasic = 9;
-            percentIron = 11;
+            if (floor < 10)
+            {
+                percentBlank = 90;
+                percentBasic = 7;
+                percentJelly = 3;
+            }
+            else if (floor < 20)
+            {
+                percentBlank = 80;
+                percentBasic = 13;
+                percentJelly = 7;
+            }
+            else if (floor < 30)
+            {
+                percentBlank = 80;
+                percentBasic = 9;
+                percentJelly = 11;
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------
@@ -218,7 +261,7 @@ public class GridCreator : MonoBehaviour
         for (int i = 0; i < newTiles.Length; i++)
         {
 
-            newTiles[i] = GetRandomTile(percentBlank, percentBasic, percentIron);
+            newTiles[i] = GetRandomTile(percentBlank, percentBasic, percentIron, percentJelly, percentThird);
         }
 
         int rand = Random.Range(0, newTiles.Length);

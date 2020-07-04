@@ -538,7 +538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 3c1738a2b346745d18f463a0c3cfc2f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   rock: {r: 0.5660378, g: 0.33483636, b: 0.32306874, a: 1}
   stair: {r: 0.2012558, g: 0.19117124, b: 0.2264151, a: 1}
   playerID: 0
-  mineType: 0
+  mineType: 1
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
@@ -1201,6 +1201,8 @@ MonoBehaviour:
   _stairTile: {fileID: 769796296754416837, guid: e39ac2909828241219d77d2d33e9078f,
     type: 3}
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
+    type: 3}
+  _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
     type: 3}
   _playerObject: {fileID: 797037929}
 --- !u!4 &1867674276
