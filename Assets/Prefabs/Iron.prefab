@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ore: 5
-  oreAmount: 0
+  oreAmount: 1
   health: 2
   holePrefab: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}

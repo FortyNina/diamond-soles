@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
 
             GameData.Instance.playerOreSupplies.Add(ores);
 
+            GameData.Instance.durabilityLevels.Add(10);
+            GameData.Instance.energyLevels.Add(10);
+            GameData.Instance.thirdLevels.Add(10);
+
 
 
         }
