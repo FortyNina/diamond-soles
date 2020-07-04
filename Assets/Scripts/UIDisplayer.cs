@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIDisplayer : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class UIDisplayer : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI[] _moneyDisplay;
+
+    [SerializeField]
+    private Image[] _energyDisplay;
+
+    [SerializeField]
+    private Image[] _durabilityDisplay;
 
 
     // Update is called once per frame
@@ -41,6 +48,17 @@ public class UIDisplayer : MonoBehaviour
         for(int i = 0; i < _moneyDisplay.Length;i++)
         {
             _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
+        }
+
+        for(int i = 0; i < _energyDisplay.Length; i++)
+        {
+            _energyDisplay[i].fillAmount = (float)GameData.Instance.energyLevels[i] / 100f;
+            Debug.Log((float)GameData.Instance.energyLevels[i] / 100f);
+        }
+
+        for (int i = 0; i < _durabilityDisplay.Length; i++)
+        {
+            _durabilityDisplay[i].fillAmount = (float)GameData.Instance.durabilityLevels[i] / 100f;
         }
     }
 }

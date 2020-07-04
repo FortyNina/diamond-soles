@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             GameData.Instance.ironFloors[playerID]++;
             gridCreator.CreateNewLayout();
+            GameData.Instance.energyLevels[playerID] -= 1;
 
         }
 
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
             GameData.Instance.ironFloors[playerID] += randFloors;
             gridCreator.CreateNewLayout();
+            GameData.Instance.energyLevels[playerID] -= randFloors;
 
 
 
