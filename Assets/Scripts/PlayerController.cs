@@ -80,6 +80,12 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            GameData.Instance.ironFloors[playerID] = 10;
+            gridCreator.DisplayNewLayout();
+        }
+
 
 
         transform.position += new Vector3(x, y, 0);
@@ -94,7 +100,7 @@ public class PlayerController : MonoBehaviour
         if(collision.tag == "Staircase")
         {
             GameData.Instance.ironFloors[playerID]++;
-            gridCreator.CreateNewLayout();
+            gridCreator.DisplayNewLayout();
             GameData.Instance.energyLevels[playerID] -= 1;
 
         }
@@ -110,7 +116,7 @@ public class PlayerController : MonoBehaviour
                 randFloors = Random.Range(5, 15);
 
             GameData.Instance.ironFloors[playerID] += randFloors;
-            gridCreator.CreateNewLayout();
+            gridCreator.DisplayNewLayout();
             GameData.Instance.energyLevels[playerID] -= randFloors;
 
 

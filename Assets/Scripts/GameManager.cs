@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameState state;
 
+
     public int amountOfResourceToLoseAfterDay = 10;
 
     [SerializeField]

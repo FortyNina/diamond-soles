@@ -63,15 +63,23 @@ public class GridCreator : MonoBehaviour
         _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
         _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
 
-        CreateNewLayout();
+        DisplayNewLayout();
 
 
     }
 
-    public void CreateNewLayout()
+    public void DisplayNewLayout()
     {
         DestroyCurrentTiles();
-        _tiles = CreateRandomMine();
+        if (MineRecorder.CheckMineFloorExists(mineType, GameData.Instance.ironFloors[playerID]))
+        {
+            _tiles = MineRecorder.GetMineFloor(mineType, GameData.Instance.ironFloors[playerID]);
+        }
+        else
+        {
+            _tiles = MineRecorder.CreateMineFloor(mineType, GameData.Instance.ironFloors[playerID], _gridWidth, _gridHeight);
+        }
+        
         DrawGrid();
     }
 
@@ -157,128 +165,5 @@ public class GridCreator : MonoBehaviour
                Destroy(child.gameObject);
         }
     }
-
-    private Tile GetRandomTile(int blank, int basic, int iron, int jelly, int third)
-    {
-        int rand = Random.Range(0, 100);
-        int marker = 0;
-
-        for (int i = marker; i < blank + marker; i++)
-        {
-            if (rand == i)
-                return new Tile(TileType.Blank, playerID);
-        }
-        marker += blank;
-        for (int i = marker; i < basic + marker; i++)
-        {
-            if (rand == i)
-                return new Tile(TileType.Rock, playerID);
-        }
-        marker += basic;
-        for (int i = marker; i < iron + marker; i++)
-        {
-            if (rand == i)
-                return new Tile(TileType.Iron, playerID);
-        }
-        marker += iron;
-        for (int i = marker; i < jelly + marker; i++)
-        {
-            if (rand == i)
-                return new Tile(TileType.Jelly, playerID);
-        }
-        marker += jelly;
-        for (int i = marker; i < third + marker; i++)
-        {
-            if (rand == i)
-                return new Tile(TileType.Third, playerID);
-        }
-        marker += third;
-
-
-
-        return new Tile(TileType.Blank, playerID);
-        
-    }
-
-    private Tile[] CreateRandomMine()
-    {
-        int floor = GameData.Instance.ironFloors[playerID];
-
-        int percentBlank = 0;
-        int percentBasic = 0;
-        int percentIron = 0;
-        int percentJelly = 0;
-        int percentThird = 0;
-
-        if (mineType == Mine.IronMine)
-        {
-            if (floor < 10)
-            {
-                percentBlank = 90;
-                percentBasic = 7;
-                percentIron = 3;
-            }
-            else if (floor < 20)
-            {
-                percentBlank = 80;
-                percentBasic = 13;
-                percentIron = 7;
-            }
-            else if (floor < 30)
-            {
-                percentBlank = 80;
-                percentBasic = 9;
-                percentIron = 11;
-            }
-        }
-
-        else if(mineType == Mine.JellyMine)
-        {
-            if (floor < 10)
-            {
-                percentBlank = 90;
-                percentBasic = 7;
-                percentJelly = 3;
-            }
-            else if (floor < 20)
-            {
-                percentBlank = 80;
-                percentBasic = 13;
-                percentJelly = 7;
-            }
-            else if (floor < 30)
-            {
-                percentBlank = 80;
-                percentBasic = 9;
-                percentJelly = 11;
-            }
-        }
-
-        //-----------------------------------------------------------------------------------------------------
-
-        Tile[] newTiles = new Tile[_gridWidth * _gridHeight];
-
-        for (int i = 0; i < newTiles.Length; i++)
-        {
-
-            newTiles[i] = GetRandomTile(percentBlank, percentBasic, percentIron, percentJelly, percentThird);
-        }
-
-        int rand = Random.Range(0, newTiles.Length);
-        int stairLoc = rand;
-        int spawnLoc = rand;
-
-        while (stairLoc == spawnLoc)
-        {
-            spawnLoc = Random.Range(0, newTiles.Length);
-        }
-
-        newTiles[stairLoc] = new Tile(TileType.Stair, playerID);
-        newTiles[spawnLoc] = new Tile(TileType.Spawn, playerID);
-
-        return newTiles;
-
-    }
-
 
 }
