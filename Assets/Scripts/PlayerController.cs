@@ -104,7 +104,14 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.tag == "Staircase")
         {
-            GameData.Instance.ironFloors[playerID]++;
+            if(gridCreator.mineType == Mine.IronMine)
+                GameData.Instance.ironFloors[playerID]++;
+            if (gridCreator.mineType == Mine.JellyMine)
+                GameData.Instance.jellyFloors[playerID]++;
+            if (gridCreator.mineType == Mine.ThirdMine)
+                GameData.Instance.thirdFloors[playerID]++;
+
+
             gridCreator.DisplayNewLayout();
             GameData.Instance.energyLevels[playerID] -= 1;
 
@@ -112,15 +119,28 @@ public class PlayerController : MonoBehaviour
 
         else if(collision.tag == "Hole")
         {
+            int currentFloor = 0;
+            if (gridCreator.mineType == Mine.IronMine)
+                currentFloor = GameData.Instance.ironFloors[playerID];
+            if (gridCreator.mineType == Mine.JellyMine)
+                currentFloor = GameData.Instance.jellyFloors[playerID];
+            if (gridCreator.mineType == Mine.ThirdMine)
+                currentFloor = GameData.Instance.thirdFloors[playerID];
+
             int randFloors = 0;
-            if (GameData.Instance.ironFloors[playerID] < 15)
+            if (currentFloor < 15)
                 randFloors = Random.Range(2, 4);
-            else if (GameData.Instance.ironFloors[playerID] < 35)
+            else if (currentFloor < 35)
                 randFloors = Random.Range(3, 9);
             else
                 randFloors = Random.Range(5, 15);
 
-            GameData.Instance.ironFloors[playerID] += randFloors;
+            if (gridCreator.mineType == Mine.IronMine)
+                GameData.Instance.ironFloors[playerID]+=randFloors;
+            if (gridCreator.mineType == Mine.JellyMine)
+                GameData.Instance.jellyFloors[playerID]+= randFloors;
+            if (gridCreator.mineType == Mine.ThirdMine)
+                GameData.Instance.thirdFloors[playerID]+= randFloors;
             gridCreator.DisplayNewLayout();
             GameData.Instance.energyLevels[playerID] -= randFloors;
 

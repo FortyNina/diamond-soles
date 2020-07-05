@@ -57,6 +57,8 @@ public class GridCreator : MonoBehaviour
     private float _adjustedX;
     private float _adjustedY;
 
+    private int _currentFloor;
+
 
 
 
@@ -121,14 +123,23 @@ public class GridCreator : MonoBehaviour
     public void DisplayNewLayout()
     {
         DestroyCurrentTiles();
-        if (MineRecorder.CheckMineFloorExists(mineType, GameData.Instance.ironFloors[playerID]))
+
+        if (mineType == Mine.IronMine)
+            _currentFloor = GameData.Instance.ironFloors[playerID];
+        if (mineType == Mine.JellyMine)
+            _currentFloor = GameData.Instance.jellyFloors[playerID];
+        if (mineType == Mine.ThirdMine)
+            _currentFloor = GameData.Instance.thirdFloors[playerID];
+
+        if (MineRecorder.CheckMineFloorExists(mineType, _currentFloor))
         {
-            _tiles = MineRecorder.GetMineFloor(mineType, GameData.Instance.ironFloors[playerID]);
+            _tiles = MineRecorder.GetMineFloor(mineType, _currentFloor);
         }
         else
         {
-            _tiles = MineRecorder.CreateMineFloor(mineType, GameData.Instance.ironFloors[playerID], _gridWidth, _gridHeight);
+            _tiles = MineRecorder.CreateMineFloor(mineType,_currentFloor, _gridWidth, _gridHeight);
         }
+        
         
         DrawGrid();
     }
@@ -192,7 +203,9 @@ public class GridCreator : MonoBehaviour
                     Rock r = go.GetComponent<Rock>();
 
                     if (r != null)
-                        r.CreateSettings(currentTile.oreAmount, currentTile.health, GameData.Instance.ironFloors[playerID], mineType, i + j, currentTile);
+                    {
+                        r.CreateSettings(currentTile.oreAmount, currentTile.health, _currentFloor, mineType, i + j, currentTile);
+                    }
 
 
                     go.transform.parent = transform;
