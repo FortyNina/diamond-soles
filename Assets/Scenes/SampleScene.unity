@@ -651,6 +651,8 @@ MonoBehaviour:
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
     type: 3}
+  _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
+    type: 3}
   _playerObject: {fileID: 64263300}
 --- !u!4 &479797024
 Transform:
@@ -1061,6 +1063,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
   _playerObject: {fileID: 1355711171}
 --- !u!4 &676899727
@@ -2171,6 +2175,8 @@ MonoBehaviour:
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
     type: 3}
+  _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
+    type: 3}
   _playerObject: {fileID: 1712520265}
 --- !u!4 &1705751278
 Transform:
@@ -2743,6 +2749,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
   _playerObject: {fileID: 797037929}
 --- !u!4 &1867674276

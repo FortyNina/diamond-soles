@@ -51,7 +51,7 @@ public class MineRecorder : MonoBehaviour
         return new Tile[0];
     }
 
-    private static Tile GetRandomTile(int blank, int basic, int iron, int jelly, int third)
+    private static Tile GetRandomTile(int index, int blank, int basic, int iron, int jelly, int third)
     {
         int rand = Random.Range(0, 100);
         int marker = 0;
@@ -59,37 +59,37 @@ public class MineRecorder : MonoBehaviour
         for (int i = marker; i < blank + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Blank, 0);
+                return new Tile(TileType.Blank, 0, index);
         }
         marker += blank;
         for (int i = marker; i < basic + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Rock, 0);
+                return new Tile(TileType.Rock, 0, index);
         }
         marker += basic;
         for (int i = marker; i < iron + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Iron, 0);
+                return new Tile(TileType.Iron, 0, index);
         }
         marker += iron;
         for (int i = marker; i < jelly + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Jelly, 0);
+                return new Tile(TileType.Jelly, 0, index);
         }
         marker += jelly;
         for (int i = marker; i < third + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Third, 0);
+                return new Tile(TileType.Third, 0, index);
         }
         marker += third;
 
 
 
-        return new Tile(TileType.Blank, 0);
+        return new Tile(TileType.Blank, 0, index);
 
     }
 
@@ -153,7 +153,7 @@ public class MineRecorder : MonoBehaviour
         for (int i = 0; i < newTiles.Length; i++)
         {
 
-            newTiles[i] = GetRandomTile(percentBlank, percentBasic, percentIron, percentJelly, percentThird);
+            newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird);
         }
 
         int rand = Random.Range(0, newTiles.Length);
@@ -165,8 +165,8 @@ public class MineRecorder : MonoBehaviour
             spawnLoc = Random.Range(0, newTiles.Length);
         }
 
-        newTiles[stairLoc] = new Tile(TileType.Stair, 0);
-        newTiles[spawnLoc] = new Tile(TileType.Spawn, 0);
+        newTiles[stairLoc] = new Tile(TileType.Stair, 0, stairLoc);
+        newTiles[spawnLoc] = new Tile(TileType.Spawn, 0, spawnLoc);
 
         if (mineType == Mine.IronMine)
             ironMineFloors[floor] = newTiles;
@@ -177,6 +177,47 @@ public class MineRecorder : MonoBehaviour
 
         return newTiles;
 
+    }
+
+
+    public static void UpdateMineTileHealth(int floor, Mine mineType, int newHealth, int index)
+    {
+        if (mineType == Mine.IronMine)
+        {
+            if (ironMineFloors[floor] != null)
+                ironMineFloors[floor][index].health += newHealth;
+        }
+        if (mineType == Mine.JellyMine)
+        {
+            if (jellyMineFloors[floor] != null)
+                jellyMineFloors[floor][index].health += newHealth;
+        }
+        if (mineType == Mine.ThirdMine)
+        {
+            if (thirdMineFloors[floor] != null)
+                thirdMineFloors[floor][index].health += newHealth;
+        }
+    }
+
+    public static int GetMineTileHealth(int floor, Mine mineType, int index)
+    {
+        if (mineType == Mine.IronMine)
+        {
+            if (ironMineFloors[floor] != null)
+                return ironMineFloors[floor][index].health;
+        }
+        if (mineType == Mine.JellyMine)
+        {
+            if (jellyMineFloors[floor] != null)
+                return jellyMineFloors[floor][index].health;
+        }
+        if (mineType == Mine.ThirdMine)
+        {
+            if (thirdMineFloors[floor] != null)
+                return thirdMineFloors[floor][index].health;
+        }
+        Debug.Log("ugh");
+        return 0;
     }
 
 

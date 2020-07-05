@@ -15,10 +15,33 @@ public class Tile
 
     private int _playerID;
 
-    public Tile(TileType t, int id)
+    public int oreAmount;
+    public int health;
+
+    public int index;
+
+    public Tile(TileType t, int id, int index)
     {
         _tileType = t;
         _playerID = id;
+
+        if(t == TileType.Rock)
+        {
+            oreAmount = 0;
+            health = 1;
+        }
+        if(t == TileType.Iron)
+        {
+            oreAmount = 1;
+            health = 2;
+        }
+        if(t == TileType.Jelly)
+        {
+            oreAmount = 1;
+            health = 2;
+        }
+
+        this.index = index;
 
 
     }

@@ -43,6 +43,10 @@ public class GridCreator : MonoBehaviour
     private GameObject _jellyTile;
 
 
+    [SerializeField]
+    private GameObject _holeTile;
+
+
     [Space(9)]
     [SerializeField]
     private GameObject _playerObject;
@@ -131,13 +135,18 @@ public class GridCreator : MonoBehaviour
                     prefabToGenerate = _ironTile;
                 else if (currentTile.TileType == TileType.Jelly)
                     prefabToGenerate = _jellyTile;
+                else if (currentTile.TileType == TileType.Hole)
+                    prefabToGenerate = _holeTile;
 
                 if (prefabToGenerate != _blankTile)
                 {
 
                     GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
                     SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
+                    Rock r = go.GetComponent<Rock>();
 
+                    if (r != null)
+                        r.CreateSettings(currentTile.oreAmount, currentTile.health, GameData.Instance.ironFloors[playerID], mineType, i + j, currentTile);
 
 
                     go.transform.parent = transform;

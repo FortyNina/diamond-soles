@@ -53,7 +53,6 @@ public class UIDisplayer : MonoBehaviour
         for(int i = 0; i < _energyDisplay.Length; i++)
         {
             _energyDisplay[i].fillAmount = (float)GameData.Instance.energyLevels[i] / 100f;
-            Debug.Log((float)GameData.Instance.energyLevels[i] / 100f);
         }
 
         for (int i = 0; i < _durabilityDisplay.Length; i++)
