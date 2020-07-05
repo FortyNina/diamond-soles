@@ -36,12 +36,9 @@ public class Rock : MonoBehaviour
     {
         if(collision.tag == "Axe")
         {
-            Debug.Log("What the fuck! " + gameObject.name);
-
             MineRecorder.UpdateMineTileHealth(floorNumber, mineType, -1, index);
             if(MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
             {
-                Debug.Log(MineRecorder.GetMineTileHealth(floorNumber, mineType, index));
                 if (GameData.Instance.playerOreSupplies[0].ContainsKey(ore))
                 {
                     GameData.Instance.playerOreSupplies[0][ore] += myTile.oreAmount;
@@ -52,9 +49,13 @@ public class Rock : MonoBehaviour
                     GameObject go = Instantiate(holePrefab, transform.position, Quaternion.identity);
                     go.transform.parent = transform.parent;
                     go.transform.position = transform.position;
+                    MineRecorder.UpdateTileType(floorNumber, index, mineType, TileType.Hole);
                 }
+                else
+                {
+                    MineRecorder.UpdateTileType(floorNumber, index, mineType, TileType.Blank);
 
-                Destroy(gameObject);
+                }
             }
         }
     }

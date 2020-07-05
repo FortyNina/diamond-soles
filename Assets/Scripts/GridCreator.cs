@@ -72,6 +72,52 @@ public class GridCreator : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (MineRecorder.IronDirty && !MineRecorder.CheckFlag(Mine.IronMine, playerID))
+        {
+            if(mineType != Mine.IronMine)
+            {
+                MineRecorder.SetBackFlag(Mine.IronMine, playerID);
+            }
+            else
+            {
+                Vector3 pos = _playerObject.transform.position;
+                DisplayNewLayout();
+                MineRecorder.SetBackFlag(Mine.IronMine, playerID);
+                _playerObject.transform.position = pos;
+            }
+        }
+        if (MineRecorder.JellyDirty && !MineRecorder.CheckFlag(Mine.JellyMine, playerID))
+        {
+            if (mineType != Mine.JellyMine)
+            {
+                MineRecorder.SetBackFlag(Mine.JellyMine, playerID);
+            }
+            else
+            {
+                Vector3 pos = _playerObject.transform.position;
+                DisplayNewLayout();
+                MineRecorder.SetBackFlag(Mine.JellyMine, playerID);
+                _playerObject.transform.position = pos;
+            }
+        }
+        if (MineRecorder.ThirdDirty && !MineRecorder.CheckFlag(Mine.ThirdMine, playerID))
+        {
+            if (mineType != Mine.ThirdMine)
+            {
+                MineRecorder.SetBackFlag(Mine.ThirdMine, playerID);
+            }
+            else
+            {
+                Vector3 pos = _playerObject.transform.position;
+                DisplayNewLayout();
+                MineRecorder.SetBackFlag(Mine.ThirdMine, playerID);
+                _playerObject.transform.position = pos;
+            }
+        }
+    }
+
     public void DisplayNewLayout()
     {
         DestroyCurrentTiles();
@@ -107,7 +153,7 @@ public class GridCreator : MonoBehaviour
                 go.transform.position = new Vector3(x, y, 0);
 
 
-                if (currentTile.TileType == TileType.Spawn)
+                if (currentTile.tileType == TileType.Spawn)
                     _playerObject.transform.position = new Vector3(x, y, 0);
 
                 x += _tileWidth;
@@ -127,15 +173,15 @@ public class GridCreator : MonoBehaviour
                 Tile currentTile = _tiles[i + j];
                 GameObject prefabToGenerate = _blankTile;
 
-                if (currentTile.TileType == TileType.Rock)
+                if (currentTile.tileType == TileType.Rock)
                     prefabToGenerate = _rockTile;
-                else if (currentTile.TileType == TileType.Stair)
+                else if (currentTile.tileType == TileType.Stair)
                     prefabToGenerate = _stairTile;
-                else if (currentTile.TileType == TileType.Iron)
+                else if (currentTile.tileType == TileType.Iron)
                     prefabToGenerate = _ironTile;
-                else if (currentTile.TileType == TileType.Jelly)
+                else if (currentTile.tileType == TileType.Jelly)
                     prefabToGenerate = _jellyTile;
-                else if (currentTile.TileType == TileType.Hole)
+                else if (currentTile.tileType == TileType.Hole)
                     prefabToGenerate = _holeTile;
 
                 if (prefabToGenerate != _blankTile)
@@ -153,7 +199,7 @@ public class GridCreator : MonoBehaviour
                     go.transform.position = new Vector3(x, y, 0);
 
 
-                    if (currentTile.TileType == TileType.Spawn)
+                    if (currentTile.tileType == TileType.Spawn)
                         _playerObject.transform.position = new Vector3(x, y, 0);
 
                 }

@@ -5,10 +5,32 @@ using UnityEngine;
 public class MineRecorder : MonoBehaviour
 {
 
-    public static Tile[][] ironMineFloors = new Tile[1000][];
-    public static Tile[][] jellyMineFloors = new Tile[1000][];
-    public static Tile[][] thirdMineFloors = new Tile[1000][];
+    private static Tile[][] ironMineFloors = new Tile[1000][];
+    private static Tile[][] jellyMineFloors = new Tile[1000][];
+    private static Tile[][] thirdMineFloors = new Tile[1000][];
 
+    //update this when changing grid size
+    private static bool[] ironGridCompleteFlags = new bool[4];
+    private static bool[] jellyGridCompleteFlags = new bool[4];
+    private static bool[] thirdGridCompleteFlags = new bool[4];
+
+    //update this on number of mines
+    private static bool ironDirty;
+    public static bool IronDirty{
+        get{return ironDirty;}
+    }
+
+    private static bool jellyDirty;
+    public static bool JellyDirty
+    {
+        get { return jellyDirty; }
+    }
+
+    private static bool thirdDirty;
+    public static bool ThirdDirty
+    {
+        get { return thirdDirty; }
+    }
 
     public static bool CheckMineFloorExists(Mine mineType, int floor)
     {
@@ -216,9 +238,101 @@ public class MineRecorder : MonoBehaviour
             if (thirdMineFloors[floor] != null)
                 return thirdMineFloors[floor][index].health;
         }
-        Debug.Log("ugh");
         return 0;
     }
+
+
+    public static void UpdateTileType(int floor, int index, Mine mineType, TileType newType)
+    {
+
+        if (mineType == Mine.IronMine)
+        {
+            if (ironMineFloors[floor] != null)
+                ironMineFloors[floor][index].tileType = newType;
+            ironDirty = true;
+            for (int i = 0; i < ironGridCompleteFlags.Length; i++)
+            {
+                ironGridCompleteFlags[i] = false;
+            }
+        }
+        if (mineType == Mine.JellyMine)
+        {
+            if (jellyMineFloors[floor] != null)
+                jellyMineFloors[floor][index].tileType = newType;
+            jellyDirty = true;
+            for (int i = 0; i < jellyGridCompleteFlags.Length; i++)
+            {
+                jellyGridCompleteFlags[i] = false;
+            }
+        }
+        if (mineType == Mine.ThirdMine)
+        {
+            if (thirdMineFloors[floor] != null)
+                thirdMineFloors[floor][index].tileType = newType;
+            thirdDirty = true;
+            for (int i = 0; i < jellyGridCompleteFlags.Length; i++)
+            {
+                jellyGridCompleteFlags[i] = false;
+            }
+        }
+
+    }
+
+    public static bool CheckFlag(Mine mineType, int index)
+    {
+        if (mineType == Mine.IronMine)
+            return ironGridCompleteFlags[index];
+        if (mineType == Mine.JellyMine)
+            return jellyGridCompleteFlags[index];
+        if (mineType == Mine.ThirdMine)
+            return thirdGridCompleteFlags[index];
+
+        return false;
+
+    }
+
+    public static void SetBackFlag(Mine mineType, int index)
+    {
+        if (mineType == Mine.IronMine)
+        {
+            ironGridCompleteFlags[index] = true;
+            bool done = true;
+            for (int i = 0; i < ironGridCompleteFlags.Length; i++)
+            {
+                if (ironGridCompleteFlags[i] == false)
+                    done = false;
+            }
+            if (done)
+                ironDirty = false;
+        }
+
+        if (mineType == Mine.JellyMine)
+        {
+            jellyGridCompleteFlags[index] = true;
+            bool done = true;
+            for (int i = 0; i < jellyGridCompleteFlags.Length; i++)
+            {
+                if (jellyGridCompleteFlags[i] == false)
+                    done = false;
+            }
+            if (done)
+                jellyDirty = false;
+        }
+
+        if (mineType == Mine.ThirdMine)
+        {
+            thirdGridCompleteFlags[index] = true;
+            bool done = true;
+            for (int i = 0; i < thirdGridCompleteFlags.Length; i++)
+            {
+                if (thirdGridCompleteFlags[i] == false)
+                    done = false;
+            }
+            if (done)
+                thirdDirty = false;
+        }
+    }
+
 
 
 }

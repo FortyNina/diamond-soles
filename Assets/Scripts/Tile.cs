@@ -7,12 +7,8 @@ public enum TileType { Blank, Rock, Spawn, Stair, Hole, Iron, Diamond, Jelly, Th
 public class Tile
 {
 
-    private TileType _tileType;
-    public TileType TileType
-    {
-        get { return _tileType; }
-    }
-
+    public TileType tileType;
+    
     private int _playerID;
 
     public int oreAmount;
@@ -22,7 +18,7 @@ public class Tile
 
     public Tile(TileType t, int id, int index)
     {
-        _tileType = t;
+        tileType = t;
         _playerID = id;
 
         if(t == TileType.Rock)

@@ -1,20 +1,20 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GridCreator.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MineRecorder.cs">
     <Files>
       <File FileName="Assets/Scripts/UIDisplayer.cs" Line="56" Column="1" />
-      <File FileName="Assets/Scripts/GameData.cs" Line="19" Column="50" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="68" Column="1" />
-      <File FileName="Assets/Scripts/Rock.cs" Line="19" Column="23" />
-      <File FileName="Assets/Scripts/GridCreator.cs" Line="201" Column="6" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="114" Column="68" />
-      <File FileName="Assets/Scripts/AuctionController.cs" Line="11" Column="80" />
-      <File FileName="Assets/Scripts/Tile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MineRecorder.cs" Line="136" Column="25" />
+      <File FileName="Assets/Scripts/GameData.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/Rock.cs" />
+      <File FileName="Assets/Scripts/GridCreator.cs" />
+      <File FileName="Assets/Scripts/PlayerController.cs" />
+      <File FileName="Assets/Scripts/AuctionController.cs" />
+      <File FileName="Assets/Scripts/Tile.cs" />
+      <File FileName="Assets/Scripts/MineRecorder.cs" Line="305" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7bda113f-4c01-4ea9-a496-cf7db88ffecd" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="dbc86735-83ce-443a-84b1-f503938dc7f4" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

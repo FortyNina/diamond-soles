@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     private PlayerDir _direction;
     private bool _axeDown;
 
+    public KeyCode left;
+    public KeyCode right;
+    public KeyCode up;
+    public KeyCode down;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,27 +38,27 @@ public class PlayerController : MonoBehaviour
         float x = 0;
         float y = 0;
 
-        if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) && !_axeDown)
+        if(Input.GetKey(left) && !_axeDown)
         {
             x -= _speed;
             _direction = PlayerDir.left;
         }
 
-        else if(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) && !_axeDown)
+        else if(Input.GetKey(right) && !_axeDown)
         {
             x += _speed;
             _direction = PlayerDir.right;
 
         }
 
-        else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) && !_axeDown)
+        else if (Input.GetKey(up) && !_axeDown)
         {
             y += _speed;
             _direction = PlayerDir.up;
 
         }
 
-        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) && !_axeDown)
+        else if (Input.GetKey(down) && !_axeDown)
         {
             y -= _speed;
             _direction = PlayerDir.down;
