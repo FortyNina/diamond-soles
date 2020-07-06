@@ -1,46 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public enum GameState { Mining, Auction}
 
 public class GameManager : MonoBehaviour
 {
-    public static GameState state;
+
+    public bool performAuctionPhase = true;
 
 
     public int amountOfResourceToLoseAfterDay = 10;
 
+    public float energyDrainFactor = .5f;
+
     [SerializeField]
     private PlayerController[] _playersInScene;
-
+   
     // Start is called before the first frame update
     void Awake()
     {
-        state = GameState.Mining;
-
-        for(int i = 0; i < _playersInScene.Length; i++)
+        //ONLY DO THIS SHIT ONCE AT THE BEGINNING OF THE GAME!
+        //TODO: MOve this block to a title sCreen that happens when play is clicked?
+        if (!GameData.Instance.setUpComplete)
         {
-            GameData.Instance.players.Add(_playersInScene[i]);
-            GameData.Instance.ironFloors.Add(0);
-            GameData.Instance.jellyFloors.Add(0);
-            GameData.Instance.thirdFloors.Add(0);
+            for (int i = 0; i < _playersInScene.Length; i++)
+            {
+                //DEFINE AI PERSONALITIES
+                GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
 
-            Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
 
-            ores.Add(TileType.Iron, 50);
-            ores.Add(TileType.Diamond, 0);
-            ores.Add(TileType.Jelly, 50);
-            ores.Add(TileType.Third, 50);
+                GameData.Instance.players.Add(_playersInScene[i]);
+                GameData.Instance.ironFloors.Add(0);
+                GameData.Instance.jellyFloors.Add(0);
+                GameData.Instance.thirdFloors.Add(0);
 
-            GameData.Instance.playerOreSupplies.Add(ores);
+                Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
 
-            GameData.Instance.durabilityLevels.Add(50);
-            GameData.Instance.energyLevels.Add(50);
-            GameData.Instance.thirdLevels.Add(50);
+                ores.Add(TileType.Iron, 50);
+                ores.Add(TileType.Diamond, 0);
+                ores.Add(TileType.Jelly, 50);
+                ores.Add(TileType.Third, 50);
 
-            GameData.Instance.playerMoney.Add(1000);
+                GameData.Instance.playerOreSupplies.Add(ores);
+
+                GameData.Instance.durabilityLevels.Add(60);
+                GameData.Instance.energyLevels.Add(60);
+                GameData.Instance.thirdLevels.Add(60);
+
+                GameData.Instance.playerMoney.Add(1000);
+
+
+            }
+            GameData.Instance.setUpComplete = true;
         }
+
+
 
         MiningStateSetup();
 
@@ -48,51 +63,46 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(state == GameState.Mining)
-        {
-            bool stillActive = false;
-            for(int i = 0;i < GameData.Instance.energyLevels.Count; i++)
-            {
-                GameData.Instance.energyLevels[i] -= Time.deltaTime;
-                if (GameData.Instance.energyLevels[i] > 0)
-                    stillActive = true;
-                else
-                {
-                    //set that player inactive
-                }
-            }
-            if (!stillActive)
-            {
 
-                state = GameState.Auction;
+        bool stillActive = false;
+        for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
+        {
+            GameData.Instance.energyLevels[i] -= Time.deltaTime * energyDrainFactor;
+            if (GameData.Instance.energyLevels[i] > 0)
+                stillActive = true;
+            else
+            {
+                //set that player inactive
             }
         }
-
-
-        else if(state == GameState.Auction)
+        if (!stillActive)
         {
-
-            state = GameState.Mining;
-            MiningStateSetup();
-            for(int i = 0; i < GameData.Instance.playerOreSupplies.Count;i++)
-            {
-                GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
-                GameData.Instance.playerOreSupplies[i][TileType.Jelly] -= amountOfResourceToLoseAfterDay;
-                GameData.Instance.playerOreSupplies[i][TileType.Third] -= amountOfResourceToLoseAfterDay;
-
-
-            }
-
+            AuctionStateSetup();
         }
+    }
 
+    private void AuctionStateSetup()
+    {
+
+        SceneManager.LoadScene("AuctionScene");
     }
 
 
     //Determine stats
     private void MiningStateSetup()
     {
+
+        //End of day removals
+        for (int i = 0; i < GameData.Instance.playerOreSupplies.Count; i++)
+        {
+            GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
+            GameData.Instance.playerOreSupplies[i][TileType.Jelly] -= amountOfResourceToLoseAfterDay;
+            GameData.Instance.playerOreSupplies[i][TileType.Third] -= amountOfResourceToLoseAfterDay;
+        }
+
+
         //based on how much food you have, calculate your energy level for this day
-        for(int i = 0; i < GameData.Instance.energyLevels.Count; i++)
+        for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
         {
             int jelly = GameData.Instance.playerOreSupplies[i][TileType.Jelly];
             int newEnergy = (100 * jelly) / 200;
@@ -114,6 +124,8 @@ public class GameManager : MonoBehaviour
             int newThird = (100 * third) / 200;
             GameData.Instance.thirdLevels[i] = newThird;
         }
+
+        
 
     }
 

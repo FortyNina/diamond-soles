@@ -140,7 +140,6 @@ public class GridCreator : MonoBehaviour
             _tiles = MineRecorder.CreateMineFloor(mineType,_currentFloor, _gridWidth, _gridHeight);
         }
         
-        
         DrawGrid();
     }
 
