@@ -22,7 +22,7 @@ public class AIManager : MonoBehaviour
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
         if(ore == TileType.Iron)
         {
-            if(GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 40)
+            if(GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 50)
             {
                 return true;
             }

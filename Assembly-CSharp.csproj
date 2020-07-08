@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AIManager.cs" />
     <Compile Include="Assets\Scripts\AuctionManager.cs" />
+    <Compile Include="Assets\Scripts\AuctionPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
+    <Compile Include="Assets\Scripts\GameInitializer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GridCreator.cs" />
     <Compile Include="Assets\Scripts\MineRecorder.cs" />

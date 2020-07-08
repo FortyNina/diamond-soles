@@ -8,7 +8,6 @@ public class GameData : Singleton<GameData>
 
 	public bool setUpComplete = false;
 
-	public List<PlayerController> players = new List<PlayerController>();
 	public List<AIPersonality> AIs = new List<AIPersonality>();
 
 	public List<int> ironFloors = new List<int>();
@@ -25,7 +24,7 @@ public class GameData : Singleton<GameData>
 
 	public List<int> playerMoney = new List<int>();
 
-	public int numberRealPlayers = 1;
+	public int numberRealPlayers = 2;
 
 
 

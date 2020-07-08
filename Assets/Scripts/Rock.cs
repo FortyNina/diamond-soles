@@ -39,9 +39,9 @@ public class Rock : MonoBehaviour
             MineRecorder.UpdateMineTileHealth(floorNumber, mineType, -1, index);
             if(MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
             {
-                if (GameData.Instance.playerOreSupplies[0].ContainsKey(ore))
+                if (GameData.Instance.playerOreSupplies[collision.transform.parent.GetComponent<GridCreator>().playerID].ContainsKey(ore))
                 {
-                    GameData.Instance.playerOreSupplies[0][ore] += myTile.oreAmount;
+                    GameData.Instance.playerOreSupplies[collision.transform.parent.GetComponent<GridCreator>().playerID][ore] += myTile.oreAmount;
 
                 }
                 if (Random.Range(0, 10) < 1)
