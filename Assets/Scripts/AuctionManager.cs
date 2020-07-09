@@ -52,6 +52,12 @@ public class AuctionManager : MonoBehaviour
     private int _resourceIndex = 0;
     private TileType[] _resourcesToTrade = { TileType.Iron };
 
+
+    private int _currentSellerPlayer = -1;
+    private int _currentBuyerPlayer = -1;
+
+    private float _transactionTimer = 1f;
+    private float _auctionTimer = 40;
     
     // Start is called before the first frame update
     void Start()
@@ -182,12 +188,26 @@ public class AuctionManager : MonoBehaviour
 
                 }
             }
+            for (int i = 0; i < _playerObjects.Length; i++)
+            {
+                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
+                if (i == _currentSellerPlayer && apc.currentPrice != minSell)
+                {
+                    _currentSellerPlayer = playerIndex;
+                }
+
+            }
+            if (minSell != currentSellMin)
+            {
+                currentSellMin = minSell;
+                _currentSellerPlayer = playerIndex;
+            }
+                    
 
             float pricePercent = (minSell - 15f) / (50 -15);
             float newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
             _sellLine.transform.position = new Vector3(_sellLine.transform.position.x, newY, 0);
-
-
+            _sellLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = minSell.ToString();
 
 
 
@@ -207,10 +227,88 @@ public class AuctionManager : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < _playerObjects.Length; i++)
+            {
+                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
+                if (i == _currentBuyerPlayer && apc.currentPrice != maxBuy)
+                {
+                    _currentBuyerPlayer = playerIndex;
+                }
+
+            }
+            if (maxBuy != currentBuyMax)
+            {
+                currentBuyMax = maxBuy;
+                _currentBuyerPlayer = playerIndex;
+            }
+
 
             pricePercent = (maxBuy - 15f) / (50 - 15);
             newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
             _buyLine.transform.position = new Vector3(_buyLine.transform.position.x, newY, 0);
+            _buyLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = maxBuy.ToString();
+
+
+            for (int i = 0; i < _playerObjects.Length; i++)
+            {
+                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
+                if (apc.isBuyer)
+                    apc.SetNewBounds(15, minSell);
+                else
+                    apc.SetNewBounds(maxBuy, 50);
+
+            }
+
+            _auctionMaterialTitle.text = "buyer: Player " + _currentBuyerPlayer + " seller: Player " + _currentSellerPlayer;
+
+
+            //ok now see if we have a sale on our hands
+            if (_transactionTimer < 0)
+            {
+                for (int i = 0; i < _playerObjects.Length; i++)
+                {
+                    AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
+                    if (apc.isBuyer)
+                    {
+                        //there is a buyer in our midst
+                        if(apc.currentPrice == maxBuy && i == _currentBuyerPlayer && maxBuy == minSell)
+                        {
+                            GameData.Instance.playerMoney[i] -= maxBuy;
+                            GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] += 5;
+                            _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
+                            _oreAmountDisplay[i].text = _resourcesToTrade[_resourceIndex].ToString() + " " + GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]];
+
+
+                        }
+                    }
+                    else
+                    {
+                        //there is a seller in our midst
+                        if (apc.currentPrice == minSell && i == _currentSellerPlayer && maxBuy == minSell)
+                        {
+                            GameData.Instance.playerMoney[i] += maxBuy;
+                            GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] -= 5;
+                            _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
+                            _oreAmountDisplay[i].text = _resourcesToTrade[_resourceIndex].ToString() + " " + GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]];
+
+
+                        }
+                    }
+
+
+
+                   
+                }
+                _transactionTimer = 1;
+            }
+
+
+            _transactionTimer -= Time.deltaTime;
+            _auctionTimer -= Time.deltaTime;
+            if(_auctionTimer < 0)
+            {
+                SceneManager.LoadScene("MiningScene");
+            }
 
 
 

@@ -23,6 +23,9 @@ public class AuctionPlayerController : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
+    private int upperBound;
+    private int lowerBound;
+
 
     private float _timer = 0;
 
@@ -38,23 +41,23 @@ public class AuctionPlayerController : MonoBehaviour
 
         if(_timer< 0)
         {
-            if (Input.GetKey(up) && currentPrice < _max)
-            {
-                currentPrice++;
-            }
-            if (Input.GetKey(down) && currentPrice > _min)
-            {
-                currentPrice--;
-            }
+            //if (Input.GetKey(up) && currentPrice < _max)
+            //{
+            //    currentPrice++;
+            //}
+            //if (Input.GetKey(down) && currentPrice > _min)
+            //{
+            //    currentPrice--;
+            //}
 
             _timer = .1f;
         }
 
-        if (Input.GetKeyUp(up) && currentPrice < _max)
+        if (Input.GetKeyUp(up) && currentPrice < _max && currentPrice < upperBound)
         {
             currentPrice++;
         }
-        if (Input.GetKeyDown(down) && currentPrice > _min)
+        if (Input.GetKeyDown(down) && currentPrice > _min && currentPrice > lowerBound)
         {
             currentPrice--;
         }
@@ -69,8 +72,10 @@ public class AuctionPlayerController : MonoBehaviour
 
     public void SetNewBounds(int min, int max)
     {
-        _max = max;
-        _min = min;
+        lowerBound = min;
+        upperBound = max;
     }
+
+
 
 }
