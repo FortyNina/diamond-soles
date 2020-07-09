@@ -24,7 +24,7 @@ public class GameData : Singleton<GameData>
 
 	public List<int> playerMoney = new List<int>();
 
-	public int numberRealPlayers = 3;
+	public int numberRealPlayers = 1;
 
 
 

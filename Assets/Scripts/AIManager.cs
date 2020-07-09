@@ -22,14 +22,59 @@ public class AIManager : MonoBehaviour
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
         if(ore == TileType.Iron)
         {
-            if(GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 50)
+            if (pers == AIPersonality.Basic)
             {
-                return true;
+                if (GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 50)
+                {
+                    return true;
+                }
             }
         }
 
         return false;
     }
-    
-    
+
+    public static int GetSellPrice(int playerIndex, TileType ore)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        int oreAmount = GameData.Instance.playerOreSupplies[playerIndex][ore];
+
+        if(pers == AIPersonality.Basic)
+        {
+            if (oreAmount > 90)
+                return 20;
+            if (oreAmount > 70)
+                return 25;
+            if (oreAmount > 50)
+                return 28;
+            if (oreAmount > 30)
+                return 35;
+            return 50;
+        }
+
+        return 50;
+    }
+
+    public static int GetBuyPrice(int playerIndex, TileType ore)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        int oreAmount = GameData.Instance.playerOreSupplies[playerIndex][ore];
+
+        if (pers == AIPersonality.Basic)
+        {
+            if (oreAmount < 20)
+                return 40;
+            if (oreAmount < 40)
+                return 30;
+            if (oreAmount > 60)
+                return 25;
+            if (oreAmount > 80)
+                return 20;
+            return 15;
+        }
+
+        return 15;
+    }
+
+
 }

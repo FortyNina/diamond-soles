@@ -11,6 +11,10 @@ public class AuctionPlayerController : MonoBehaviour
 
     public int currentPrice;
 
+    public bool isAI;
+
+    private TileType currentOre;
+
     private int _max = 50;
     private int _min = 15;
 
@@ -29,6 +33,8 @@ public class AuctionPlayerController : MonoBehaviour
 
     private float _timer = 0;
 
+    private int _AItargetPrice = 0;
+
    
     // Update is called once per frame
     void Update()
@@ -39,28 +45,43 @@ public class AuctionPlayerController : MonoBehaviour
 
         Debug.Log("price: " + currentPrice + " " +  gameObject.name);
 
-        if(_timer< 0)
+       
+        if (!isAI)
         {
-            //if (Input.GetKey(up) && currentPrice < _max)
-            //{
-            //    currentPrice++;
-            //}
-            //if (Input.GetKey(down) && currentPrice > _min)
-            //{
-            //    currentPrice--;
-            //}
+            if (Input.GetKeyUp(up) && currentPrice < _max && currentPrice < upperBound)
+            {
+                currentPrice++;
+            }
+            if (Input.GetKeyDown(down) && currentPrice > _min && currentPrice > lowerBound)
+            {
+                currentPrice--;
+            }
+        }
 
+        else
+        {
+            //do AI movement!
+            if (_timer < 0)
+            {
+                if (isBuyer)
+                    _AItargetPrice = AIManager.GetBuyPrice(playerID, currentOre);
+                else
+                    _AItargetPrice = AIManager.GetSellPrice(playerID, currentOre);
+
+                if (currentPrice > _AItargetPrice)
+                    currentPrice--;
+                else if (currentPrice < _AItargetPrice)
+                    currentPrice++;
+            }
+
+        }
+
+
+        if (_timer < 0)
+        {
             _timer = .1f;
         }
 
-        if (Input.GetKeyUp(up) && currentPrice < _max && currentPrice < upperBound)
-        {
-            currentPrice++;
-        }
-        if (Input.GetKeyDown(down) && currentPrice > _min && currentPrice > lowerBound)
-        {
-            currentPrice--;
-        }
 
         float pricePercent = (currentPrice - (float)_min) / (_max - (float)_min);
         float newY = Mathf.Lerp(_floor.position.y, _ceiling.position.y, pricePercent);
@@ -74,6 +95,11 @@ public class AuctionPlayerController : MonoBehaviour
     {
         lowerBound = min;
         upperBound = max;
+    }
+
+    public void SetOreType(TileType ore)
+    {
+        currentOre = ore;
     }
 
 

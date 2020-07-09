@@ -8,7 +8,7 @@ using TMPro;
 public class AuctionManager : MonoBehaviour
 {
 
-    private enum AuctionState { BuyerSellerSetup, BuyerSellerWait, AuctionSetup, AuctionHappening, Wait}
+    private enum AuctionState { BuyerSellerSetup, BuyerSellerWait, AuctionSetup, AuctionHappening, EndAuction, Wait}
 
     [SerializeField]
     private GameObject[] _buyerSellerSelectGroups;
@@ -50,7 +50,7 @@ public class AuctionManager : MonoBehaviour
     private bool[] _isBuyer;
     private AuctionState state;
     private int _resourceIndex = 0;
-    private TileType[] _resourcesToTrade = { TileType.Iron };
+    private TileType[] _resourcesToTrade = { TileType.Iron, TileType.Jelly };
 
 
     private int _currentSellerPlayer = -1;
@@ -58,7 +58,9 @@ public class AuctionManager : MonoBehaviour
 
     private float _transactionTimer = 1f;
     private float _auctionTimer = 40;
-    
+
+    private int _auctionScenario = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +92,7 @@ public class AuctionManager : MonoBehaviour
             for (int i = GameData.Instance.numberRealPlayers; i < _buyerSellerSelectGroups.Length; i++)
             {
                 StartCoroutine(AIBuyerSellerDecisions(i, _resourcesToTrade[_resourceIndex]));
+                _playerObjects[i].GetComponent<AuctionPlayerController>().isAI = true;
             }
 
             _auctionMaterialTitle.text = "current auction: " + _resourcesToTrade[_resourceIndex].ToString();
@@ -116,29 +119,6 @@ public class AuctionManager : MonoBehaviour
         else if(state == AuctionState.AuctionSetup)
         {
 
-            //three scenarios: everyone's a buyer, everyone's a seller, mixture
-            int scenario = 0;
-            for(int i = 0; i < _isBuyer.Length; i++)
-            {
-                if (_isBuyer[i])
-                    scenario++;
-            }
-
-            if(scenario == 0) //EVERYONE IS A SELLER!
-            {
-
-            }
-
-            else if(scenario >= _isBuyer.Length) //EVERYONE IS A BUYER
-            {
-                
-            }
-
-            else //WE GOT A MIX ON OUR HANDS
-            {
-
-            }
-
             currentBuyMax = 15;
             currentSellMin = 50;
 
@@ -151,7 +131,9 @@ public class AuctionManager : MonoBehaviour
 
             for (int i = 0; i < _playerObjects.Length; i++)
             {
+
                 AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
+                apc.SetOreType(_resourcesToTrade[_resourceIndex]);
                 apc.isBuyer = _isBuyer[i];
                 if (apc.isBuyer)
                 {
@@ -174,7 +156,7 @@ public class AuctionManager : MonoBehaviour
         {
 
             //find out where the sell line should b
-            int minSell = 100;
+            int minSell = 50;
             int playerIndex = -1;
             for(int i = 0; i < _playerObjects.Length; i++)
             {
@@ -211,7 +193,7 @@ public class AuctionManager : MonoBehaviour
 
 
 
-            int maxBuy = 0;
+            int maxBuy = 15;
             playerIndex = -1;
             for (int i = 0; i < _playerObjects.Length; i++)
             {
@@ -241,6 +223,8 @@ public class AuctionManager : MonoBehaviour
                 currentBuyMax = maxBuy;
                 _currentBuyerPlayer = playerIndex;
             }
+
+           
 
 
             pricePercent = (maxBuy - 15f) / (50 - 15);
@@ -307,9 +291,38 @@ public class AuctionManager : MonoBehaviour
             _auctionTimer -= Time.deltaTime;
             if(_auctionTimer < 0)
             {
-                SceneManager.LoadScene("MiningScene");
+                _resourceIndex++;
+                if (_resourceIndex >= _resourcesToTrade.Length)
+                    SceneManager.LoadScene("MiningScene");
+                else
+                    state = AuctionState.EndAuction;
+
+
+                _auctionTimer = 40;
             }
 
+
+
+
+        }
+
+
+        else if(state == AuctionState.EndAuction)
+        {
+            for (int i = 0; i < _playerObjects.Length; i++)
+            {
+                _playerObjects[i].SetActive(false);
+            }
+
+            _sellLine.SetActive(false);
+            _buyLine.SetActive(false);
+
+            for (int i = 0; i < _buyerSellerSelected.Length; i++)
+            {
+                _buyerSellerSelected[i] = false;
+            }
+
+            state = AuctionState.BuyerSellerSetup;
 
 
 
