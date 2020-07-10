@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
 
         transform.position += new Vector3(x, y, 0);
-
+        GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
 
 
 

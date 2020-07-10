@@ -51,6 +51,9 @@ public class GridCreator : MonoBehaviour
     [SerializeField]
     private GameObject _playerObject;
 
+    [SerializeField]
+    private GameObject[] _otherPlayers;
+
 
     private Tile[] _tiles;
 
@@ -69,6 +72,9 @@ public class GridCreator : MonoBehaviour
         _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
         _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
 
+        //TODO: move?
+        GameData.Instance.playerMineLocations[playerID] = mineType;
+
         DisplayNewLayout();
 
 
@@ -76,6 +82,53 @@ public class GridCreator : MonoBehaviour
 
     private void Update()
     {
+        //Check to Display other Players
+        for(int i = 0;i < _otherPlayers.Length; i++)
+        {
+            bool playerOnFloor = false ;
+
+            if (i == playerID)
+                continue;
+
+            if(GameData.Instance.playerMineLocations[i] == mineType)
+            {
+                if(mineType == Mine.IronMine)
+                {
+                    if(GameData.Instance.ironFloors[i] == GameData.Instance.ironFloors[playerID])
+                    {
+                        playerOnFloor = true;
+                    }
+                }
+                if (mineType == Mine.JellyMine)
+                {
+                    if (GameData.Instance.jellyFloors[i] == GameData.Instance.jellyFloors[playerID])
+                    {
+                        playerOnFloor = true;
+                    }
+                }
+                if (mineType == Mine.ThirdMine)
+                {
+                    if (GameData.Instance.thirdFloors[i] == GameData.Instance.thirdFloors[playerID])
+                    {
+                        playerOnFloor = true;
+                    }
+                }
+            }
+
+            if (playerOnFloor)
+            {
+                _otherPlayers[i].SetActive(true);
+                _otherPlayers[i].transform.localPosition = GameData.Instance.playerLocalLocations[i];
+            }
+            else
+                _otherPlayers[i].SetActive(false);
+
+
+        }
+
+
+
+        //Check for updated floors
         if (MineRecorder.IronDirty && !MineRecorder.CheckFlag(Mine.IronMine, playerID))
         {
             if(mineType != Mine.IronMine)

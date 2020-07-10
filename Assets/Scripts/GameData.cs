@@ -27,5 +27,11 @@ public class GameData : Singleton<GameData>
 	public int numberRealPlayers = 1;
 
 
+	//TODO: dont hardcode number of values!
+	public List<Vector3> playerLocalLocations = new List<Vector3> { Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero, };
+
+	public List<Mine> playerMineLocations = new List<Mine> { Mine.IronMine, Mine.IronMine, Mine.IronMine, Mine.IronMine };
+
+
 
 }
