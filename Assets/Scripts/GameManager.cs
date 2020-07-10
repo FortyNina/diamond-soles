@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
                 //set that player inactive
             }
         }
-        if (!stillActive)
+        if (!stillActive || Input.GetKeyDown(KeyCode.P))
         {
             AuctionStateSetup();
         }

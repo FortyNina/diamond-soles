@@ -286,7 +286,7 @@ public class AuctionManager : MonoBehaviour
 
             _transactionTimer -= Time.deltaTime;
             _auctionTimer -= Time.deltaTime;
-            if(_auctionTimer < 0)
+            if(_auctionTimer < 0 || Input.GetKeyUp(KeyCode.P))
             {
                 _resourceIndex++;
                 if (_resourceIndex >= _resourcesToTrade.Length)
