@@ -26,12 +26,12 @@ public class AIManager : MonoBehaviour
             {
                 if (GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 50)
                 {
-                    return true;
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 
     public static int GetSellPrice(int playerIndex, TileType ore)
@@ -66,9 +66,9 @@ public class AIManager : MonoBehaviour
                 return 40;
             if (oreAmount < 40)
                 return 30;
-            if (oreAmount > 60)
+            if (oreAmount < 60)
                 return 25;
-            if (oreAmount > 80)
+            if (oreAmount < 80)
                 return 20;
             return 15;
         }

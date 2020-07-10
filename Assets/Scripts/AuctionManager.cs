@@ -40,9 +40,6 @@ public class AuctionManager : MonoBehaviour
     [SerializeField]
     private Transform _floorLoc;
 
-    private int ceiling = 50;
-    private int floor = 15;
-
     private int currentSellMin = 0;
     private int currentBuyMax = 0;
 

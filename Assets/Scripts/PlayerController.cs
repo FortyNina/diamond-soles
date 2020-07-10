@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public KeyCode up;
     public KeyCode down;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +79,10 @@ public class PlayerController : MonoBehaviour
             if (_direction == PlayerDir.right)
                 _axe.transform.position = new Vector3(transform.position.x + .8f, transform.position.y, 0);
             _axe.SetActive(true);
+
+            //durability!
+            GameData.Instance.durabilityLevels[playerID]--;
+
         }
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.KeypadEnter))
         {

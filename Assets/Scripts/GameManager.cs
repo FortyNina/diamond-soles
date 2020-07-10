@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public bool performAuctionPhase = true;
 
+    public bool giveAIRandomOre = true;
+
 
     public int amountOfResourceToLoseAfterDay = 10;
 
@@ -47,6 +49,34 @@ public class GameManager : MonoBehaviour
 
     private void AuctionStateSetup()
     {
+
+        //GIVE AI SOME RANDOM NUMBERS!
+        if (giveAIRandomOre)
+        {
+            for(int i = GameData.Instance.numberRealPlayers;i<GameData.Instance.AIs.Count;i++)
+            {
+                int rand = Random.Range(0, 3);
+                if(rand == 0)
+                {
+                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(5, 15);
+                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
+                }
+                else if(rand == 1)
+                {
+                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(5, 15);
+                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
+                }
+                else
+                {
+                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(5, 15);
+                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
+                }
+
+            }
+        }
 
         SceneManager.LoadScene("AuctionScene");
     }

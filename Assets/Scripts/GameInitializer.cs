@@ -38,6 +38,10 @@ public class GameInitializer : MonoBehaviour
 
                 GameData.Instance.playerMoney.Add(1000);
 
+                GameData.Instance.playerLocalLocations.Add(Vector3.zero);
+
+                GameData.Instance.playerMineLocations.Add(Mine.IronMine);
+
 
             }
             GameData.Instance.setUpComplete = true;
