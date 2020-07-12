@@ -42,9 +42,6 @@ public class AuctionPlayerController : MonoBehaviour
         _timer -= Time.deltaTime;
 
 
-
-        Debug.Log("price: " + currentPrice + " " +  gameObject.name);
-
        
         if (!isAI)
         {

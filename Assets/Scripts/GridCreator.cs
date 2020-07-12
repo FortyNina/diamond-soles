@@ -242,7 +242,7 @@ public class GridCreator : MonoBehaviour
                     prefabToGenerate = _stairTile;
                 else if (currentTile.tileType == TileType.Iron)
                     prefabToGenerate = _ironTile;
-                else if (currentTile.tileType == TileType.Jelly)
+                else if (currentTile.tileType == TileType.Food)
                     prefabToGenerate = _jellyTile;
                 else if (currentTile.tileType == TileType.Hole)
                     prefabToGenerate = _holeTile;

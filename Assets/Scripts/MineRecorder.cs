@@ -99,7 +99,7 @@ public class MineRecorder : MonoBehaviour
         for (int i = marker; i < jelly + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Jelly, 0, index);
+                return new Tile(TileType.Food, 0, index);
         }
         marker += jelly;
         for (int i = marker; i < third + marker; i++)

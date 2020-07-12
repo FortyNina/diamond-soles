@@ -41,9 +41,10 @@ public class GameManager : MonoBehaviour
                 //set that player inactive
             }
         }
-        if (!stillActive || Input.GetKeyDown(KeyCode.P))
+        //if (!stillActive || Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            AuctionStateSetup();
+             AuctionStateSetup();
         }
     }
 
@@ -59,19 +60,19 @@ public class GameManager : MonoBehaviour
                 if(rand == 0)
                 {
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(5, 15);
-                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
                     GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
                 }
                 else if(rand == 1)
                 {
-                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(5, 15);
+                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(5, 15);
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
                     GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
                 }
                 else
                 {
                     GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(5, 15);
-                    GameData.Instance.playerOreSupplies[i][TileType.Jelly] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
                 }
 
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < GameData.Instance.playerOreSupplies.Count; i++)
         {
             GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
-            GameData.Instance.playerOreSupplies[i][TileType.Jelly] -= amountOfResourceToLoseAfterDay;
+            GameData.Instance.playerOreSupplies[i][TileType.Food] -= amountOfResourceToLoseAfterDay;
             GameData.Instance.playerOreSupplies[i][TileType.Third] -= amountOfResourceToLoseAfterDay;
         }
 
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
         //based on how much food you have, calculate your energy level for this day
         for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
         {
-            int jelly = GameData.Instance.playerOreSupplies[i][TileType.Jelly];
+            int jelly = GameData.Instance.playerOreSupplies[i][TileType.Food];
             int newEnergy = (100 * jelly) / 200;
             GameData.Instance.energyLevels[i] = newEnergy;
         }

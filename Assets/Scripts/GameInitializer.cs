@@ -27,7 +27,7 @@ public class GameInitializer : MonoBehaviour
 
                 ores.Add(TileType.Iron, 50);
                 ores.Add(TileType.Diamond, 0);
-                ores.Add(TileType.Jelly, 50);
+                ores.Add(TileType.Food, 50);
                 ores.Add(TileType.Third, 50);
 
                 GameData.Instance.playerOreSupplies.Add(ores);

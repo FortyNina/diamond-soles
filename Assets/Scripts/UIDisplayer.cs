@@ -41,7 +41,7 @@ public class UIDisplayer : MonoBehaviour
 
         for (int i = 0; i < _jellyCollectedDisplay.Length; i++)
         {
-            _jellyCollectedDisplay[i].text = "Food: " + GameData.Instance.playerOreSupplies[i][TileType.Jelly];
+            _jellyCollectedDisplay[i].text = "Food: " + GameData.Instance.playerOreSupplies[i][TileType.Food];
         }
 
 

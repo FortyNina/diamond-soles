@@ -47,7 +47,7 @@ public class AuctionManager : MonoBehaviour
     private bool[] _isBuyer;
     private AuctionState state;
     private int _resourceIndex = 0;
-    private TileType[] _resourcesToTrade = { TileType.Iron, TileType.Jelly };
+    private TileType[] _resourcesToTrade = { TileType.Iron, TileType.Food };
 
 
     private int _currentSellerPlayer = -1;

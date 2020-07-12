@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3013197358939522052}
   - component: {fileID: 5886678729117998259}
   - component: {fileID: 6094106835457023834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Jelly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
