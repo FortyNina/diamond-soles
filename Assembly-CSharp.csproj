@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AIPathfinder.cs" />
     <Compile Include="Assets\Scripts\AIManager.cs" />
+    <Compile Include="Assets\Scripts\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\AuctionManager.cs" />
     <Compile Include="Assets\Scripts\AuctionPlayerController.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
@@ -298,6 +300,9 @@
     <Reference Include="nunit.framework">
       <HintPath>/Applications/Unity/Hub/Editor/2019.1.8f1/Unity.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>/Users/nina/Documents/DiamondSoles/diamond-soles/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>/Users/nina/Documents/DiamondSoles/diamond-soles/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
@@ -306,9 +311,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>/Users/nina/Documents/DiamondSoles/diamond-soles/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>/Users/nina/Documents/DiamondSoles/diamond-soles/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>/Applications/Unity/Hub/Editor/2019.1.8f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
