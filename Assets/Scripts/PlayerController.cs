@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private float _speed = 1;
 
     [SerializeField]
-    private GridCreator gridCreator;
+    protected GridCreator gridCreator;
 
     [SerializeField]
     public GameObject _axe;

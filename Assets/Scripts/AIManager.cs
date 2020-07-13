@@ -76,5 +76,21 @@ public class AIManager : MonoBehaviour
         return 15;
     }
 
+    public static TileType GetTileTypeToSeek(int playerIndex)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        if(pers == AIPersonality.Basic)
+        {
+            if (Random.Range(0, 2) == 1)
+                return TileType.Iron;
+            else
+                return TileType.Rock;
+        }
+
+        return TileType.Stair;
+
+
+    }
+
 
 }

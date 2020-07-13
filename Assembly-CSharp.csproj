@@ -63,7 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AIPathfinder.cs" />
+    <Compile Include="Assets\AIPlayerController.cs" />
     <Compile Include="Assets\Scripts\AIManager.cs" />
     <Compile Include="Assets\Scripts\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\AuctionManager.cs" />
