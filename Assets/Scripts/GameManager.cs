@@ -20,9 +20,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
-
-
         MiningStateSetup();
 
     }
@@ -41,6 +38,7 @@ public class GameManager : MonoBehaviour
                 //set that player inactive
             }
         }
+        //TODO: switch back
         //if (!stillActive || Input.GetKeyDown(KeyCode.P))
         if (Input.GetKeyDown(KeyCode.P))
         {

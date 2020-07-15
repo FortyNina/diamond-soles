@@ -130,9 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 64263305}
   - component: {fileID: 64263304}
-  - component: {fileID: 64263303}
   - component: {fileID: 64263302}
   - component: {fileID: 64263301}
+  - component: {fileID: 64263303}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -196,13 +196,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 64263300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1836a3dd82c429ab3f710db679d6d1, type: 3}
+  m_Script: {fileID: 11500000, guid: c384104129c5143b185404b7fa4679b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
-  _speed: 0.075
+  moveSpeed: 0.05
   gridCreator: {fileID: 479797023}
-  _axe: {fileID: 2019881859}
+  axe: {fileID: 2019881859}
   left: 0
   right: 0
   up: 0
@@ -484,7 +483,7 @@ MonoBehaviour:
   rock: {r: 0.5660378, g: 0.33483636, b: 0.32306874, a: 1}
   stair: {r: 0.2012558, g: 0.19117124, b: 0.2264151, a: 1}
   playerID: 2
-  mineType: 1
+  mineType: 0
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
@@ -514,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479797022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5, y: -0.18, z: 0}
+  m_LocalPosition: {x: -35.5, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 64263305}
@@ -1267,9 +1266,9 @@ GameObject:
   m_Component:
   - component: {fileID: 797037932}
   - component: {fileID: 797037931}
-  - component: {fileID: 797037930}
   - component: {fileID: 797037934}
   - component: {fileID: 797037933}
+  - component: {fileID: 797037930}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1286,13 +1285,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 797037929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1836a3dd82c429ab3f710db679d6d1, type: 3}
+  m_Script: {fileID: 11500000, guid: c384104129c5143b185404b7fa4679b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
-  _speed: 0.075
+  moveSpeed: 0.05
   gridCreator: {fileID: 1867674275}
-  _axe: {fileID: 250375829}
+  axe: {fileID: 250375829}
   left: 97
   right: 100
   up: 119
@@ -1637,6 +1635,138 @@ Transform:
   m_Children: []
   m_Father: {fileID: 479797024}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1040955611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1040955614}
+  - component: {fileID: 1040955613}
+  - component: {fileID: 1040955612}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1040955612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040955611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2d08ab49a2b4467a61ac8f63d20ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: {fileID: 1040955613}
+--- !u!114 &1040955613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040955611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  data:
+    dataString: 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
+    upgradeData: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 10
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 0
+--- !u!4 &1040955614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040955611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1125789948
 GameObject:
@@ -2036,9 +2166,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1355711176}
   - component: {fileID: 1355711175}
-  - component: {fileID: 1355711174}
   - component: {fileID: 1355711173}
   - component: {fileID: 1355711172}
+  - component: {fileID: 1355711174}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2102,13 +2232,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355711171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1836a3dd82c429ab3f710db679d6d1, type: 3}
+  m_Script: {fileID: 11500000, guid: c384104129c5143b185404b7fa4679b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
-  _speed: 0.075
+  moveSpeed: 0.05
   gridCreator: {fileID: 676899726}
-  _axe: {fileID: 1236154574}
+  axe: {fileID: 1236154574}
   left: 276
   right: 275
   up: 273
@@ -2933,7 +3062,7 @@ MonoBehaviour:
   rock: {r: 0.5660378, g: 0.33483636, b: 0.32306874, a: 1}
   stair: {r: 0.2012558, g: 0.19117124, b: 0.2264151, a: 1}
   playerID: 3
-  mineType: 1
+  mineType: 0
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
@@ -2963,7 +3092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705751276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5, y: -11.09, z: 0}
+  m_LocalPosition: {x: -35.5, y: -24.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1712520270}
@@ -2984,9 +3113,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1712520270}
   - component: {fileID: 1712520269}
-  - component: {fileID: 1712520268}
   - component: {fileID: 1712520267}
   - component: {fileID: 1712520266}
+  - component: {fileID: 1712520268}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3050,13 +3179,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1712520265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1836a3dd82c429ab3f710db679d6d1, type: 3}
+  m_Script: {fileID: 11500000, guid: c384104129c5143b185404b7fa4679b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
-  _speed: 0.075
-  gridCreator: {fileID: 1705751277}
-  _axe: {fileID: 532879315}
+  moveSpeed: 0.05
+  gridCreator: {fileID: 479797023}
+  axe: {fileID: 2019881859}
   left: 0
   right: 0
   up: 0

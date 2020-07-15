@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class AIPlayerController : MonoBehaviour
+public class AIPlayerController : PlayerController
 {
     private enum AIstate { TravelPath, Wait}
-
-    enum PlayerDir { left, right, up, down }
-
-    private PlayerDir _direction;
-    private bool _axeDown;
-
-    [SerializeField]
-    public GameObject _axe;
 
     public Transform target;
 
@@ -29,16 +21,12 @@ public class AIPlayerController : MonoBehaviour
 
     AIstate state = AIstate.TravelPath;
 
-    [HideInInspector]
-    public int playerID = 0; //TODO: should come from grid creator (see playerController)
-
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
+        DetermineNewTarget();
 
     }
 
@@ -127,22 +115,28 @@ public class AIPlayerController : MonoBehaviour
     void DetermineNewTarget()
     {
         TileType toSeek = AIManager.GetTileTypeToSeek(playerID);
-        Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10f); //TODO: make sure this doesnt overlap with other maps
+        Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 100f); //TODO: make sure this doesnt overlap with other maps
 
         float minDist = 100;
 
         for(int i = 0;i < interactableObjects.Length; i++)
         {
+            print(interactableObjects[i].name);
             if (toSeek == TileType.Stair && interactableObjects[i].gameObject.tag == "Staircase")
             {
+                print("1");
                 target = interactableObjects[i].transform;
                 break;
             }
             if (toSeek == TileType.Hole && interactableObjects[i].gameObject.tag == "Hole")
             {
+                print("2");
                 target = interactableObjects[i].transform;
                 break;
             }
+
+
+
 
             if(interactableObjects[i].GetComponent<Rock>() != null)
             {
@@ -153,6 +147,8 @@ public class AIPlayerController : MonoBehaviour
                     {
                         minDist = dist;
                         target = interactableObjects[i].transform;
+                        print("3");
+
                     }
 
                 }
@@ -160,10 +156,6 @@ public class AIPlayerController : MonoBehaviour
 
 
         }
-
-        
-
-
 
         seeker.StartPath(rb.position, target.position, OnPathComplete);
 
@@ -194,24 +186,11 @@ public class AIPlayerController : MonoBehaviour
             _direction = PlayerDir.down;
         }
 
-        _axeDown = true;
-        if (_direction == PlayerDir.up)
-            _axe.transform.position = new Vector3(transform.position.x, transform.position.y + .8f, 0);
-        if (_direction == PlayerDir.down)
-            _axe.transform.position = new Vector3(transform.position.x, transform.position.y - .8f, 0);
-        if (_direction == PlayerDir.left)
-            _axe.transform.position = new Vector3(transform.position.x - .8f, transform.position.y, 0);
-        if (_direction == PlayerDir.right)
-            _axe.transform.position = new Vector3(transform.position.x + .8f, transform.position.y, 0);
-        _axe.SetActive(true);
-
-        //durability!
-        //TODO: replace 0
-        GameData.Instance.durabilityLevels[0]--;
+        AxeDown();
 
         yield return new WaitForSeconds(.5f);
-        _axeDown = false;
-        _axe.SetActive(false);
+
+        AxeUp();
 
     }
 }

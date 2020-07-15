@@ -4,38 +4,64 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    protected enum PlayerDir { left, right, up, down }
+
     [HideInInspector]
     public int playerID;
-
-    [SerializeField]
-    private float _speed = 1;
-
-    [SerializeField]
-    protected GridCreator gridCreator;
-
-    [SerializeField]
-    public GameObject _axe;
-
-    enum PlayerDir { left, right, up, down }
-
-    private PlayerDir _direction;
-    private bool _axeDown;
-
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode up;
-    public KeyCode down;
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    public int PlayerID
     {
-        playerID = gridCreator.playerID;
+        get { return playerID; }
+        set { playerID = value; }
     }
 
+    protected float _speed = 1;
+    public float Speed
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }
+
+    protected GridCreator _gridCreator;
+    public GridCreator GridCreator
+    {
+        set { _gridCreator = value; }
+    }
+
+    protected GameObject _axe;
+    public GameObject Axe
+    {
+        set { _axe = value; }
+    }
+
+    protected bool _isAI;
+    public bool IsAI
+    {
+        get { return _isAI; }
+        set { _isAI = value; }
+    }
+
+
+
+
+    protected PlayerDir _direction;
+    protected bool _axeDown;
+
+    [SerializeField]
+    private KeyCode left;
+
+    [SerializeField]
+    private KeyCode right;
+
+    [SerializeField]
+    private KeyCode up;
+
+    [SerializeField]
+    private KeyCode down;
+
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float x = 0;
         float y = 0;
@@ -69,39 +95,86 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            _axeDown = true;
-            if (_direction == PlayerDir.up)
-                _axe.transform.position = new Vector3(transform.position.x, transform.position.y + .8f, 0);
-            if (_direction == PlayerDir.down)
-                _axe.transform.position = new Vector3(transform.position.x, transform.position.y - .8f, 0);
-            if (_direction == PlayerDir.left)
-                _axe.transform.position = new Vector3(transform.position.x - .8f, transform.position.y, 0);
-            if (_direction == PlayerDir.right)
-                _axe.transform.position = new Vector3(transform.position.x + .8f, transform.position.y, 0);
-            _axe.SetActive(true);
-
-            //durability!
-            GameData.Instance.durabilityLevels[playerID]--;
+            AxeDown();
 
         }
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.KeypadEnter))
         {
-            _axeDown = false;
-            _axe.SetActive(false);
+            AxeUp();
 
         }
 
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            GameData.Instance.ironFloors[playerID] = 10;
-            gridCreator.DisplayNewLayout();
-        }
-
-
-
+        
         transform.position += new Vector3(x, y, 0);
         GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
 
+
+
+    }
+
+    protected void AxeDown()
+    {
+        _axeDown = true;
+        if (_direction == PlayerDir.up)
+            _axe.transform.position = new Vector3(transform.position.x, transform.position.y + .8f, 0);
+        if (_direction == PlayerDir.down)
+            _axe.transform.position = new Vector3(transform.position.x, transform.position.y - .8f, 0);
+        if (_direction == PlayerDir.left)
+            _axe.transform.position = new Vector3(transform.position.x - .8f, transform.position.y, 0);
+        if (_direction == PlayerDir.right)
+            _axe.transform.position = new Vector3(transform.position.x + .8f, transform.position.y, 0);
+        _axe.SetActive(true);
+
+        //durability!
+        GameData.Instance.durabilityLevels[playerID]--;
+    }
+
+    protected void AxeUp()
+    {
+        _axeDown = false;
+        _axe.SetActive(false);
+    }
+
+    protected void TraverseStaircase()
+    {
+        if (_gridCreator.mineType == Mine.IronMine)
+            GameData.Instance.ironFloors[playerID]++;
+        if (_gridCreator.mineType == Mine.JellyMine)
+            GameData.Instance.jellyFloors[playerID]++;
+        if (_gridCreator.mineType == Mine.ThirdMine)
+            GameData.Instance.thirdFloors[playerID]++;
+
+
+        _gridCreator.DisplayNewLayout();
+        GameData.Instance.energyLevels[playerID] -= 1;
+    }
+
+    protected void TraverseHole()
+    {
+        int currentFloor = 0;
+        if (_gridCreator.mineType == Mine.IronMine)
+            currentFloor = GameData.Instance.ironFloors[playerID];
+        if (_gridCreator.mineType == Mine.JellyMine)
+            currentFloor = GameData.Instance.jellyFloors[playerID];
+        if (_gridCreator.mineType == Mine.ThirdMine)
+            currentFloor = GameData.Instance.thirdFloors[playerID];
+
+        int randFloors = 0;
+        if (currentFloor < 15)
+            randFloors = Random.Range(2, 4);
+        else if (currentFloor < 35)
+            randFloors = Random.Range(3, 9);
+        else
+            randFloors = Random.Range(5, 15);
+
+        if (_gridCreator.mineType == Mine.IronMine)
+            GameData.Instance.ironFloors[playerID] += randFloors;
+        if (_gridCreator.mineType == Mine.JellyMine)
+            GameData.Instance.jellyFloors[playerID] += randFloors;
+        if (_gridCreator.mineType == Mine.ThirdMine)
+            GameData.Instance.thirdFloors[playerID] += randFloors;
+        _gridCreator.DisplayNewLayout();
+        GameData.Instance.energyLevels[playerID] -= randFloors;
 
 
     }
@@ -110,50 +183,23 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.tag == "Staircase")
         {
-            if(gridCreator.mineType == Mine.IronMine)
-                GameData.Instance.ironFloors[playerID]++;
-            if (gridCreator.mineType == Mine.JellyMine)
-                GameData.Instance.jellyFloors[playerID]++;
-            if (gridCreator.mineType == Mine.ThirdMine)
-                GameData.Instance.thirdFloors[playerID]++;
-
-
-            gridCreator.DisplayNewLayout();
-            GameData.Instance.energyLevels[playerID] -= 1;
-
+            TraverseStaircase();
         }
 
         else if(collision.tag == "Hole")
         {
-            int currentFloor = 0;
-            if (gridCreator.mineType == Mine.IronMine)
-                currentFloor = GameData.Instance.ironFloors[playerID];
-            if (gridCreator.mineType == Mine.JellyMine)
-                currentFloor = GameData.Instance.jellyFloors[playerID];
-            if (gridCreator.mineType == Mine.ThirdMine)
-                currentFloor = GameData.Instance.thirdFloors[playerID];
-
-            int randFloors = 0;
-            if (currentFloor < 15)
-                randFloors = Random.Range(2, 4);
-            else if (currentFloor < 35)
-                randFloors = Random.Range(3, 9);
-            else
-                randFloors = Random.Range(5, 15);
-
-            if (gridCreator.mineType == Mine.IronMine)
-                GameData.Instance.ironFloors[playerID]+=randFloors;
-            if (gridCreator.mineType == Mine.JellyMine)
-                GameData.Instance.jellyFloors[playerID]+= randFloors;
-            if (gridCreator.mineType == Mine.ThirdMine)
-                GameData.Instance.thirdFloors[playerID]+= randFloors;
-            gridCreator.DisplayNewLayout();
-            GameData.Instance.energyLevels[playerID] -= randFloors;
-
-
+            TraverseHole();
 
         }
 
+    }
+
+    public void SetControlKeys(KeyCode u, KeyCode d, KeyCode l, KeyCode r)
+    {
+        up = u;
+        down = d;
+        left = l;
+        right = r;
     }
 
 

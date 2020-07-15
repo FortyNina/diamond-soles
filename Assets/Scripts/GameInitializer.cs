@@ -5,15 +5,13 @@ using UnityEngine;
 public class GameInitializer : MonoBehaviour
 {
 
-    public int numPlayers = 4;
-
     private void Awake()
     {
         //ONLY DO THIS SHIT ONCE AT THE BEGINNING OF THE GAME!
         //TODO: MOve this block to a title sCreen that happens when play is clicked?
         if (!GameData.Instance.setUpComplete)
         {
-            for (int i = 0; i < numPlayers; i++)
+            for (int i = 0; i < GameData.Instance.numPlayers; i++)
             {
                 //DEFINE AI PERSONALITIES
                 GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());

@@ -63,16 +63,12 @@ public class GridCreator : MonoBehaviour
     private int _currentFloor;
 
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
         _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
 
-        //TODO: move?
+        //TODO: move to a select screen?
         GameData.Instance.playerMineLocations[playerID] = mineType;
 
         DisplayNewLayout();

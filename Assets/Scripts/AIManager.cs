@@ -79,7 +79,32 @@ public class AIManager : MonoBehaviour
     public static TileType GetTileTypeToSeek(int playerIndex)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
-        if(pers == AIPersonality.Basic)
+        Mine mine = GameData.Instance.playerMineLocations[playerIndex];
+        int floor = 0;
+        Tile[] currentMineLayout = new Tile[0] ;
+
+        if (mine == Mine.IronMine)
+        {
+            floor = GameData.Instance.ironFloors[playerIndex];
+        }
+
+        if (mine == Mine.JellyMine)
+        {
+            floor = GameData.Instance.jellyFloors[playerIndex];
+        }
+
+        if (mine == Mine.ThirdMine)
+        {
+            floor = GameData.Instance.thirdFloors[playerIndex];
+        }
+
+        currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
+
+
+
+
+
+        if (pers == AIPersonality.Basic)
         {
             if (Random.Range(0, 2) == 1)
                 return TileType.Iron;

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameData : Singleton<GameData>
 {
+
+	public int numPlayers = 4;
+	public int numberRealPlayers = 1;
+
+
 	protected GameData() { } // guarantee this will be always a singleton only - can't use the constructor!
 
 	public bool setUpComplete = false;
@@ -24,7 +29,8 @@ public class GameData : Singleton<GameData>
 
 	public List<int> playerMoney = new List<int>();
 
-	public int numberRealPlayers = 1;
+	
+
 
 
 	//TODO: dont hardcode number of values!

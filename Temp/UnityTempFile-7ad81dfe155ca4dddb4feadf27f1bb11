@@ -300,7 +300,7 @@
 /define:ENABLE_VSTU
 /define:CSHARP_7_OR_LATER
 /define:CSHARP_7_3_OR_NEWER
-"Assets/AIPathfinder.cs"
+"Assets/AIPlayerController.cs"
 "Assets/Scripts/AIManager.cs"
 "Assets/Scripts/AStarMapController.cs"
 "Assets/Scripts/AuctionManager.cs"
