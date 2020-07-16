@@ -483,7 +483,7 @@ MonoBehaviour:
   rock: {r: 0.5660378, g: 0.33483636, b: 0.32306874, a: 1}
   stair: {r: 0.2012558, g: 0.19117124, b: 0.2264151, a: 1}
   playerID: 2
-  mineType: 0
+  mineType: 1
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
@@ -496,6 +496,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _diamondTile: {fileID: 5724706138156692360, guid: df05d6b46edd846e49df650da6e9f522,
     type: 3}
   _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
@@ -1075,6 +1077,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _diamondTile: {fileID: 5724706138156692360, guid: df05d6b46edd846e49df650da6e9f522,
     type: 3}
   _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
@@ -3062,7 +3066,7 @@ MonoBehaviour:
   rock: {r: 0.5660378, g: 0.33483636, b: 0.32306874, a: 1}
   stair: {r: 0.2012558, g: 0.19117124, b: 0.2264151, a: 1}
   playerID: 3
-  mineType: 0
+  mineType: 1
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
@@ -3075,6 +3079,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _diamondTile: {fileID: 5724706138156692360, guid: df05d6b46edd846e49df650da6e9f522,
     type: 3}
   _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
@@ -3659,6 +3665,8 @@ MonoBehaviour:
   _ironTile: {fileID: 5287908624698679013, guid: a6c7a7d400e4b4aabacb47038fb728fb,
     type: 3}
   _jellyTile: {fileID: 4327791449484428188, guid: 12726633d0c0640c3801ddf7ebfd6822,
+    type: 3}
+  _diamondTile: {fileID: 5724706138156692360, guid: df05d6b46edd846e49df650da6e9f522,
     type: 3}
   _holeTile: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}

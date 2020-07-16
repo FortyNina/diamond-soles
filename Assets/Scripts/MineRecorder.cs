@@ -73,7 +73,7 @@ public class MineRecorder : MonoBehaviour
         return new Tile[0];
     }
 
-    private static Tile GetRandomTile(int index, int blank, int basic, int iron, int jelly, int third)
+    private static Tile GetRandomTile(int index, int blank, int basic, int iron, int jelly, int third, int diamond)
     {
         int rand = Random.Range(0, 100);
         int marker = 0;
@@ -108,6 +108,13 @@ public class MineRecorder : MonoBehaviour
                 return new Tile(TileType.Third, 0, index);
         }
         marker += third;
+        for (int i = marker; i < diamond + marker; i++)
+        {
+            if (rand == i)
+                return new Tile(TileType.Diamond, 0, index);
+        }
+        marker += diamond;
+
 
 
 
@@ -123,6 +130,7 @@ public class MineRecorder : MonoBehaviour
         int percentIron = 0;
         int percentJelly = 0;
         int percentThird = 0;
+        int percentDiamond = 0;
 
         if (mineType == Mine.IronMine)
         {
@@ -143,6 +151,20 @@ public class MineRecorder : MonoBehaviour
                 percentBlank = 80;
                 percentBasic = 9;
                 percentIron = 11;
+            }
+            else if (floor < 40)
+            {
+                percentBlank = 75;
+                percentBasic = 11;
+                percentIron = 11;
+                percentDiamond = 3;
+            }
+            else if (floor < 50)
+            {
+                percentBlank = 75;
+                percentBasic = 5;
+                percentIron = 11;
+                percentDiamond = 9;
             }
         }
 
@@ -166,6 +188,20 @@ public class MineRecorder : MonoBehaviour
                 percentBasic = 9;
                 percentJelly = 11;
             }
+            else if (floor < 40)
+            {
+                percentBlank = 75;
+                percentBasic = 9;
+                percentJelly = 11;
+                percentDiamond = 5;
+            }
+            else if (floor < 50)
+            {
+                percentBlank = 75;
+                percentBasic = 5;
+                percentJelly = 11;
+                percentDiamond = 9;
+            }
         }
 
         //-----------------------------------------------------------------------------------------------------
@@ -175,7 +211,7 @@ public class MineRecorder : MonoBehaviour
         for (int i = 0; i < newTiles.Length; i++)
         {
 
-            newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird);
+            newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird, percentDiamond);
         }
 
         int rand = Random.Range(0, newTiles.Length);

@@ -42,6 +42,9 @@ public class GridCreator : MonoBehaviour
     [SerializeField]
     private GameObject _jellyTile;
 
+    [SerializeField]
+    private GameObject _diamondTile;
+
 
     [SerializeField]
     private GameObject _holeTile;
@@ -264,6 +267,8 @@ public class GridCreator : MonoBehaviour
                     prefabToGenerate = _jellyTile;
                 else if (currentTile.tileType == TileType.Hole)
                     prefabToGenerate = _holeTile;
+                else if (currentTile.tileType == TileType.Diamond)
+                    prefabToGenerate = _diamondTile;
 
                 if (prefabToGenerate != _blankTile)
                 {

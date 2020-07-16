@@ -36,6 +36,11 @@ public class Tile
             oreAmount = 1;
             health = 2;
         }
+        if (t == TileType.Diamond)
+        {
+            oreAmount = 5;
+            health = 5;
+        }
 
         this.index = index;
 
