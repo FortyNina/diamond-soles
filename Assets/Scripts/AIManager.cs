@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AIPersonality { Basic }
 
 public class AIManager : MonoBehaviour
 {
@@ -100,18 +99,19 @@ public class AIManager : MonoBehaviour
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
         Dictionary<TileType, int> tileKinds = new Dictionary<TileType, int>();
-        for(int i = 0;i < currentMineLayout.Length; i++)
+        List<TileType> preferences = AIPersonalityPreferences.GetTilePreferences(pers);
+        for (int i = 0;i < currentMineLayout.Length; i++)
         {
             TileType t = currentMineLayout[i].tileType;
 
-            if (t == TileType.Hole || t == TileType.Stair || t == TileType.Blank || t == TileType.Spawn)
-                continue;
-            if (tileKinds.ContainsKey(t))
-                tileKinds[t]++;
-            else
-                tileKinds.Add(t, 1);
+            if (preferences.Contains(t))
+            {
+                if (tileKinds.ContainsKey(t))
+                    tileKinds[t]++;
+                else
+                    tileKinds.Add(t, 1);
+            }
         }
-
 
         if (pers == AIPersonality.Basic)
         {
