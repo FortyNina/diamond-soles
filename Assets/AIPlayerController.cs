@@ -12,6 +12,9 @@ public class AIPlayerController : PlayerController
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
+    [Space(5)]
+    public GameObject currentObj;
+
     Path path;
     int currentWaypoint = 0;
     bool reachedEndOfPath = false;
@@ -35,12 +38,16 @@ public class AIPlayerController : PlayerController
     {
         if (state == AIstate.TravelPath)
         {
-
+            
             if (path == null)
             {
-                print("5");
                 DetermineNewTarget();
                 return;
+            }
+
+            if(target == null || !target.gameObject.activeInHierarchy)
+            {
+                DetermineNewTarget();
             }
 
             //REACHED GOAL!
@@ -115,9 +122,10 @@ public class AIPlayerController : PlayerController
     {
         TileType toSeek = AIManager.GetTileTypeToSeek(playerID);
         print(toSeek.ToString());
-        Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 100f); //TODO: make sure this doesnt overlap with other maps
+        Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
         target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
         seeker.StartPath(rb.position, target.position, OnPathComplete);
+        currentObj = target.gameObject;
     }
 
     IEnumerator BreakBlock()

@@ -62,6 +62,8 @@ public class GridCreator : MonoBehaviour
 
     private int _currentFloor;
 
+    private TileType[] _prevTileTypes;
+    private GameObject[] _tilesInScene;
 
     void Awake()
     {
@@ -134,7 +136,7 @@ public class GridCreator : MonoBehaviour
             else
             {
                 Vector3 pos = _playerObject.transform.position;
-                DisplayNewLayout();
+                RemoveTilesFromLayout();
                 MineRecorder.SetBackFlag(Mine.IronMine, playerID);
                 _playerObject.transform.position = pos;
             }
@@ -148,7 +150,7 @@ public class GridCreator : MonoBehaviour
             else
             {
                 Vector3 pos = _playerObject.transform.position;
-                DisplayNewLayout();
+                RemoveTilesFromLayout();
                 MineRecorder.SetBackFlag(Mine.JellyMine, playerID);
                 _playerObject.transform.position = pos;
             }
@@ -162,11 +164,24 @@ public class GridCreator : MonoBehaviour
             else
             {
                 Vector3 pos = _playerObject.transform.position;
-                DisplayNewLayout();
+                RemoveTilesFromLayout();
                 MineRecorder.SetBackFlag(Mine.ThirdMine, playerID);
                 _playerObject.transform.position = pos;
             }
         }
+    }
+
+    public void RemoveTilesFromLayout()
+    {
+        for(int i = 0; i < _prevTileTypes.Length; i++)
+        {
+            if(_prevTileTypes[i] != MineRecorder.GetMineFloor(mineType, _currentFloor)[i].tileType)
+            {
+                _tilesInScene[i].SetActive(false) ;
+            }
+        }
+
+        _prevTileTypes = MakeCopyOfTileSetTypes(MineRecorder.GetMineFloor(mineType, _currentFloor));
     }
 
     public void DisplayNewLayout()
@@ -183,12 +198,15 @@ public class GridCreator : MonoBehaviour
         if (MineRecorder.CheckMineFloorExists(mineType, _currentFloor))
         {
             _tiles = MineRecorder.GetMineFloor(mineType, _currentFloor);
+            _prevTileTypes = MakeCopyOfTileSetTypes(_tiles);
         }
         else
         {
             _tiles = MineRecorder.CreateMineFloor(mineType,_currentFloor, _gridWidth, _gridHeight);
+            _prevTileTypes = MakeCopyOfTileSetTypes(_tiles);
+
         }
-        
+
         DrawGrid();
         StartCoroutine(RescanMap());
 
@@ -198,6 +216,8 @@ public class GridCreator : MonoBehaviour
     {
         float x = _adjustedX;
         float y = _adjustedY;
+
+        _tilesInScene = new GameObject[_gridHeight * _gridWidth];
 
         //Create Blanks
         for (int i = 0; i < _tiles.Length; i += _gridWidth)
@@ -265,6 +285,8 @@ public class GridCreator : MonoBehaviour
                     if (currentTile.tileType == TileType.Spawn)
                         _playerObject.transform.position = new Vector3(x, y, 0);
 
+                    _tilesInScene[i+j] = go;
+
                 }
 
 
@@ -290,6 +312,17 @@ public class GridCreator : MonoBehaviour
             if(child.tag != "Player" && child.tag != "Axe")
                Destroy(child.gameObject);
         }
+    }
+
+    private TileType[] MakeCopyOfTileSetTypes(Tile[] original)
+    {
+        TileType[] newSet = new TileType[original.Length];
+        for(int i = 0;i < original.Length; i++)
+        {
+            newSet[i] = original[i].tileType;
+        }
+        return newSet;
+
     }
 
 }

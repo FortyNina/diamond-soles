@@ -159,7 +159,6 @@ public class AIManager : MonoBehaviour
             print(rand + " " + tileTransforms.Count + " " + toSeek.ToString());
             return tileTransforms[rand];
         }
-        Debug.Log("hi");
         return null;
     }
 
