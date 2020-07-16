@@ -112,21 +112,33 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    protected void AxeDown(Transform t)
+    {
+        SwingAxe(t.position);
+    }
+
     protected void AxeDown()
     {
-        _axeDown = true;
+        Vector3 t = Vector3.zero;
         if (_direction == PlayerDir.up)
-            _axe.transform.position = new Vector3(transform.position.x, transform.position.y + .8f, 0);
+            t = new Vector3(transform.position.x, transform.position.y + .8f, 0);
         if (_direction == PlayerDir.down)
-            _axe.transform.position = new Vector3(transform.position.x, transform.position.y - .8f, 0);
+            t = new Vector3(transform.position.x, transform.position.y - .8f, 0);
         if (_direction == PlayerDir.left)
-            _axe.transform.position = new Vector3(transform.position.x - .8f, transform.position.y, 0);
+            t = new Vector3(transform.position.x - .8f, transform.position.y, 0);
         if (_direction == PlayerDir.right)
-            _axe.transform.position = new Vector3(transform.position.x + .8f, transform.position.y, 0);
-        _axe.SetActive(true);
+            t = new Vector3(transform.position.x + .8f, transform.position.y, 0);
 
-        //durability!
+        SwingAxe(t);
+    }
+
+    private void SwingAxe(Vector3 t)
+    {
+        _axeDown = true;
+        _axe.transform.position = t;
+        _axe.SetActive(true);
         GameData.Instance.durabilityLevels[playerID]--;
+             
     }
 
     protected void AxeUp()

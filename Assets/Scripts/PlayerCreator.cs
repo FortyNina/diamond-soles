@@ -36,7 +36,10 @@ public class PlayerCreator : MonoBehaviour
 
         pc.GridCreator = gridCreator;
         pc.PlayerID = gridCreator.playerID;
+        axe.AddComponent<Axe>();
+        axe.GetComponent<Axe>().PlayerID = gridCreator.playerID;
         pc.Axe = axe;
+
         pc.Speed = moveSpeed;
 
     }

@@ -155,9 +155,9 @@ public class AIManager : MonoBehaviour
                 }
             }
 
-            int rand = Random.Range(0, tileTransforms.Count - 1);
-            print(rand + " " + tileTransforms.Count + " " + toSeek.ToString());
-            return tileTransforms[rand];
+            int rand = Random.Range(0, tileTransforms.Count);
+            if(rand < tileTransforms.Count)
+                return tileTransforms[rand];
         }
         return null;
     }

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\AuctionManager.cs" />
     <Compile Include="Assets\Scripts\AuctionPlayerController.cs" />
+    <Compile Include="Assets\Scripts\Axe.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameInitializer.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

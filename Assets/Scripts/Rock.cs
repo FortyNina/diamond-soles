@@ -40,9 +40,9 @@ public class Rock : MonoBehaviour
             if(MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
             {
                 if (collision.transform.parent != null){
-                    if (GameData.Instance.playerOreSupplies[collision.transform.parent.GetComponent<GridCreator>().playerID].ContainsKey(ore))
+                    if (GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID].ContainsKey(ore))
                     {
-                        GameData.Instance.playerOreSupplies[collision.transform.parent.GetComponent<GridCreator>().playerID][ore] += myTile.oreAmount;
+                        GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID][ore] += myTile.oreAmount;
 
                     }
                 }

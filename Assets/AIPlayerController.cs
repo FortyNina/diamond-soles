@@ -9,6 +9,7 @@ public class AIPlayerController : PlayerController
 
     public Transform target;
 
+
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
@@ -38,7 +39,18 @@ public class AIPlayerController : PlayerController
     {
         if (state == AIstate.TravelPath)
         {
-            
+            //REACHED GOAL!
+            if ( path != null)
+            {
+                if (currentWaypoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    state = AIstate.Wait;
+                    StartCoroutine(BreakBlock());
+                    return;
+                }
+            }
+
             if (path == null)
             {
                 DetermineNewTarget();
@@ -50,14 +62,7 @@ public class AIPlayerController : PlayerController
                 DetermineNewTarget();
             }
 
-            //REACHED GOAL!
-            if (currentWaypoint >= path.vectorPath.Count)
-            {
-                reachedEndOfPath = true;
-                state = AIstate.Wait;
-                DetermineNewTarget();
-                return;
-            }
+           
             else
             {
                 reachedEndOfPath = false;
@@ -124,8 +129,11 @@ public class AIPlayerController : PlayerController
         print(toSeek.ToString());
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
         target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
-        seeker.StartPath(rb.position, target.position, OnPathComplete);
-        currentObj = target.gameObject;
+        if (target != null)
+        {
+            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            currentObj = target.gameObject;
+        }
     }
 
     IEnumerator BreakBlock()
@@ -153,11 +161,25 @@ public class AIPlayerController : PlayerController
             _direction = PlayerDir.down;
         }
 
-        AxeDown();
+        int health = 0;
+        if (target.gameObject.GetComponent<Rock>() != null)
+        {
+            health = target.gameObject.GetComponent<Rock>().health;
+        }
 
-        yield return new WaitForSeconds(.5f);
+        while (health > 0) {
 
-        AxeUp();
+            AxeDown();
+
+            yield return new WaitForSeconds(.5f);
+
+            AxeUp();
+
+            yield return new WaitForSeconds(.5f);
+            health--;
+        }
+        DetermineNewTarget();
+        state = AIstate.TravelPath;
 
     }
 }
