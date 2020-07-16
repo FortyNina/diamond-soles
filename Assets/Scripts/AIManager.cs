@@ -99,22 +99,68 @@ public class AIManager : MonoBehaviour
         }
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
+        Dictionary<TileType, int> tileKinds = new Dictionary<TileType, int>();
+        for(int i = 0;i < currentMineLayout.Length; i++)
+        {
+            TileType t = currentMineLayout[i].tileType;
 
-
-
+            if (t == TileType.Hole || t == TileType.Stair || t == TileType.Blank || t == TileType.Spawn)
+                continue;
+            if (tileKinds.ContainsKey(t))
+                tileKinds[t]++;
+            else
+                tileKinds.Add(t, 1);
+        }
 
 
         if (pers == AIPersonality.Basic)
         {
-            if (Random.Range(0, 2) == 1)
-                return TileType.Iron;
-            else
-                return TileType.Rock;
+            int rand = Random.Range(0, tileKinds.Count - 1);
+            int index = 0;
+            foreach (KeyValuePair<TileType,int> entry in tileKinds)
+            {
+                if (index == rand)
+                    return entry.Key;
+                index++;
+            }
         }
 
         return TileType.Stair;
+    }
 
+    public static Transform GetTargetedTileTransformFromMap(Collider2D[] interactableObjects, TileType toSeek, int playerIndex)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
 
+        //find random tile rn
+        if (pers == AIPersonality.Basic)
+        {
+            List<Transform> tileTransforms = new List<Transform>();
+            for(int i = 0;i < interactableObjects.Length; i++)
+            {
+                if (toSeek == TileType.Stair && interactableObjects[i].gameObject.tag == "Staircase")
+                {
+                    tileTransforms.Add(interactableObjects[i].transform);
+                }
+                if (toSeek == TileType.Hole && interactableObjects[i].gameObject.tag == "Hole")
+                {
+                    tileTransforms.Add(interactableObjects[i].transform);
+                }
+                if (interactableObjects[i].GetComponent<Rock>() != null)
+                {
+                    if (interactableObjects[i].GetComponent<Rock>().ore == toSeek)
+                    {
+                        tileTransforms.Add(interactableObjects[i].transform);
+                    }
+                }
+            }
+
+            int rand = Random.Range(0, tileTransforms.Count - 1);
+            print(rand + " " + tileTransforms.Count + " " + toSeek.ToString());
+            return tileTransforms[rand];
+        }
+        Debug.Log("hi");
+        return null;
     }
 
 

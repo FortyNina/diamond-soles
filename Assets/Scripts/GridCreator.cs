@@ -70,8 +70,8 @@ public class GridCreator : MonoBehaviour
 
         //TODO: move to a select screen?
         GameData.Instance.playerMineLocations[playerID] = mineType;
-
         DisplayNewLayout();
+
 
 
     }
@@ -190,6 +190,8 @@ public class GridCreator : MonoBehaviour
         }
         
         DrawGrid();
+        StartCoroutine(RescanMap());
+
     }
 
     private void DrawGrid()
@@ -272,6 +274,14 @@ public class GridCreator : MonoBehaviour
             y += _tileWidth;
         }
     }
+
+    private IEnumerator RescanMap()
+    {
+        yield return new WaitForEndOfFrame();
+        AStarMapController.RequestScan();
+
+    }
+
 
     private void DestroyCurrentTiles()
     {

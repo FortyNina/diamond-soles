@@ -58,6 +58,7 @@ public class Rock : MonoBehaviour
                     MineRecorder.UpdateTileType(floorNumber, index, mineType, TileType.Blank);
 
                 }
+                AStarMapController.RequestScan();
             }
         }
     }

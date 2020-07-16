@@ -39,7 +39,7 @@ public class AIPlayerController : PlayerController
             if (path == null)
             {
                 print("5");
-
+                DetermineNewTarget();
                 return;
             }
 
@@ -95,7 +95,6 @@ public class AIPlayerController : PlayerController
         else if(state == AIstate.Wait)
         {
             //dont do anything
-            print(_direction.ToString());
         }
 
         
@@ -115,50 +114,10 @@ public class AIPlayerController : PlayerController
     void DetermineNewTarget()
     {
         TileType toSeek = AIManager.GetTileTypeToSeek(playerID);
+        print(toSeek.ToString());
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 100f); //TODO: make sure this doesnt overlap with other maps
-
-        float minDist = 100;
-
-        for(int i = 0;i < interactableObjects.Length; i++)
-        {
-            print(interactableObjects[i].name);
-            if (toSeek == TileType.Stair && interactableObjects[i].gameObject.tag == "Staircase")
-            {
-                print("1");
-                target = interactableObjects[i].transform;
-                break;
-            }
-            if (toSeek == TileType.Hole && interactableObjects[i].gameObject.tag == "Hole")
-            {
-                print("2");
-                target = interactableObjects[i].transform;
-                break;
-            }
-
-
-
-
-            if(interactableObjects[i].GetComponent<Rock>() != null)
-            {
-                if(interactableObjects[i].GetComponent<Rock>().ore == toSeek)
-                {
-                    float dist = Vector2.Distance(transform.position, interactableObjects[i].transform.position);
-                    if(dist < minDist)
-                    {
-                        minDist = dist;
-                        target = interactableObjects[i].transform;
-                        print("3");
-
-                    }
-
-                }
-            }
-
-
-        }
-
+        target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
         seeker.StartPath(rb.position, target.position, OnPathComplete);
-
     }
 
     IEnumerator BreakBlock()

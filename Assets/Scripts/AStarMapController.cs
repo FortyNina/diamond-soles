@@ -8,13 +8,37 @@ public class AStarMapController : MonoBehaviour
 
     public AstarPath path;
 
+    private static int _scanRequests = 0;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.L))
         {
-            path.Scan();
+            RequestScan();
         }
+
+        if(_scanRequests > 0)
+        {
+            if (!path.isScanning)
+            {
+                path.Scan();
+                _scanRequests--;
+            }
+        }
+
+        if(_scanRequests < 0)
+        {
+            _scanRequests = 0;
+        }
+
     }
+
+    public static void RequestScan()
+    {
+        _scanRequests++;
+    }
+
+    
 
 }

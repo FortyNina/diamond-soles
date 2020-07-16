@@ -1,42 +1,26 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/AstarPathfindingProject/Core/AstarPath.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AIManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/GridCreator.cs" Line="76" Column="39" IsPinned="True" />
-      <File FileName="Assets/Scripts/UIDisplayer.cs" Line="42" Column="64" />
-      <File FileName="Assets/Scripts/GameData.cs" Line="10" Column="1" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="22" Column="6" />
-      <File FileName="Assets/Scripts/Rock.cs" Line="42" Column="47" />
-      <File FileName="Assets/Scripts/Tile.cs" Line="34" Column="30" />
-      <File FileName="Assets/Scripts/MineRecorder.cs" Line="102" Column="46" />
-      <File FileName="Assets/Scripts/AuctionManager.cs" Line="50" Column="74" />
+      <File FileName="Assets/Scripts/GridCreator.cs" Line="75" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/UIDisplayer.cs" />
+      <File FileName="Assets/Scripts/GameData.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/Rock.cs" />
+      <File FileName="Assets/Scripts/Tile.cs" />
+      <File FileName="Assets/Scripts/MineRecorder.cs" />
+      <File FileName="Assets/Scripts/AuctionManager.cs" />
       <File FileName="Assets/Scripts/AIManager.cs" Line="103" Column="1" />
-      <File FileName="Assets/Scripts/AuctionPlayerController.cs" Line="44" Column="1" />
-      <File FileName="Assets/Scripts/GameInitializer.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/AStarMapController.cs" Line="11" Column="23" />
-      <File FileName="Assets/AIPlayerController.cs" Line="118" Column="93" />
-      <File FileName="Assets/AstarPathfindingProject/Core/AstarPath.cs" Line="1302" Column="1" />
+      <File FileName="Assets/Scripts/AuctionPlayerController.cs" />
+      <File FileName="Assets/Scripts/GameInitializer.cs" />
+      <File FileName="Assets/Scripts/AStarMapController.cs" />
+      <File FileName="Assets/AIPlayerController.cs" />
+      <File FileName="Assets/AstarPathfindingProject/Core/AstarPath.cs" />
       <File FileName="Assets/Scripts/PlayerController.cs" Line="197" Column="11" NotebookId="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="diamond-soles" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="AstarPathfindingProject" expanded="True">
-                <Node name="Core" expanded="True">
-                  <Node name="AstarPath.cs" selected="True" />
-                </Node>
-              </Node>
-              <Node name="Scripts" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="40f4098a-0e8e-4218-8d98-ca78870cfdd2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cbe2ed85-66a5-4cc5-ac15-799f85149e2c" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
