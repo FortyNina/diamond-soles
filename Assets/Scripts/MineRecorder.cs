@@ -134,7 +134,11 @@ public class MineRecorder : MonoBehaviour
 
         if (mineType == Mine.IronMine)
         {
-            if (floor < 10)
+            if(floor < 1)
+            {
+                percentBlank = 100;
+            }
+            else if (floor < 10)
             {
                 percentBlank = 90;
                 percentBasic = 7;
@@ -170,7 +174,11 @@ public class MineRecorder : MonoBehaviour
 
         else if (mineType == Mine.JellyMine)
         {
-            if (floor < 10)
+            if (floor < 1)
+            {
+                percentBlank = 100;
+            }
+            else if (floor < 10)
             {
                 percentBlank = 90;
                 percentBasic = 7;
@@ -208,23 +216,41 @@ public class MineRecorder : MonoBehaviour
 
         Tile[] newTiles = new Tile[gridWidth * gridHeight];
 
-        for (int i = 0; i < newTiles.Length; i++)
+        if (floor < 1)
+        {
+            for (int i = 0; i < newTiles.Length; i++)
+            {
+
+                newTiles[i] = new Tile(TileType.Blank, 0, i);
+            }
+
+            int stairLoc = gridWidth / 2;
+            int spawnLoc = gridWidth * gridHeight / 2;
+            newTiles[stairLoc] = new Tile(TileType.Stair, 0, stairLoc);
+            newTiles[spawnLoc] = new Tile(TileType.Spawn, 0, spawnLoc);
+
+        }
+        else
         {
 
-            newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird, percentDiamond);
+            for (int i = 0; i < newTiles.Length; i++)
+            {
+
+                newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird, percentDiamond);
+            }
+
+            int rand = Random.Range(0, newTiles.Length);
+            int stairLoc = rand;
+            int spawnLoc = rand;
+
+            while (stairLoc == spawnLoc)
+            {
+                spawnLoc = Random.Range(0, newTiles.Length);
+            }
+
+            newTiles[stairLoc] = new Tile(TileType.Stair, 0, stairLoc);
+            newTiles[spawnLoc] = new Tile(TileType.Spawn, 0, spawnLoc);
         }
-
-        int rand = Random.Range(0, newTiles.Length);
-        int stairLoc = rand;
-        int spawnLoc = rand;
-
-        while (stairLoc == spawnLoc)
-        {
-            spawnLoc = Random.Range(0, newTiles.Length);
-        }
-
-        newTiles[stairLoc] = new Tile(TileType.Stair, 0, stairLoc);
-        newTiles[spawnLoc] = new Tile(TileType.Spawn, 0, spawnLoc);
 
         if (mineType == Mine.IronMine)
             ironMineFloors[floor] = newTiles;
