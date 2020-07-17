@@ -40,6 +40,8 @@ public class GameInitializer : MonoBehaviour
 
                 GameData.Instance.playerMineLocations.Add(Mine.Entry);
 
+                GameData.Instance.playerElevators.Add(new List<ElevatorData>());
+
 
             }
             GameData.Instance.setUpComplete = true;

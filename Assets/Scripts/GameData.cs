@@ -29,14 +29,11 @@ public class GameData : Singleton<GameData>
 
 	public List<int> playerMoney = new List<int>();
 
-	
-
-
-
-	//TODO: dont hardcode number of values!
 	public List<Vector3> playerLocalLocations = new List<Vector3> ();
 
 	public List<Mine> playerMineLocations = new List<Mine> ();
+
+	public List<List<ElevatorData>> playerElevators = new List<List<ElevatorData>>();
 
 
 

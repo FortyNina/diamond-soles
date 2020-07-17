@@ -49,6 +49,9 @@ public class GridCreator : MonoBehaviour
     [SerializeField]
     private GameObject _holeTile;
 
+    [SerializeField]
+    private GameObject _elevatorTile;
+
 
     [Space(9)]
     [SerializeField]
@@ -62,6 +65,8 @@ public class GridCreator : MonoBehaviour
 
     private float _adjustedX;
     private float _adjustedY;
+    private float _elevatorStartX = -4.5f;
+    private float _elevatorStartY = 3;
 
     private int _currentFloor;
 
@@ -228,6 +233,7 @@ public class GridCreator : MonoBehaviour
     {
         float x = _adjustedX;
         float y = _adjustedY;
+        
 
         _tilesInScene = new GameObject[_gridHeight * _gridWidth];
 
@@ -309,6 +315,8 @@ public class GridCreator : MonoBehaviour
             x = _adjustedX;
             y += _tileWidth;
         }
+        if (_currentFloor == 0)
+            SetElevators();
     }
 
     private IEnumerator RescanMap()
@@ -337,6 +345,26 @@ public class GridCreator : MonoBehaviour
         }
         return newSet;
 
+    }
+
+    private void SetElevators()
+    {
+        float x = _elevatorStartX;
+        for(int i =0;i < GameData.Instance.playerElevators.Count; i++)
+        {
+            for(int j = 0;j < GameData.Instance.playerElevators[i].Count; j++)
+            {
+                if(mineType == GameData.Instance.playerElevators[i][j].mineType)
+                {
+                    GameObject et = Instantiate(_elevatorTile, Vector3.zero, Quaternion.identity);
+                    et.transform.parent = transform;
+                    et.transform.position = new Vector3(x, _elevatorStartY, 0);
+                    et.GetComponent<ElevatorObj>().SetData(GameData.Instance.playerElevators[i][j]);
+                    x += .6f;
+;                        
+                }
+            }
+        }
     }
 
 

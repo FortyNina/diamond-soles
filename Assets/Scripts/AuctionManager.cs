@@ -290,7 +290,7 @@ public class AuctionManager : MonoBehaviour
             {
                 _resourceIndex++;
                 if (_resourceIndex >= _resourcesToTrade.Length)
-                    SceneManager.LoadScene("MiningScene");
+                    LeaveAuction();
                 else
                     state = AuctionState.EndAuction;
 
@@ -330,18 +330,24 @@ public class AuctionManager : MonoBehaviour
 
             //do nothing! just wait xD
         }
-
-
-
-
-
-
     }
 
 
 
 
+    public void LeaveAuction()
+    {
+        //drop floors?
+        for (int i = 0; i < GameData.Instance.ironFloors.Count; i++)
+            GameData.Instance.ironFloors[i] = 0;
+        for (int i = 0; i < GameData.Instance.jellyFloors.Count; i++)
+            GameData.Instance.jellyFloors[i] = 0;
+        for (int i = 0; i < GameData.Instance.thirdFloors.Count; i++)
+            GameData.Instance.thirdFloors[i] = 0;
 
+
+        SceneManager.LoadScene("MiningScene");
+    }
 
 
 

@@ -191,6 +191,19 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    protected void UseStaircase(ElevatorObj eo)
+    {
+        if (_gridCreator.mineType == Mine.IronMine)
+            GameData.Instance.ironFloors[playerID] = eo.floor;
+        if (_gridCreator.mineType == Mine.JellyMine)
+            GameData.Instance.jellyFloors[playerID] = eo.floor;
+        if (_gridCreator.mineType == Mine.ThirdMine)
+            GameData.Instance.thirdFloors[playerID] = eo.floor;
+
+        _gridCreator.DisplayNewLayout();
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Staircase")
@@ -202,6 +215,10 @@ public class PlayerController : MonoBehaviour
         {
             TraverseHole();
 
+        }
+        else if(collision.tag == "Elevator")
+        {
+            UseStaircase(collision.GetComponent<ElevatorObj>());
         }
 
     }
