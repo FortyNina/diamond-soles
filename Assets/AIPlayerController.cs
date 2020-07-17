@@ -126,7 +126,6 @@ public class AIPlayerController : PlayerController
     void DetermineNewTarget()
     {
         TileType toSeek = AIManager.GetTileTypeToSeek(playerID);
-        print(toSeek.ToString());
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
         target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
         if (target != null)

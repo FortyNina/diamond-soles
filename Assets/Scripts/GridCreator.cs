@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Mine { IronMine, JellyMine, ThirdMine}
+public enum Mine { IronMine, JellyMine, ThirdMine, Entry}
 
 public class GridCreator : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class GridCreator : MonoBehaviour
 
     public int playerID;
 
-    public Mine mineType;
+    public Mine mineType = Mine.Entry;
 
     [SerializeField]
     private int _gridWidth = 9;
@@ -68,21 +68,20 @@ public class GridCreator : MonoBehaviour
     private TileType[] _prevTileTypes;
     private GameObject[] _tilesInScene;
 
+    private bool _mineSelected = false;
+
     void Awake()
     {
         _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
         _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
 
-        //TODO: move to a select screen?
-        GameData.Instance.playerMineLocations[playerID] = mineType;
-        DisplayNewLayout();
-
-
-
     }
 
     private void Update()
     {
+        if (!_mineSelected)
+            return;
+
         //Check to Display other Players
         for(int i = 0;i < _otherPlayers.Length; i++)
         {
@@ -174,6 +173,14 @@ public class GridCreator : MonoBehaviour
         }
     }
 
+    public void SelectMine(Mine mine)
+    {
+        mineType = mine;
+        _mineSelected = true;
+        GameData.Instance.playerMineLocations[playerID] = mineType;
+        DisplayNewLayout();
+    }
+
     public void RemoveTilesFromLayout()
     {
         for(int i = 0; i < _prevTileTypes.Length; i++)
@@ -186,6 +193,8 @@ public class GridCreator : MonoBehaviour
 
         _prevTileTypes = MakeCopyOfTileSetTypes(MineRecorder.GetMineFloor(mineType, _currentFloor));
     }
+
+   
 
     public void DisplayNewLayout()
     {
@@ -329,5 +338,6 @@ public class GridCreator : MonoBehaviour
         return newSet;
 
     }
+
 
 }

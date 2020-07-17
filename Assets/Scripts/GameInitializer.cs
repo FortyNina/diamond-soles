@@ -38,7 +38,7 @@ public class GameInitializer : MonoBehaviour
 
                 GameData.Instance.playerLocalLocations.Add(Vector3.zero);
 
-                GameData.Instance.playerMineLocations.Add(Mine.IronMine);
+                GameData.Instance.playerMineLocations.Add(Mine.Entry);
 
 
             }

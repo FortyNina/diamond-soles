@@ -1,21 +1,22 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AIPersonalityPreferences.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MinePicker.cs">
     <Files>
-      <File FileName="Assets/Scripts/GridCreator.cs" Line="139" Column="1" IsPinned="True" />
+      <File FileName="Assets/Scripts/GridCreator.cs" Line="84" Column="1" IsPinned="True" />
       <File FileName="Assets/Scripts/GameData.cs" />
       <File FileName="Assets/Scripts/GameManager.cs" Line="22" Column="6" />
       <File FileName="Assets/Scripts/Rock.cs" Line="45" Column="109" />
-      <File FileName="Assets/Scripts/Tile.cs" Line="44" Column="1" />
-      <File FileName="Assets/Scripts/MineRecorder.cs" Line="265" Column="39" />
+      <File FileName="Assets/Scripts/Tile.cs" Line="42" Column="23" />
+      <File FileName="Assets/Scripts/MineRecorder.cs" Line="160" Column="35" />
       <File FileName="Assets/Scripts/AuctionManager.cs" Line="50" Column="74" />
-      <File FileName="Assets/Scripts/AIManager.cs" Line="9" Column="1" />
+      <File FileName="Assets/Scripts/AIManager.cs" Line="113" Column="14" />
       <File FileName="Assets/Scripts/AuctionPlayerController.cs" />
       <File FileName="Assets/Scripts/GameInitializer.cs" />
       <File FileName="Assets/Scripts/AStarMapController.cs" Line="42" Column="5" />
       <File FileName="Assets/AIPlayerController.cs" Line="172" Column="21" />
       <File FileName="Assets/AstarPathfindingProject/Core/AstarPath.cs" Line="837" Column="7" />
       <File FileName="Assets/Scripts/Axe.cs" Line="11" Column="34" />
-      <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" Line="8" Column="16" />
+      <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" Line="27" Column="41" />
+      <File FileName="Assets/Scripts/MinePicker.cs" Line="7" Column="6" />
       <File FileName="Assets/Scripts/PlayerController.cs" Line="115" Column="37" NotebookId="1" />
       <File FileName="Assets/Scripts/PlayerCreator.cs" Line="33" Column="33" NotebookId="1" />
     </Files>

@@ -162,5 +162,22 @@ public class AIManager : MonoBehaviour
         return null;
     }
 
+    public static Mine GetMineChoice(int playerIndex)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        if(pers == AIPersonality.Basic)
+        {
+            int rand = Random.Range(0, 2);
+            if (rand == 0)
+            {
+                return Mine.IronMine;
+            }
+            return Mine.JellyMine;
+        }
+
+        return Mine.IronMine;
+
+    }
+
 
 }
