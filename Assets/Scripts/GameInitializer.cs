@@ -19,20 +19,20 @@ public class GameInitializer : MonoBehaviour
 
                 GameData.Instance.ironFloors.Add(0);
                 GameData.Instance.jellyFloors.Add(0);
-                GameData.Instance.thirdFloors.Add(0);
+                GameData.Instance.coalFloors.Add(0);
 
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
 
                 ores.Add(TileType.Iron, 50);
                 ores.Add(TileType.Diamond, 0);
                 ores.Add(TileType.Food, 50);
-                ores.Add(TileType.Third, 50);
+                ores.Add(TileType.Coal, 50);
 
                 GameData.Instance.playerOreSupplies.Add(ores);
 
                 GameData.Instance.durabilityLevels.Add(60);
                 GameData.Instance.energyLevels.Add(60);
-                GameData.Instance.thirdLevels.Add(60);
+                GameData.Instance.coalLevels.Add(60);
 
                 GameData.Instance.playerMoney.Add(1000);
 

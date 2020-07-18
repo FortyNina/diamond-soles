@@ -66,16 +66,14 @@ public class AIPlayerController : PlayerController
         }
 
         _previousPos = transform.position;
+        GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
+
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-
-        if (playerID == 1)
-            print(state);
 
         if (state == AIstate.TravelPath)
         {

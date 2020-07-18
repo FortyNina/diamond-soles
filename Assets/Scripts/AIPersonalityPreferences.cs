@@ -16,7 +16,7 @@ public class AIPersonalityPreferences : MonoBehaviour
         {
             types.Add(TileType.Iron);
             types.Add(TileType.Food);
-            types.Add(TileType.Third);
+            types.Add(TileType.Coal);
             types.Add(TileType.Diamond);
         }
 

@@ -37,15 +37,16 @@ public class Rock : MonoBehaviour
         if(collision.tag == "Axe")
         {
             MineRecorder.UpdateMineTileHealth(floorNumber, mineType, -1, index);
-            if(MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
-            {
-                if (collision.transform.parent != null){
-                    if (GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID].ContainsKey(ore))
-                    {
-                        GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID][ore] += myTile.oreAmount;
 
-                    }
+            if (MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
+            {
+                
+                if (GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID].ContainsKey(ore))
+                {
+                    GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID][ore] += myTile.oreAmount;
+
                 }
+                
                 if (Random.Range(0, 10) < 1)
                 {
                     GameObject go = Instantiate(holePrefab, transform.position, Quaternion.identity);
@@ -60,6 +61,9 @@ public class Rock : MonoBehaviour
                 }
                 AStarMapController.RequestScan();
             }
+
+
+
         }
     }
 

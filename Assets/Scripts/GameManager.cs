@@ -59,17 +59,17 @@ public class GameManager : MonoBehaviour
                 {
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(5, 15);
                     GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
-                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(0, 2);
                 }
                 else if(rand == 1)
                 {
                     GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(5, 15);
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
-                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(0, 2);
+                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(0, 2);
                 }
                 else
                 {
-                    GameData.Instance.playerOreSupplies[i][TileType.Third] += Random.Range(5, 15);
+                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(5, 15);
                     GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
                     GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
                 }
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         {
             GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
             GameData.Instance.playerOreSupplies[i][TileType.Food] -= amountOfResourceToLoseAfterDay;
-            GameData.Instance.playerOreSupplies[i][TileType.Third] -= amountOfResourceToLoseAfterDay;
+            GameData.Instance.playerOreSupplies[i][TileType.Coal] -= amountOfResourceToLoseAfterDay;
         }
 
 
@@ -111,11 +111,11 @@ public class GameManager : MonoBehaviour
         }
 
         //based on how much iron you have, calculate your axe durability level for this day
-        for (int i = 0; i < GameData.Instance.thirdLevels.Count; i++)
+        for (int i = 0; i < GameData.Instance.coalLevels.Count; i++)
         {
-            int third = GameData.Instance.playerOreSupplies[i][TileType.Third];
-            int newThird = (100 * third) / 200;
-            GameData.Instance.thirdLevels[i] = newThird;
+            int coal = GameData.Instance.playerOreSupplies[i][TileType.Coal];
+            int newCoal = (100 * coal) / 200;
+            GameData.Instance.coalLevels[i] = newCoal;
         }
 
         

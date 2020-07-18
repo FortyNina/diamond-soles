@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIDisplayer : MonoBehaviour
 {
+    
 
     [SerializeField]
     private TextMeshProUGUI[] _playerFloorDisplay;
@@ -15,6 +16,9 @@ public class UIDisplayer : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI[] _jellyCollectedDisplay;
+
+    [SerializeField]
+    private TextMeshProUGUI[] _coalCollectedDisplay;
 
     [SerializeField]
     private TextMeshProUGUI[] _moneyDisplay;
@@ -31,7 +35,13 @@ public class UIDisplayer : MonoBehaviour
     {
         for(int i = 0;i < _playerFloorDisplay.Length;i++)
         {
-            _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.ironFloors[i];
+            if(GameData.Instance.playerMineLocations[i] == Mine.IronMine)
+                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.ironFloors[i];
+            if (GameData.Instance.playerMineLocations[i] == Mine.JellyMine)
+                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.jellyFloors[i];
+            if (GameData.Instance.playerMineLocations[i] == Mine.CoalMine)
+                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.coalFloors[i];
+
         }
 
         for(int i = 0; i < _ironCollectedDisplay.Length; i++)
@@ -41,7 +51,12 @@ public class UIDisplayer : MonoBehaviour
 
         for (int i = 0; i < _jellyCollectedDisplay.Length; i++)
         {
-            _jellyCollectedDisplay[i].text = "Food: " + GameData.Instance.playerOreSupplies[i][TileType.Food];
+            _jellyCollectedDisplay[i].text = "Jelly: " + GameData.Instance.playerOreSupplies[i][TileType.Food];
+        }
+
+        for(int i = 0;i < _coalCollectedDisplay.Length; i++)
+        {
+            _coalCollectedDisplay[i].text = "Coal: " + GameData.Instance.playerOreSupplies[i][TileType.Coal];
         }
 
 

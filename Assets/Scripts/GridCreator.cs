@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Mine { IronMine, JellyMine, ThirdMine, Entry}
+public enum Mine { IronMine, JellyMine, CoalMine, Entry}
 
 public class GridCreator : MonoBehaviour
 {
 
-    public Color blank;
-    public Color spawn;
-    public Color rock;
-    public Color stair;
-
+   
     public int playerID;
 
     public Mine mineType = Mine.Entry;
@@ -41,6 +37,9 @@ public class GridCreator : MonoBehaviour
 
     [SerializeField]
     private GameObject _jellyTile;
+
+    [SerializeField]
+    private GameObject _coalTile;
 
     [SerializeField]
     private GameObject _diamondTile;
@@ -111,9 +110,9 @@ public class GridCreator : MonoBehaviour
                         playerOnFloor = true;
                     }
                 }
-                if (mineType == Mine.ThirdMine)
+                if (mineType == Mine.CoalMine)
                 {
-                    if (GameData.Instance.thirdFloors[i] == GameData.Instance.thirdFloors[playerID])
+                    if (GameData.Instance.coalFloors[i] == GameData.Instance.coalFloors[playerID])
                     {
                         playerOnFloor = true;
                     }
@@ -162,17 +161,17 @@ public class GridCreator : MonoBehaviour
                 _playerObject.transform.position = pos;
             }
         }
-        if (MineRecorder.ThirdDirty && !MineRecorder.CheckFlag(Mine.ThirdMine, playerID))
+        if (MineRecorder.CoalDirty && !MineRecorder.CheckFlag(Mine.CoalMine, playerID))
         {
-            if (mineType != Mine.ThirdMine)
+            if (mineType != Mine.CoalMine)
             {
-                MineRecorder.SetBackFlag(Mine.ThirdMine, playerID);
+                MineRecorder.SetBackFlag(Mine.CoalMine, playerID);
             }
             else
             {
                 Vector3 pos = _playerObject.transform.position;
                 RemoveTilesFromLayout();
-                MineRecorder.SetBackFlag(Mine.ThirdMine, playerID);
+                MineRecorder.SetBackFlag(Mine.CoalMine, playerID);
                 _playerObject.transform.position = pos;
             }
         }
@@ -209,8 +208,8 @@ public class GridCreator : MonoBehaviour
             _currentFloor = GameData.Instance.ironFloors[playerID];
         if (mineType == Mine.JellyMine)
             _currentFloor = GameData.Instance.jellyFloors[playerID];
-        if (mineType == Mine.ThirdMine)
-            _currentFloor = GameData.Instance.thirdFloors[playerID];
+        if (mineType == Mine.CoalMine)
+            _currentFloor = GameData.Instance.coalFloors[playerID];
 
         if (MineRecorder.CheckMineFloorExists(mineType, _currentFloor))
         {
@@ -282,6 +281,8 @@ public class GridCreator : MonoBehaviour
                     prefabToGenerate = _jellyTile;
                 else if (currentTile.tileType == TileType.Hole)
                     prefabToGenerate = _holeTile;
+                else if (currentTile.tileType == TileType.Coal)
+                    prefabToGenerate = _coalTile;
                 else if (currentTile.tileType == TileType.Diamond)
                     prefabToGenerate = _diamondTile;
 

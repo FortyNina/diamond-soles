@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { Blank, Rock, Spawn, Stair, Hole, Iron, Diamond, Food, Third}
+public enum TileType { Blank, Rock, Spawn, Stair, Hole, Iron, Diamond, Food, Coal}
 
 public class Tile
 {
@@ -40,6 +40,11 @@ public class Tile
         {
             oreAmount = 5;
             health = 5;
+        }
+        if(t == TileType.Coal)
+        {
+            oreAmount = 4;
+            health = 3;
         }
 
         this.index = index;

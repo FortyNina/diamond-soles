@@ -153,8 +153,8 @@ public class PlayerController : MonoBehaviour
             GameData.Instance.ironFloors[playerID]++;
         if (_gridCreator.mineType == Mine.JellyMine)
             GameData.Instance.jellyFloors[playerID]++;
-        if (_gridCreator.mineType == Mine.ThirdMine)
-            GameData.Instance.thirdFloors[playerID]++;
+        if (_gridCreator.mineType == Mine.CoalMine)
+            GameData.Instance.coalFloors[playerID]++;
 
 
         _gridCreator.DisplayNewLayout();
@@ -168,8 +168,8 @@ public class PlayerController : MonoBehaviour
             currentFloor = GameData.Instance.ironFloors[playerID];
         if (_gridCreator.mineType == Mine.JellyMine)
             currentFloor = GameData.Instance.jellyFloors[playerID];
-        if (_gridCreator.mineType == Mine.ThirdMine)
-            currentFloor = GameData.Instance.thirdFloors[playerID];
+        if (_gridCreator.mineType == Mine.CoalMine)
+            currentFloor = GameData.Instance.coalFloors[playerID];
 
         int randFloors = 0;
         if (currentFloor < 15)
@@ -183,8 +183,8 @@ public class PlayerController : MonoBehaviour
             GameData.Instance.ironFloors[playerID] += randFloors;
         if (_gridCreator.mineType == Mine.JellyMine)
             GameData.Instance.jellyFloors[playerID] += randFloors;
-        if (_gridCreator.mineType == Mine.ThirdMine)
-            GameData.Instance.thirdFloors[playerID] += randFloors;
+        if (_gridCreator.mineType == Mine.CoalMine)
+            GameData.Instance.coalFloors[playerID] += randFloors;
         _gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= randFloors;
 
@@ -197,8 +197,8 @@ public class PlayerController : MonoBehaviour
             GameData.Instance.ironFloors[playerID] = eo.floor;
         if (_gridCreator.mineType == Mine.JellyMine)
             GameData.Instance.jellyFloors[playerID] = eo.floor;
-        if (_gridCreator.mineType == Mine.ThirdMine)
-            GameData.Instance.thirdFloors[playerID] = eo.floor;
+        if (_gridCreator.mineType == Mine.CoalMine)
+            GameData.Instance.coalFloors[playerID] = eo.floor;
 
         _gridCreator.DisplayNewLayout();
 

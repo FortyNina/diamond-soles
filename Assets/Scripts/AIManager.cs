@@ -92,9 +92,9 @@ public class AIManager : MonoBehaviour
             floor = GameData.Instance.jellyFloors[playerIndex];
         }
 
-        if (mine == Mine.ThirdMine)
+        if (mine == Mine.CoalMine)
         {
-            floor = GameData.Instance.thirdFloors[playerIndex];
+            floor = GameData.Instance.coalFloors[playerIndex];
         }
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
@@ -167,12 +167,12 @@ public class AIManager : MonoBehaviour
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
         if(pers == AIPersonality.Basic)
         {
-            int rand = Random.Range(0, 2);
+            int rand = Random.Range(0, 3);
             if (rand == 0)
-            {
                 return Mine.IronMine;
-            }
-            return Mine.JellyMine;
+            else if(rand == 1)
+                return Mine.JellyMine;
+            return Mine.CoalMine;
         }
 
         return Mine.IronMine;

@@ -26,6 +26,8 @@ public class MinePicker : MonoBehaviour
             m = Mine.IronMine;
         if (type == "jellymine")
             m = Mine.JellyMine;
+        if (type == "coalmine")
+            m = Mine.CoalMine;
 
         gridCreator.SelectMine(m);
         Destroy(gameObject);

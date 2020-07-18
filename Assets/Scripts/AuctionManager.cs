@@ -342,8 +342,8 @@ public class AuctionManager : MonoBehaviour
             GameData.Instance.ironFloors[i] = 0;
         for (int i = 0; i < GameData.Instance.jellyFloors.Count; i++)
             GameData.Instance.jellyFloors[i] = 0;
-        for (int i = 0; i < GameData.Instance.thirdFloors.Count; i++)
-            GameData.Instance.thirdFloors[i] = 0;
+        for (int i = 0; i < GameData.Instance.coalFloors.Count; i++)
+            GameData.Instance.coalFloors[i] = 0;
 
 
         SceneManager.LoadScene("MiningScene");

@@ -17,14 +17,14 @@ public class GameData : Singleton<GameData>
 
 	public List<int> ironFloors = new List<int>();
 	public List<int> jellyFloors = new List<int>();
-	public List<int> thirdFloors = new List<int>();
+	public List<int> coalFloors = new List<int>();
 
 
 	public List<Dictionary<TileType, int>> playerOreSupplies = new List<Dictionary<TileType, int>>();
 
 	public List<float> energyLevels = new List<float>();
 	public List<int> durabilityLevels = new List<int>();
-	public List<int> thirdLevels = new List<int>();
+	public List<int> coalLevels = new List<int>();
 
 
 	public List<int> playerMoney = new List<int>();

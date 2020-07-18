@@ -7,12 +7,12 @@ public class MineRecorder : MonoBehaviour
 
     private static Tile[][] ironMineFloors = new Tile[1000][];
     private static Tile[][] jellyMineFloors = new Tile[1000][];
-    private static Tile[][] thirdMineFloors = new Tile[1000][];
+    private static Tile[][] coalMineFloors = new Tile[1000][];
 
     //update this when changing grid size
     private static bool[] ironGridCompleteFlags = new bool[4];
     private static bool[] jellyGridCompleteFlags = new bool[4];
-    private static bool[] thirdGridCompleteFlags = new bool[4];
+    private static bool[] coalGridCompleteFlags = new bool[4];
 
     //update this on number of mines
     private static bool ironDirty;
@@ -26,10 +26,10 @@ public class MineRecorder : MonoBehaviour
         get { return jellyDirty; }
     }
 
-    private static bool thirdDirty;
-    public static bool ThirdDirty
+    private static bool coalDirty;
+    public static bool CoalDirty
     {
-        get { return thirdDirty; }
+        get { return coalDirty; }
     }
 
     public static bool CheckMineFloorExists(Mine mineType, int floor)
@@ -44,9 +44,9 @@ public class MineRecorder : MonoBehaviour
             if (jellyMineFloors[floor] != null)
                 return true;
         }
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            if (thirdMineFloors[floor] != null)
+            if (coalMineFloors[floor] != null)
                 return true;
         }
 
@@ -65,15 +65,15 @@ public class MineRecorder : MonoBehaviour
             if (jellyMineFloors[floor] != null)
                 return jellyMineFloors[floor];
         }
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            if (thirdMineFloors[floor] != null)
-                return thirdMineFloors[floor];
+            if (coalMineFloors[floor] != null)
+                return coalMineFloors[floor];
         }
         return new Tile[0];
     }
 
-    private static Tile GetRandomTile(int index, int blank, int basic, int iron, int jelly, int third, int diamond)
+    private static Tile GetRandomTile(int index, int blank, int basic, int iron, int jelly, int coal, int diamond)
     {
         int rand = Random.Range(0, 100);
         int marker = 0;
@@ -102,12 +102,12 @@ public class MineRecorder : MonoBehaviour
                 return new Tile(TileType.Food, 0, index);
         }
         marker += jelly;
-        for (int i = marker; i < third + marker; i++)
+        for (int i = marker; i < coal + marker; i++)
         {
             if (rand == i)
-                return new Tile(TileType.Third, 0, index);
+                return new Tile(TileType.Coal, 0, index);
         }
-        marker += third;
+        marker += coal;
         for (int i = marker; i < diamond + marker; i++)
         {
             if (rand == i)
@@ -129,7 +129,7 @@ public class MineRecorder : MonoBehaviour
         int percentBasic = 0;
         int percentIron = 0;
         int percentJelly = 0;
-        int percentThird = 0;
+        int percentCoal = 0;
         int percentDiamond = 0;
 
         if (mineType == Mine.IronMine)
@@ -212,6 +212,40 @@ public class MineRecorder : MonoBehaviour
             }
         }
 
+        else if (mineType == Mine.CoalMine)
+        {
+            if (floor < 1)
+            {
+                percentBlank = 100;
+            }
+            else if (floor < 10)
+            {
+                percentBlank = 90;
+                percentBasic = 9;
+                percentCoal = 1;
+            }
+            else if (floor < 20)
+            {
+                percentBlank = 80;
+                percentBasic = 16;
+                percentCoal = 4;
+            }
+            else if (floor < 30)
+            {
+                percentBlank = 75;
+                percentBasic = 9;
+                percentCoal = 11;
+                percentDiamond = 5;
+            }
+            else if (floor < 50)
+            {
+                percentBlank = 75;
+                percentBasic = 5;
+                percentCoal = 11;
+                percentDiamond = 9;
+            }
+        }
+
         //-----------------------------------------------------------------------------------------------------
 
         Tile[] newTiles = new Tile[gridWidth * gridHeight];
@@ -236,7 +270,7 @@ public class MineRecorder : MonoBehaviour
             for (int i = 0; i < newTiles.Length; i++)
             {
 
-                newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentThird, percentDiamond);
+                newTiles[i] = GetRandomTile(i, percentBlank, percentBasic, percentIron, percentJelly, percentCoal, percentDiamond);
             }
 
             int rand = Random.Range(0, newTiles.Length);
@@ -256,8 +290,8 @@ public class MineRecorder : MonoBehaviour
             ironMineFloors[floor] = newTiles;
         if (mineType == Mine.JellyMine)
             jellyMineFloors[floor] = newTiles;
-        if (mineType == Mine.ThirdMine)
-            thirdMineFloors[floor] = newTiles;
+        if (mineType == Mine.CoalMine)
+            coalMineFloors[floor] = newTiles;
 
         return newTiles;
 
@@ -276,10 +310,10 @@ public class MineRecorder : MonoBehaviour
             if (jellyMineFloors[floor] != null)
                 jellyMineFloors[floor][index].health += newHealth;
         }
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            if (thirdMineFloors[floor] != null)
-                thirdMineFloors[floor][index].health += newHealth;
+            if (coalMineFloors[floor] != null)
+                coalMineFloors[floor][index].health += newHealth;
         }
     }
 
@@ -295,10 +329,10 @@ public class MineRecorder : MonoBehaviour
             if (jellyMineFloors[floor] != null)
                 return jellyMineFloors[floor][index].health;
         }
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            if (thirdMineFloors[floor] != null)
-                return thirdMineFloors[floor][index].health;
+            if (coalMineFloors[floor] != null)
+                return coalMineFloors[floor][index].health;
         }
         return 0;
     }
@@ -327,14 +361,14 @@ public class MineRecorder : MonoBehaviour
                 jellyGridCompleteFlags[i] = false;
             }
         }
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            if (thirdMineFloors[floor] != null)
-                thirdMineFloors[floor][index].tileType = newType;
-            thirdDirty = true;
-            for (int i = 0; i < jellyGridCompleteFlags.Length; i++)
+            if (coalMineFloors[floor] != null)
+                coalMineFloors[floor][index].tileType = newType;
+            coalDirty = true;
+            for (int i = 0; i < coalGridCompleteFlags.Length; i++)
             {
-                jellyGridCompleteFlags[i] = false;
+                coalGridCompleteFlags[i] = false;
             }
         }
 
@@ -346,8 +380,8 @@ public class MineRecorder : MonoBehaviour
             return ironGridCompleteFlags[index];
         if (mineType == Mine.JellyMine)
             return jellyGridCompleteFlags[index];
-        if (mineType == Mine.ThirdMine)
-            return thirdGridCompleteFlags[index];
+        if (mineType == Mine.CoalMine)
+            return coalGridCompleteFlags[index];
 
         return false;
 
@@ -381,17 +415,17 @@ public class MineRecorder : MonoBehaviour
                 jellyDirty = false;
         }
 
-        if (mineType == Mine.ThirdMine)
+        if (mineType == Mine.CoalMine)
         {
-            thirdGridCompleteFlags[index] = true;
+            coalGridCompleteFlags[index] = true;
             bool done = true;
-            for (int i = 0; i < thirdGridCompleteFlags.Length; i++)
+            for (int i = 0; i < coalGridCompleteFlags.Length; i++)
             {
-                if (thirdGridCompleteFlags[i] == false)
+                if (coalGridCompleteFlags[i] == false)
                     done = false;
             }
             if (done)
-                thirdDirty = false;
+                coalDirty = false;
         }
     }
 
