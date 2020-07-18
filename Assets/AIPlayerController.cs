@@ -25,22 +25,65 @@ public class AIPlayerController : PlayerController
 
     AIstate state = AIstate.TravelPath;
 
+    private Vector3 _previousPos;
+    private float _stuckTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         DetermineNewTarget();
+        _previousPos = transform.position;
+        _stuckTimer = 3f;
+        if (playerID == 1)
+            print("im player 2");
+
+
+    }
+
+    private void Update()
+    {
+        if (state == AIstate.TravelPath)
+        {
+
+            //check if stuck
+            //might need to rescan map, and set new target pos
+            if (IsStandingStill(_previousPos, transform.position))
+                _stuckTimer -= Time.deltaTime;
+            else
+                _stuckTimer = 3f;
+
+            if (_stuckTimer < 0)
+            {
+                _stuckTimer = 3f;
+                AStarMapController.RequestScan();
+                DetermineNewTarget();
+
+                if (playerID == 1)
+                    print("IM STUCK!");
+            }
+        }
+
+        _previousPos = transform.position;
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+
+        if (playerID == 1)
+            print(state);
+
         if (state == AIstate.TravelPath)
         {
+
+            
+
             //REACHED GOAL!
-            if ( path != null)
+            if (path != null)
             {
                 if (currentWaypoint >= path.vectorPath.Count)
                 {
@@ -109,6 +152,7 @@ public class AIPlayerController : PlayerController
             //dont do anything
         }
 
+
         
 
     }
@@ -140,45 +184,59 @@ public class AIPlayerController : PlayerController
         yield return new WaitForSeconds(.1f);
 
         //face block
-        float xDiff = transform.position.x - target.position.x;
-        float yDiff = transform.position.y - target.position.y;
-
-        if(xDiff < -.5f)
+        if (target != null)
         {
-            _direction = PlayerDir.right;
-        }
-        if(xDiff > .5f)
-        {
-            _direction = PlayerDir.left;
-        }
-        if (yDiff < -.5f)
-        {
-            _direction = PlayerDir.up;
-        }
-        if (yDiff > .5f)
-        {
-            _direction = PlayerDir.down;
-        }
+            float xDiff = transform.position.x - target.position.x;
+            float yDiff = transform.position.y - target.position.y;
 
-        int health = 0;
-        if (target.gameObject.GetComponent<Rock>() != null)
-        {
-            health = target.gameObject.GetComponent<Rock>().health;
-        }
+            if (xDiff < -.5f)
+            {
+                _direction = PlayerDir.right;
+            }
+            if (xDiff > .5f)
+            {
+                _direction = PlayerDir.left;
+            }
+            if (yDiff < -.5f)
+            {
+                _direction = PlayerDir.up;
+            }
+            if (yDiff > .5f)
+            {
+                _direction = PlayerDir.down;
+            }
 
-        while (health > 0) {
+            int health = 0;
+            if (target.gameObject.GetComponent<Rock>() != null)
+            {
+                health = target.gameObject.GetComponent<Rock>().health;
+            }
 
-            AxeDown();
+            while (health > 0)
+            {
 
-            yield return new WaitForSeconds(.5f);
+                AxeDown();
 
-            AxeUp();
+                yield return new WaitForSeconds(.5f);
 
-            yield return new WaitForSeconds(.5f);
-            health--;
+                AxeUp();
+
+                yield return new WaitForSeconds(.5f);
+                health--;
+            }
         }
         DetermineNewTarget();
         state = AIstate.TravelPath;
+
+    }
+
+    private bool IsStandingStill(Vector3 prev, Vector3 current)
+    {
+        if(Vector3.Distance(prev, current) < .005f)
+        {
+            return true;
+        }
+        return false;
 
     }
 }
