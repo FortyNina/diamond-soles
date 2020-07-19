@@ -46,7 +46,7 @@ public class UIDisplayer : MonoBehaviour
 
         for(int i = 0; i < _ironCollectedDisplay.Length; i++)
         {
-            _ironCollectedDisplay[i].text = "Iron ore: " + GameData.Instance.playerOreSupplies[i][TileType.Iron];
+            _ironCollectedDisplay[i].text = "Iron: " + GameData.Instance.playerOreSupplies[i][TileType.Iron];
         }
 
         for (int i = 0; i < _jellyCollectedDisplay.Length; i++)

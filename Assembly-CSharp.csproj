@@ -63,9 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AIPlayerController.cs" />
     <Compile Include="Assets\Scripts\AIManager.cs" />
     <Compile Include="Assets\Scripts\AIPersonalityPreferences.cs" />
+    <Compile Include="Assets\Scripts\AIPlayerController.cs" />
     <Compile Include="Assets\Scripts\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\AuctionManager.cs" />
     <Compile Include="Assets\Scripts\AuctionPlayerController.cs" />
