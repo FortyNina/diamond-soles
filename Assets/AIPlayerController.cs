@@ -27,7 +27,9 @@ public class AIPlayerController : PlayerController
 
     private Vector3 _previousPos;
     private float _stuckTimer;
-    private bool _breakingBlock; 
+    private bool _breakingBlock;
+    private bool _isStuck;
+    private int _stuckNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,31 +46,38 @@ public class AIPlayerController : PlayerController
 
     private void Update()
     {
-        
         if (!_breakingBlock)
         {
+
 
             //check if stuck
             //might need to rescan map, and set new target pos
             if (IsStandingStill(_previousPos, transform.position))
-            {
                 _stuckTimer -= Time.deltaTime;
-            }
             else
-            {
                 _stuckTimer = 3f;
-            }
-
             if (_stuckTimer < 0)
             {
-                Debug.Log("Player " + playerID + "is stuck");
-                _stuckTimer = 3f;
-                AStarMapController.RequestScan();
-                DetermineNewTarget();
-                
+                if (_stuckNumber > 5)
+                    StartCoroutine(BreakBlock());
+                else
+                {
+                    Debug.Log("Player " + playerID + "is stuck");
+                    _stuckTimer = 3f;
+                    _isStuck = true;
+                    AStarMapController.RequestScan();
+                    DetermineNewTarget();
+                    _isStuck = false;
+                    _stuckNumber++;
+                }
+
             }
-            
+
+
+
         }
+
+        
 
         _previousPos = transform.position;
         GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
@@ -79,11 +88,10 @@ public class AIPlayerController : PlayerController
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (state == AIstate.TravelPath)
         {
-
-            
+            if(target == null)
+                Debug.Log(playerID + " is targeting null");
 
             //REACHED GOAL!
             if (path != null)
@@ -104,12 +112,14 @@ public class AIPlayerController : PlayerController
             if (path == null)
             {
                 DetermineNewTarget();
+                _stuckNumber = 0;
                 return;
             }
 
             //target has disappeared
             if(target == null || !target.gameObject.activeInHierarchy)
             {
+                _stuckNumber = 0;
                 DetermineNewTarget();
             }
 
@@ -174,7 +184,7 @@ public class AIPlayerController : PlayerController
 
     void DetermineNewTarget()
     {
-        TileType toSeek = AIManager.GetTileTypeToSeek(playerID);
+        TileType toSeek = AIManager.GetTileTypeToSeek(playerID, _isStuck);
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
         target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
         if (target != null)
@@ -234,6 +244,8 @@ public class AIPlayerController : PlayerController
         DetermineNewTarget();
         state = AIstate.TravelPath;
         _breakingBlock = false;
+        _stuckNumber = 0;
+
 
     }
 

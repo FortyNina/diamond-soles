@@ -75,7 +75,7 @@ public class AIManager : MonoBehaviour
         return 15;
     }
 
-    public static TileType GetTileTypeToSeek(int playerIndex)
+    public static TileType GetTileTypeToSeek(int playerIndex, bool random)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
         Mine mine = GameData.Instance.playerMineLocations[playerIndex];
@@ -104,7 +104,7 @@ public class AIManager : MonoBehaviour
         {
             TileType t = currentMineLayout[i].tileType;
 
-            if (preferences.Contains(t))
+            if (preferences.Contains(t) || random)
             {
                 if (tileKinds.ContainsKey(t))
                     tileKinds[t]++;

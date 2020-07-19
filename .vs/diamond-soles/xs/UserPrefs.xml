@@ -1,35 +1,38 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UIDisplayer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MineRecorder.cs">
     <Files>
       <File FileName="Assets/Scripts/GridCreator.cs" Line="279" Column="41" IsPinned="True" />
-      <File FileName="Assets/Scripts/Rock.cs" Line="41" Column="1" IsPinned="True" />
-      <File FileName="Assets/Scripts/GameData.cs" Line="18" Column="19" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="109" Column="40" />
-      <File FileName="Assets/Scripts/Tile.cs" Line="29" Column="26" />
-      <File FileName="Assets/Scripts/MineRecorder.cs" Line="394" Column="13" />
-      <File FileName="Assets/Scripts/AuctionManager.cs" Line="342" Column="31" />
-      <File FileName="Assets/Scripts/AIManager.cs" Line="178" Column="21" />
+      <File FileName="Assets/Scripts/Rock.cs" IsPinned="True" />
+      <File FileName="Assets/Scripts/GameData.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" />
+      <File FileName="Assets/Scripts/Tile.cs" />
+      <File FileName="Assets/Scripts/MineRecorder.cs" Line="153" Column="30" />
+      <File FileName="Assets/Scripts/AuctionManager.cs" />
+      <File FileName="Assets/Scripts/AIManager.cs" />
       <File FileName="Assets/Scripts/AuctionPlayerController.cs" />
-      <File FileName="Assets/Scripts/GameInitializer.cs" Line="26" Column="35" />
+      <File FileName="Assets/Scripts/GameInitializer.cs" />
       <File FileName="Assets/Scripts/AStarMapController.cs" />
-      <File FileName="Assets/AIPlayerController.cs" Line="70" Column="1" />
+      <File FileName="Assets/AIPlayerController.cs" />
       <File FileName="Assets/AstarPathfindingProject/Core/AstarPath.cs" />
       <File FileName="Assets/Scripts/Axe.cs" />
-      <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" Line="17" Column="32" />
-      <File FileName="Assets/Scripts/MinePicker.cs" Line="26" Column="22" />
-      <File FileName="Assets/Scripts/ElevatorButton.cs" Line="13" Column="39" />
+      <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" />
+      <File FileName="Assets/Scripts/MinePicker.cs" />
+      <File FileName="Assets/Scripts/ElevatorButton.cs" />
       <File FileName="Assets/Scripts/ElevatorObj.cs" />
-      <File FileName="Assets/AstarPathfindingProject/Core/Misc/GraphUtilities.cs" Line="177" Column="13" />
-      <File FileName="Assets/AstarPathfindingProject/Generators/NodeClasses/TriangleMeshNode.cs" Line="32" Column="46" />
-      <File FileName="Assets/AstarPathfindingProject/Core/astarclasses.cs" Line="163" Column="32" />
-      <File FileName="Assets/Scripts/UIDisplayer.cs" Line="14" Column="32" />
+      <File FileName="Assets/AstarPathfindingProject/Core/Misc/GraphUtilities.cs" />
+      <File FileName="Assets/AstarPathfindingProject/Generators/NodeClasses/TriangleMeshNode.cs" />
+      <File FileName="Assets/AstarPathfindingProject/Core/astarclasses.cs" />
+      <File FileName="Assets/Scripts/UIDisplayer.cs" />
+      <File FileName="Assets/AstarPathfindingProject/Core/AI/AIBase.cs" />
+      <File FileName="Assets/AstarPathfindingProject/Core/Misc/ArrayPool.cs" />
+      <File FileName="Assets/Scripts/ElevatorData.cs" />
       <File FileName="Assets/Scripts/PlayerController.cs" Line="197" Column="31" NotebookId="1" />
-      <File FileName="Assets/Scripts/PlayerCreator.cs" Line="33" Column="33" NotebookId="1" />
+      <File FileName="Assets/Scripts/PlayerCreator.cs" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c7fa94ed-025e-4192-9b2a-798105c51a91" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2e41c606-f215-4a4e-830d-6b0da68db149" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
