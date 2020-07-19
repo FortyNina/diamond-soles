@@ -27,6 +27,7 @@ public class AIPlayerController : PlayerController
 
     private Vector3 _previousPos;
     private float _stuckTimer;
+    private bool _breakingBlock; 
 
     // Start is called before the first frame update
     void Start()
@@ -36,33 +37,37 @@ public class AIPlayerController : PlayerController
         DetermineNewTarget();
         _previousPos = transform.position;
         _stuckTimer = 3f;
-        if (playerID == 1)
-            print("im player 2");
+        
 
 
     }
 
     private void Update()
     {
-        if (state == AIstate.TravelPath)
+        
+        if (!_breakingBlock)
         {
 
             //check if stuck
             //might need to rescan map, and set new target pos
             if (IsStandingStill(_previousPos, transform.position))
+            {
                 _stuckTimer -= Time.deltaTime;
+            }
             else
+            {
                 _stuckTimer = 3f;
+            }
 
             if (_stuckTimer < 0)
             {
+                Debug.Log("Player " + playerID + "is stuck");
                 _stuckTimer = 3f;
                 AStarMapController.RequestScan();
                 DetermineNewTarget();
-
-                if (playerID == 1)
-                    print("IM STUCK!");
+                
             }
+            
         }
 
         _previousPos = transform.position;
@@ -91,6 +96,10 @@ public class AIPlayerController : PlayerController
                     return;
                 }
             }
+            else
+            {
+                reachedEndOfPath = false;
+            }
 
             if (path == null)
             {
@@ -98,16 +107,14 @@ public class AIPlayerController : PlayerController
                 return;
             }
 
+            //target has disappeared
             if(target == null || !target.gameObject.activeInHierarchy)
             {
                 DetermineNewTarget();
             }
 
            
-            else
-            {
-                reachedEndOfPath = false;
-            }
+            
 
             float xDiff = transform.position.x - path.vectorPath[currentWaypoint].x;
             float yDiff = transform.position.y - path.vectorPath[currentWaypoint].y;
@@ -179,6 +186,7 @@ public class AIPlayerController : PlayerController
 
     IEnumerator BreakBlock()
     {
+        _breakingBlock = true;
         yield return new WaitForSeconds(.1f);
 
         //face block
@@ -225,12 +233,13 @@ public class AIPlayerController : PlayerController
         }
         DetermineNewTarget();
         state = AIstate.TravelPath;
+        _breakingBlock = false;
 
     }
 
     private bool IsStandingStill(Vector3 prev, Vector3 current)
     {
-        if(Vector3.Distance(prev, current) < .005f)
+        if(Vector3.Distance(prev, current) < .05f)
         {
             return true;
         }
