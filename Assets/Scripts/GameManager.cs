@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool giveAIRandomOre = true;
 
 
+
+
     public int amountOfResourceToLoseAfterDay = 10;
 
     public float energyDrainFactor = .5f;
@@ -38,9 +40,8 @@ public class GameManager : MonoBehaviour
                 //set that player inactive
             }
         }
-        //TODO: switch back
-        //if (!stillActive || Input.GetKeyDown(KeyCode.P))
-        if (Input.GetKeyDown(KeyCode.P))
+        //TODO: remove P?
+        if ((!stillActive && performAuctionPhase) || Input.GetKeyDown(KeyCode.P))
         {
              AuctionStateSetup();
         }

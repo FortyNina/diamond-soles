@@ -359,7 +359,7 @@ public class GridCreator : MonoBehaviour
                 {
                     GameObject et = Instantiate(_elevatorTile, Vector3.zero, Quaternion.identity);
                     et.transform.parent = transform;
-                    et.transform.position = new Vector3(x, _elevatorStartY, 0);
+                    et.transform.localPosition = new Vector3(x, _elevatorStartY, 0);
                     et.GetComponent<ElevatorObj>().SetData(GameData.Instance.playerElevators[i][j]);
                     x += .6f;
 ;                        
