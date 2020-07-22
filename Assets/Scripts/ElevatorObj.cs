@@ -9,6 +9,7 @@ public class ElevatorObj : MonoBehaviour
     public int playerID;
     public int floor;
     public int price;
+    public Mine mineType;
 
     public void SetData(ElevatorData ed)
     {
@@ -16,6 +17,7 @@ public class ElevatorObj : MonoBehaviour
         floor = ed.floor;
         price = ed.price;
         GetComponent<SpriteRenderer>().color = playerColors[playerID];
+        mineType = ed.mineType;
              
     }
 }

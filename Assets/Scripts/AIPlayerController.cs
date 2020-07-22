@@ -184,9 +184,29 @@ public class AIPlayerController : PlayerController
 
     void DetermineNewTarget()
     {
-        TileType toSeek = AIManager.GetTileTypeToSeek(playerID, _isStuck);
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
-        target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
+
+        Transform elevator = null;
+        if ((GameData.Instance.playerMineLocations[playerID] == Mine.IronMine && GameData.Instance.ironFloors[playerID] == 0)
+            || (GameData.Instance.playerMineLocations[playerID] == Mine.JellyMine && GameData.Instance.jellyFloors[playerID] == 0)
+            || (GameData.Instance.playerMineLocations[playerID] == Mine.IronMine && GameData.Instance.coalFloors[playerID] == 0))
+        {
+            List<Collider2D> elevators = new List<Collider2D>();
+            for(int i = 0;i < interactableObjects.Length; i++)
+            {
+                if (interactableObjects[i].tag == "Elevator") elevators.Add(interactableObjects[i]);
+            }
+            elevator = AIManager.ChooseElevator(playerID, elevators);
+        }
+        if(elevator != null)
+        {
+            target = elevator;
+        }
+        else
+        {
+            TileType toSeek = AIManager.GetTileTypeToSeek(playerID, _isStuck);
+            target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
+        }
         if (target != null)
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);

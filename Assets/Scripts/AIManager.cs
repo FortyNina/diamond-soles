@@ -179,5 +179,29 @@ public class AIManager : MonoBehaviour
 
     }
 
+    public static Transform ChooseElevator(int playerIndex, List<Collider2D> objs)
+    {
+        if (objs.Count == 0)
+            return null;
+
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        if(pers == AIPersonality.Basic) //go to deepest mine :) 
+        {
+            int maxFloor = 0;
+            Transform t = null;
+            for(int i = 0;i < objs.Count; i++)
+            {
+                if(objs[i].GetComponent<ElevatorObj>().floor > maxFloor)
+                {
+                    maxFloor = objs[i].GetComponent<ElevatorObj>().floor;
+                    t = objs[i].transform;
+                }
+            }
+            return t;
+
+        }
+
+        return null;
+    }
 
 }
