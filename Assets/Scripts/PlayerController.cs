@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    protected void UseStaircase(ElevatorObj eo)
+    protected void UseElevator(ElevatorObj eo)
     {
         if (_gridCreator.mineType == Mine.IronMine)
             GameData.Instance.ironFloors[playerID] = eo.floor;
@@ -199,6 +199,9 @@ public class PlayerController : MonoBehaviour
             GameData.Instance.jellyFloors[playerID] = eo.floor;
         if (_gridCreator.mineType == Mine.CoalMine)
             GameData.Instance.coalFloors[playerID] = eo.floor;
+
+        GameData.Instance.playerMoney[playerID] -= eo.price;
+        GameData.Instance.playerMoney[eo.playerID] += eo.price;
 
         _gridCreator.DisplayNewLayout();
 
@@ -218,7 +221,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(collision.tag == "Elevator")
         {
-            UseStaircase(collision.GetComponent<ElevatorObj>());
+            UseElevator(collision.GetComponent<ElevatorObj>());
         }
 
     }
