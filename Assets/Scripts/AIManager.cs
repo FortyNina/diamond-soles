@@ -73,6 +73,11 @@ public class AIManager : MonoBehaviour
                 return 20;
             return 15;
         }
+        if (pers == AIPersonality.Traverser)
+        {
+            if (ore == TileType.Food) return Random.Range(35,48);
+            return Random.Range(15,30);
+        }
 
         return 15;
     }
@@ -126,41 +131,63 @@ public class AIManager : MonoBehaviour
                 index++;
             }
         }
+        if(pers == AIPersonality.Traverser)
+        {
+            if (tileKinds.ContainsKey(TileType.Hole)) return TileType.Hole;
+            int rand = Random.Range(0, 10);
+            if (rand < 5) return TileType.Stair;
+            return TileType.Rock;
+        }
         
 
         return TileType.Stair;
     }
 
-    public static Transform GetTargetedTileTransformFromMap(Collider2D[] interactableObjects, TileType toSeek, int playerIndex)
+    public static Transform GetTargetedTileTransformFromMap(Collider2D[] interactableObjects, TileType toSeek, int playerIndex, Transform playerPos)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        List<Transform> tileTransforms = new List<Transform>();
+        for (int i = 0; i < interactableObjects.Length; i++)
+        {
+            if (toSeek == TileType.Stair && interactableObjects[i].gameObject.tag == "Staircase")
+            {
+                tileTransforms.Add(interactableObjects[i].transform);
+            }
+            if (toSeek == TileType.Hole && interactableObjects[i].gameObject.tag == "Hole")
+            {
+                tileTransforms.Add(interactableObjects[i].transform);
+            }
+            if (interactableObjects[i].GetComponent<Rock>() != null)
+            {
+                if (interactableObjects[i].GetComponent<Rock>().ore == toSeek)
+                {
+                    tileTransforms.Add(interactableObjects[i].transform);
+                }
+            }
+        }
 
         //find random tile rn
         if (pers == AIPersonality.Basic)
         {
-            List<Transform> tileTransforms = new List<Transform>();
-            for(int i = 0;i < interactableObjects.Length; i++)
-            {
-                if (toSeek == TileType.Stair && interactableObjects[i].gameObject.tag == "Staircase")
-                {
-                    tileTransforms.Add(interactableObjects[i].transform);
-                }
-                if (toSeek == TileType.Hole && interactableObjects[i].gameObject.tag == "Hole")
-                {
-                    tileTransforms.Add(interactableObjects[i].transform);
-                }
-                if (interactableObjects[i].GetComponent<Rock>() != null)
-                {
-                    if (interactableObjects[i].GetComponent<Rock>().ore == toSeek)
-                    {
-                        tileTransforms.Add(interactableObjects[i].transform);
-                    }
-                }
-            }
-
+            
             int rand = Random.Range(0, tileTransforms.Count);
             if(rand < tileTransforms.Count)
                 return tileTransforms[rand];
+        }
+        //get closest
+        if(pers == AIPersonality.Traverser)
+        {
+            float minDist = 100;
+            Transform minTransform = null;
+            for(int i = 0; i < tileTransforms.Count; i++)
+            {
+                if(Vector3.Distance(playerPos.position,tileTransforms[i].position) < minDist)
+                {
+                    minDist = Vector3.Distance(playerPos.position, tileTransforms[i].position);
+                    minTransform = tileTransforms[i];
+                }
+            }
+            return minTransform;
         }
         return null;
     }
@@ -177,6 +204,8 @@ public class AIManager : MonoBehaviour
                 return Mine.JellyMine;
             return Mine.CoalMine;
         }
+        if (pers == AIPersonality.Traverser)
+            return Mine.JellyMine;
 
         return Mine.IronMine;
 
@@ -188,7 +217,7 @@ public class AIManager : MonoBehaviour
             return null;
 
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
-        if(pers == AIPersonality.Basic) //go to deepest mine :) 
+        if(pers == AIPersonality.Basic || pers == AIPersonality.Traverser) //go to deepest mine :) 
         {
             int maxFloor = 0;
             Transform t = null;

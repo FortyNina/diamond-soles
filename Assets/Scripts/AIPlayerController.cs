@@ -205,7 +205,7 @@ public class AIPlayerController : PlayerController
         else
         {
             TileType toSeek = AIManager.GetTileTypeToSeek(playerID, _isStuck);
-            target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID);
+            target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID,transform);
         }
         if (target != null)
         {

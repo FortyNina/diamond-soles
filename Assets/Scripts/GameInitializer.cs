@@ -15,6 +15,7 @@ public class GameInitializer : MonoBehaviour
             {
                 //DEFINE AI PERSONALITIES
                 GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
+                Debug.Log("Player " + i + " Personality is " + GameData.Instance.AIs[i]);
 
 
                 GameData.Instance.ironFloors.Add(0);

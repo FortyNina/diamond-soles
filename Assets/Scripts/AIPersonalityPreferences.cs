@@ -25,6 +25,8 @@ public class AIPersonalityPreferences : MonoBehaviour
             types.Add(TileType.Hole);
             types.Add(TileType.Rock);
             types.Add(TileType.Diamond);
+            types.Add(TileType.Stair);
+                
         }
 
         return types;
