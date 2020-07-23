@@ -1,38 +1,17 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AIPlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GridCreator.cs" Line="362" Column="40" IsPinned="True" />
-      <File FileName="Assets/Scripts/Rock.cs" IsPinned="True" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="43" Column="26" />
-      <File FileName="Assets/Scripts/Tile.cs" />
-      <File FileName="Assets/Scripts/MineRecorder.cs" />
-      <File FileName="Assets/Scripts/AuctionManager.cs" />
-      <File FileName="Assets/Scripts/AIManager.cs" Line="180" Column="6" />
-      <File FileName="Assets/Scripts/AuctionPlayerController.cs" />
-      <File FileName="Assets/Scripts/GameInitializer.cs" />
-      <File FileName="Assets/Scripts/AStarMapController.cs" />
-      <File FileName="Assets/AstarPathfindingProject/Core/AstarPath.cs" />
-      <File FileName="Assets/Scripts/Axe.cs" />
+      <File FileName="Assets/Scripts/Singleton.cs" Line="23" Column="48" />
       <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MinePicker.cs" />
-      <File FileName="Assets/Scripts/ElevatorButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ElevatorObj.cs" Line="1" Column="1" />
-      <File FileName="Assets/AstarPathfindingProject/Core/Misc/GraphUtilities.cs" />
-      <File FileName="Assets/Scripts/GameData.cs" Line="1" Column="1" />
-      <File FileName="Assets/AstarPathfindingProject/Generators/NodeClasses/TriangleMeshNode.cs" />
-      <File FileName="Assets/AstarPathfindingProject/Core/astarclasses.cs" />
-      <File FileName="Assets/Scripts/UIDisplayer.cs" />
-      <File FileName="Assets/AstarPathfindingProject/Core/AI/AIBase.cs" />
-      <File FileName="Assets/AstarPathfindingProject/Core/Misc/ArrayPool.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ElevatorData.cs" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="197" Column="31" NotebookId="1" />
-      <File FileName="Assets/Scripts/PlayerCreator.cs" NotebookId="1" />
-      <File FileName="Assets/Scripts/AIPlayerController.cs" Line="193" Column="1" NotebookId="1" />
+      <File FileName="Assets/Scripts/AIManager.cs" Line="13" Column="43" />
+      <File FileName="Assets/Scripts/UIDisplayer.cs" Line="91" Column="44" />
+      <File FileName="Assets/Scripts/AIPlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="09c00951-a0aa-41f4-8275-ff73f98cd305" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f64b6fc3-25f4-4ec8-bae9-7b893cd0ffeb" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

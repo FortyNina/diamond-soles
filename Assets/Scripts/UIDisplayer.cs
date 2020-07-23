@@ -29,6 +29,16 @@ public class UIDisplayer : MonoBehaviour
     [SerializeField]
     private Image[] _durabilityDisplay;
 
+    [SerializeField]
+    private TextMeshProUGUI _p1LevelDisplay;
+
+    [SerializeField]
+    private TextMeshProUGUI _p2LevelDisplay;
+
+    [SerializeField]
+    private TextMeshProUGUI _p3LevelDisplay;
+
+
 
     // Update is called once per frame
     void Update()
@@ -74,5 +84,25 @@ public class UIDisplayer : MonoBehaviour
         {
             _durabilityDisplay[i].fillAmount = (float)GameData.Instance.durabilityLevels[i] / 100f;
         }
+
+
+        _p1LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[1], 1).ToString();
+        _p2LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[2], 2).ToString();
+        _p3LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[3], 3).ToString();
+
+
+    }
+
+    private int GetFloor(Mine mt, int id)
+    {
+        Debug.Log(mt.ToString());
+        if (mt == Mine.IronMine)
+            return GameData.Instance.ironFloors[id];
+        if (mt == Mine.JellyMine)
+            return GameData.Instance.jellyFloors[id];
+        if (mt == Mine.CoalMine)
+            return GameData.Instance.coalFloors[id];
+        return 0;
+
     }
 }
