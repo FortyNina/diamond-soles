@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour
     public ElevatorButton elevatorCreator;
 
     protected bool landedOnNewFloor;
+
+    protected bool canMove;
+
+    public GameObject runOutOfEnergyDisplay;
 
 
 
@@ -241,6 +246,12 @@ public class PlayerController : MonoBehaviour
         down = d;
         left = l;
         right = r;
+    }
+
+    public void RunOutOfEnergy()
+    {
+        canMove = false;
+        runOutOfEnergyDisplay.SetActive(true);
     }
 
 

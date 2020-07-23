@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool giveAIRandomOre = true;
 
 
-
+    public GameObject[] players;
 
     public int amountOfResourceToLoseAfterDay = 10;
 
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
                 stillActive = true;
             else
             {
-                //set that player inactive
+                players[i].GetComponent<PlayerController>().RunOutOfEnergy();
             }
         }
         //TODO: remove P?

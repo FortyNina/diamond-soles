@@ -8,6 +8,7 @@ public class PlayerCreator : MonoBehaviour
     public float moveSpeed;
     public GridCreator gridCreator;
     public ElevatorButton elevatorCreator;
+    public GameObject runOutOfEnergyDisplay;
     public GameObject axe;
 
     public KeyCode left;
@@ -43,6 +44,7 @@ public class PlayerCreator : MonoBehaviour
 
         pc.Speed = moveSpeed;
         pc.elevatorCreator = elevatorCreator;
+        pc.runOutOfEnergyDisplay = runOutOfEnergyDisplay;
 
     }
 
