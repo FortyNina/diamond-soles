@@ -7,6 +7,7 @@ public class PlayerCreator : MonoBehaviour
 {
     public float moveSpeed;
     public GridCreator gridCreator;
+    public ElevatorButton elevatorCreator;
     public GameObject axe;
 
     public KeyCode left;
@@ -41,6 +42,7 @@ public class PlayerCreator : MonoBehaviour
         pc.Axe = axe;
 
         pc.Speed = moveSpeed;
+        pc.elevatorCreator = elevatorCreator;
 
     }
 

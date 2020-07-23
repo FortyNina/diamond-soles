@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   gridCreator: {fileID: 479797023}
+  elevatorCreator: {fileID: 529710307}
   axe: {fileID: 2019881859}
   left: 0
   right: 0
@@ -1480,6 +1481,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &529710306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 529710308}
+  - component: {fileID: 529710307}
+  m_Layer: 0
+  m_Name: ElevatorCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &529710307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529710306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 527942cd1339d4268b3ed4c5670592e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &529710308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529710306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.27252, y: 191.9352, z: -1924.9642}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &532879315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,6 +2444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   gridCreator: {fileID: 1867674275}
+  elevatorCreator: {fileID: 529710307}
   axe: {fileID: 250375829}
   left: 97
   right: 100
@@ -3728,7 +3773,6 @@ GameObject:
   - component: {fileID: 1307793653}
   - component: {fileID: 1307793652}
   - component: {fileID: 1307793651}
-  - component: {fileID: 1307793654}
   m_Layer: 5
   m_Name: ElevatorButton
   m_TagString: Untagged
@@ -3799,7 +3843,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1307793654}
+      - m_Target: {fileID: 529710307}
         m_MethodName: CreateNewElevator
         m_Mode: 3
         m_Arguments:
@@ -3849,18 +3893,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307793649}
   m_CullTransparentMesh: 0
---- !u!114 &1307793654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307793649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527942cd1339d4268b3ed4c5670592e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1355711171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3942,6 +3974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   gridCreator: {fileID: 676899726}
+  elevatorCreator: {fileID: 529710307}
   axe: {fileID: 1236154574}
   left: 276
   right: 275
@@ -4985,6 +5018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   gridCreator: {fileID: 1705751277}
+  elevatorCreator: {fileID: 529710307}
   axe: {fileID: 2019881859}
   left: 0
   right: 0

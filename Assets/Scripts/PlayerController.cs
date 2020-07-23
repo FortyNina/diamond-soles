@@ -59,6 +59,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode down;
 
+    public ElevatorButton elevatorCreator;
+
+    protected bool landedOnNewFloor;
+
+
+
 
     // Update is called once per frame
     private void Update()
@@ -159,6 +165,8 @@ public class PlayerController : MonoBehaviour
 
         _gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= 1;
+        landedOnNewFloor = true;
+
     }
 
     protected void TraverseHole()
@@ -187,6 +195,7 @@ public class PlayerController : MonoBehaviour
             GameData.Instance.coalFloors[playerID] += randFloors;
         _gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= randFloors;
+        landedOnNewFloor = true;
 
 
     }

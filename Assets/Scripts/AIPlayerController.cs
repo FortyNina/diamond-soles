@@ -31,6 +31,7 @@ public class AIPlayerController : PlayerController
     private bool _isStuck;
     private int _stuckNumber = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,15 @@ public class AIPlayerController : PlayerController
 
     private void Update()
     {
+        if (landedOnNewFloor)
+        {
+            landedOnNewFloor = false;
+            if (AIManager.BuildElevator(playerID))
+            {
+                Debug.Log("Player " + playerID + " updated their " + GameData.Instance.playerMineLocations[playerID].ToString() + " elevator location");
+                elevatorCreator.CreateNewElevator(playerID);
+            }
+        }
         if (!_breakingBlock)
         {
 

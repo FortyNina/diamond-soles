@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-
+    /// <summary>
+    /// Return a randomly generated personality
+    /// </summary>
     public static AIPersonality GetRandomPersonality()
     {
         int rand = Random.Range(0, 2);
@@ -15,7 +17,10 @@ public class AIManager : MonoBehaviour
             return AIPersonality.Basic;
     }
     
-
+    /// <summary>
+    /// Return, based on the players ore and money, whether or not this character will
+    /// be a buyer for a particular round in the auction
+    /// </summary>
     public static bool DetermineBuyer(int playerIndex, TileType ore)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
@@ -35,6 +40,9 @@ public class AIManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Determine how much a player is willing to sell an ore for in a round of the auction
+    /// </summary>
     public static int GetSellPrice(int playerIndex, TileType ore)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
@@ -56,6 +64,9 @@ public class AIManager : MonoBehaviour
         return 50;
     }
 
+    /// <summary>
+    /// Determine how much money a player is wiliing to spend on an ore in the auction
+    /// </summary>
     public static int GetBuyPrice(int playerIndex, TileType ore)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
@@ -81,6 +92,7 @@ public class AIManager : MonoBehaviour
 
         return 15;
     }
+
 
     public static TileType GetTileTypeToSeek(int playerIndex, bool random)
     {
@@ -234,6 +246,35 @@ public class AIManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public static bool BuildElevator(int playerIndex)
+    {
+        AIPersonality pers = GameData.Instance.AIs[playerIndex];
+        int currentFloor = 0;
+        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.IronMine)
+            currentFloor = GameData.Instance.ironFloors[playerIndex];
+        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.JellyMine)
+            currentFloor = GameData.Instance.jellyFloors[playerIndex];
+        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.CoalMine)
+            currentFloor = GameData.Instance.coalFloors[playerIndex];
+
+        int currentElevator = 0;
+        for(int i = 0;i < GameData.Instance.playerElevators[playerIndex].Count; i++)
+        {
+            if (GameData.Instance.playerElevators[playerIndex][i].mineType == GameData.Instance.playerMineLocations[playerIndex])
+                currentElevator = GameData.Instance.playerElevators[playerIndex][i].floor;
+        }
+
+        if (currentFloor <= currentElevator) return false;
+        if (GameData.Instance.playerOreSupplies[playerIndex][TileType.Coal] < 20) return false;
+
+        if(pers == AIPersonality.Basic || pers == AIPersonality.Traverser)
+        {
+            if (currentFloor - currentElevator >= 10 && Random.Range(0,3)>1) return true;
+        }
+
+        return false;
     }
 
 }
