@@ -23,10 +23,12 @@ public class AIManager : MonoBehaviour
         {
             if (pers == AIPersonality.Basic)
             {
-                if (GameData.Instance.playerOreSupplies[playerIndex][TileType.Iron] > 50)
-                {
-                    return false;
-                }
+                if (GameData.Instance.playerOreSupplies[playerIndex][ore] > 50) return false;  
+            }
+            if(pers == AIPersonality.Traverser)
+            {
+                if (ore == TileType.Food) return true;
+                if (GameData.Instance.playerOreSupplies[playerIndex][ore] > 60) return false;
             }
         }
 
@@ -40,15 +42,15 @@ public class AIManager : MonoBehaviour
 
         if(pers == AIPersonality.Basic)
         {
-            if (oreAmount > 90)
-                return 20;
-            if (oreAmount > 70)
-                return 25;
-            if (oreAmount > 50)
-                return 28;
-            if (oreAmount > 30)
-                return 35;
+            if (oreAmount > 90) return 20;
+            if (oreAmount > 70) return 25;
+            if (oreAmount > 50) return 28;
+            if (oreAmount > 30) return 35;
             return 50;
+        }
+        if(pers == AIPersonality.Traverser)
+        {
+            return Random.Range(25, 40);
         }
 
         return 50;
@@ -113,7 +115,7 @@ public class AIManager : MonoBehaviour
             }
         }
 
-        if (pers == AIPersonality.Basic)
+        if (pers == AIPersonality.Basic) 
         {
             int rand = Random.Range(0, tileKinds.Count - 1);
             int index = 0;
@@ -124,6 +126,7 @@ public class AIManager : MonoBehaviour
                 index++;
             }
         }
+        
 
         return TileType.Stair;
     }
