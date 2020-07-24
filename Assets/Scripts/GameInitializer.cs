@@ -17,18 +17,18 @@ public class GameInitializer : MonoBehaviour
                 GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
                 Debug.Log("Player " + i + " Personality is " + GameData.Instance.AIs[i]);
 
+                Dictionary<Mine, int> floors = new Dictionary<Mine, int>();
+                floors.Add(Mine.IronMine, 0);
+                floors.Add(Mine.JellyMine, 0);
+                floors.Add(Mine.CoalMine, 0);
+                GameData.Instance.playerFloors.Add(floors);
 
-                GameData.Instance.ironFloors.Add(0);
-                GameData.Instance.jellyFloors.Add(0);
-                GameData.Instance.coalFloors.Add(0);
-
+               
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
-
                 ores.Add(TileType.Iron, 50);
                 ores.Add(TileType.Diamond, 0);
                 ores.Add(TileType.Food, 50);
                 ores.Add(TileType.Coal, 50);
-
                 GameData.Instance.playerOreSupplies.Add(ores);
 
                 GameData.Instance.durabilityLevels.Add(60);

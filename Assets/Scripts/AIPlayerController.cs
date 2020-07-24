@@ -200,9 +200,10 @@ public class AIPlayerController : PlayerController
         Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
 
         Transform elevator = null;
-        if ((GameData.Instance.playerMineLocations[playerID] == Mine.IronMine && GameData.Instance.ironFloors[playerID] == 0)
-            || (GameData.Instance.playerMineLocations[playerID] == Mine.JellyMine && GameData.Instance.jellyFloors[playerID] == 0)
-            || (GameData.Instance.playerMineLocations[playerID] == Mine.IronMine && GameData.Instance.coalFloors[playerID] == 0))
+        Mine m = GameData.Instance.playerMineLocations[playerID];
+        if ((m == Mine.IronMine && GameData.Instance.playerFloors[playerID][Mine.IronMine] == 0)
+            || (m == Mine.JellyMine && GameData.Instance.playerFloors[playerID][Mine.JellyMine] == 0)
+            || (m == Mine.IronMine && GameData.Instance.playerFloors[playerID][Mine.CoalMine] == 0))
         {
             List<Collider2D> elevators = new List<Collider2D>();
             for(int i = 0;i < interactableObjects.Length; i++)

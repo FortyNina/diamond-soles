@@ -15,9 +15,8 @@ public class GameData : Singleton<GameData>
 
 	public List<AIPersonality> AIs = new List<AIPersonality>();
 
-	public List<int> ironFloors = new List<int>();
-	public List<int> jellyFloors = new List<int>();
-	public List<int> coalFloors = new List<int>();
+	
+	public List<Dictionary<Mine, int>> playerFloors = new List<Dictionary<Mine, int>>();
 
 
 	public List<Dictionary<TileType, int>> playerOreSupplies = new List<Dictionary<TileType, int>>();

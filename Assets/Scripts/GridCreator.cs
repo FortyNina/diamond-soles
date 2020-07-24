@@ -96,27 +96,8 @@ public class GridCreator : MonoBehaviour
 
             if(GameData.Instance.playerMineLocations[i] == mineType)
             {
-                if(mineType == Mine.IronMine)
-                {
-                    if(GameData.Instance.ironFloors[i] == GameData.Instance.ironFloors[playerID])
-                    {
-                        playerOnFloor = true;
-                    }
-                }
-                if (mineType == Mine.JellyMine)
-                {
-                    if (GameData.Instance.jellyFloors[i] == GameData.Instance.jellyFloors[playerID])
-                    {
-                        playerOnFloor = true;
-                    }
-                }
-                if (mineType == Mine.CoalMine)
-                {
-                    if (GameData.Instance.coalFloors[i] == GameData.Instance.coalFloors[playerID])
-                    {
-                        playerOnFloor = true;
-                    }
-                }
+                if (GameData.Instance.playerFloors[i][mineType] == GameData.Instance.playerFloors[playerID][mineType])
+                    playerOnFloor = true;
             }
 
             if (playerOnFloor)
@@ -203,14 +184,8 @@ public class GridCreator : MonoBehaviour
     public void DisplayNewLayout()
     {
         DestroyCurrentTiles();
-
-        if (mineType == Mine.IronMine)
-            _currentFloor = GameData.Instance.ironFloors[playerID];
-        if (mineType == Mine.JellyMine)
-            _currentFloor = GameData.Instance.jellyFloors[playerID];
-        if (mineType == Mine.CoalMine)
-            _currentFloor = GameData.Instance.coalFloors[playerID];
-
+        _currentFloor = GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]];
+        
         if (MineRecorder.CheckMineFloorExists(mineType, _currentFloor))
         {
             _tiles = MineRecorder.GetMineFloor(mineType, _currentFloor);

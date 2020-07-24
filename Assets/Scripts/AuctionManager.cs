@@ -338,12 +338,13 @@ public class AuctionManager : MonoBehaviour
     public void LeaveAuction()
     {
         //drop floors?
-        for (int i = 0; i < GameData.Instance.ironFloors.Count; i++)
-            GameData.Instance.ironFloors[i] = 0;
-        for (int i = 0; i < GameData.Instance.jellyFloors.Count; i++)
-            GameData.Instance.jellyFloors[i] = 0;
-        for (int i = 0; i < GameData.Instance.coalFloors.Count; i++)
-            GameData.Instance.coalFloors[i] = 0;
+        for(int i = 0;i < GameData.Instance.playerFloors.Count; i++)
+        {
+            GameData.Instance.playerFloors[i][Mine.IronMine] = 0;
+            GameData.Instance.playerFloors[i][Mine.JellyMine] = 0;
+            GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
+
+        }
 
 
         SceneManager.LoadScene("MiningScene");

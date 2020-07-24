@@ -45,13 +45,7 @@ public class UIDisplayer : MonoBehaviour
     {
         for(int i = 0;i < _playerFloorDisplay.Length;i++)
         {
-            if(GameData.Instance.playerMineLocations[i] == Mine.IronMine)
-                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.ironFloors[i];
-            if (GameData.Instance.playerMineLocations[i] == Mine.JellyMine)
-                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.jellyFloors[i];
-            if (GameData.Instance.playerMineLocations[i] == Mine.CoalMine)
-                _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.coalFloors[i];
-
+             _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.playerFloors[i][GameData.Instance.playerMineLocations[i]];
         }
 
         for(int i = 0; i < _ironCollectedDisplay.Length; i++)
@@ -95,14 +89,6 @@ public class UIDisplayer : MonoBehaviour
 
     private int GetFloor(Mine mt, int id)
     {
-        Debug.Log(mt.ToString());
-        if (mt == Mine.IronMine)
-            return GameData.Instance.ironFloors[id];
-        if (mt == Mine.JellyMine)
-            return GameData.Instance.jellyFloors[id];
-        if (mt == Mine.CoalMine)
-            return GameData.Instance.coalFloors[id];
-        return 0;
-
+        return GameData.Instance.playerFloors[id][mt];
     }
 }

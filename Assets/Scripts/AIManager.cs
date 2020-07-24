@@ -100,21 +100,7 @@ public class AIManager : MonoBehaviour
         Mine mine = GameData.Instance.playerMineLocations[playerIndex];
         int floor = 0;
         Tile[] currentMineLayout = new Tile[0] ;
-
-        if (mine == Mine.IronMine)
-        {
-            floor = GameData.Instance.ironFloors[playerIndex];
-        }
-
-        if (mine == Mine.JellyMine)
-        {
-            floor = GameData.Instance.jellyFloors[playerIndex];
-        }
-
-        if (mine == Mine.CoalMine)
-        {
-            floor = GameData.Instance.coalFloors[playerIndex];
-        }
+        floor = GameData.Instance.playerFloors[playerIndex][mine];
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
         Dictionary<TileType, int> tileKinds = new Dictionary<TileType, int>();
@@ -251,14 +237,8 @@ public class AIManager : MonoBehaviour
     public static bool BuildElevator(int playerIndex)
     {
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
-        int currentFloor = 0;
-        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.IronMine)
-            currentFloor = GameData.Instance.ironFloors[playerIndex];
-        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.JellyMine)
-            currentFloor = GameData.Instance.jellyFloors[playerIndex];
-        if (GameData.Instance.playerMineLocations[playerIndex] == Mine.CoalMine)
-            currentFloor = GameData.Instance.coalFloors[playerIndex];
-
+        int currentFloor = GameData.Instance.playerFloors[playerIndex][GameData.Instance.playerMineLocations[playerIndex]];
+        
         int currentElevator = 0;
         for(int i = 0;i < GameData.Instance.playerElevators[playerIndex].Count; i++)
         {

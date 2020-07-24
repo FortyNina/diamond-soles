@@ -165,13 +165,8 @@ public class PlayerController : MonoBehaviour
 
     protected void TraverseStaircase()
     {
-        if (_gridCreator.mineType == Mine.IronMine)
-            GameData.Instance.ironFloors[playerID]++;
-        if (_gridCreator.mineType == Mine.JellyMine)
-            GameData.Instance.jellyFloors[playerID]++;
-        if (_gridCreator.mineType == Mine.CoalMine)
-            GameData.Instance.coalFloors[playerID]++;
-
+        GameData.Instance.playerFloors[playerID][_gridCreator.mineType]++;
+       
 
         _gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= 1;
@@ -181,14 +176,8 @@ public class PlayerController : MonoBehaviour
 
     protected void TraverseHole()
     {
-        int currentFloor = 0;
-        if (_gridCreator.mineType == Mine.IronMine)
-            currentFloor = GameData.Instance.ironFloors[playerID];
-        if (_gridCreator.mineType == Mine.JellyMine)
-            currentFloor = GameData.Instance.jellyFloors[playerID];
-        if (_gridCreator.mineType == Mine.CoalMine)
-            currentFloor = GameData.Instance.coalFloors[playerID];
-
+        int currentFloor = GameData.Instance.playerFloors[playerID][_gridCreator.mineType];
+        
         int randFloors = 0;
         if (currentFloor < 15)
             randFloors = Random.Range(2, 4);
@@ -197,12 +186,8 @@ public class PlayerController : MonoBehaviour
         else
             randFloors = Random.Range(5, 15);
 
-        if (_gridCreator.mineType == Mine.IronMine)
-            GameData.Instance.ironFloors[playerID] += randFloors;
-        if (_gridCreator.mineType == Mine.JellyMine)
-            GameData.Instance.jellyFloors[playerID] += randFloors;
-        if (_gridCreator.mineType == Mine.CoalMine)
-            GameData.Instance.coalFloors[playerID] += randFloors;
+        GameData.Instance.playerFloors[playerID][_gridCreator.mineType]+= randFloors;
+
         _gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= randFloors;
         landedOnNewFloor = true;
@@ -212,16 +197,9 @@ public class PlayerController : MonoBehaviour
 
     protected void UseElevator(ElevatorObj eo)
     {
-        if (_gridCreator.mineType == Mine.IronMine)
-            GameData.Instance.ironFloors[playerID] = eo.floor;
-        if (_gridCreator.mineType == Mine.JellyMine)
-            GameData.Instance.jellyFloors[playerID] = eo.floor;
-        if (_gridCreator.mineType == Mine.CoalMine)
-            GameData.Instance.coalFloors[playerID] = eo.floor;
-
+        GameData.Instance.playerFloors[playerID][_gridCreator.mineType]=eo.floor;
         GameData.Instance.playerMoney[playerID] -= eo.price;
         GameData.Instance.playerMoney[eo.playerID] += eo.price;
-
         _gridCreator.DisplayNewLayout();
 
     }
