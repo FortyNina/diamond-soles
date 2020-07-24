@@ -118,11 +118,5 @@ public class GameManager : MonoBehaviour
             int newCoal = (100 * coal) / 200;
             GameData.Instance.coalLevels[i] = newCoal;
         }
-
-        
-
     }
-
-
-
 }

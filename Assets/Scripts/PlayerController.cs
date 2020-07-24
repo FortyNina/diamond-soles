@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     protected bool landedOnNewFloor;
 
-    protected bool canMove;
+    protected bool canMove = true;
 
     public GameObject runOutOfEnergyDisplay;
 
@@ -77,43 +77,46 @@ public class PlayerController : MonoBehaviour
         float x = 0;
         float y = 0;
 
-        if(Input.GetKey(left) && !_axeDown)
+        if (canMove)
         {
-            x -= _speed;
-            _direction = PlayerDir.left;
-        }
+            if (Input.GetKey(left) && !_axeDown)
+            {
+                x -= _speed;
+                _direction = PlayerDir.left;
+            }
 
-        else if(Input.GetKey(right) && !_axeDown)
-        {
-            x += _speed;
-            _direction = PlayerDir.right;
+            else if (Input.GetKey(right) && !_axeDown)
+            {
+                x += _speed;
+                _direction = PlayerDir.right;
 
-        }
+            }
 
-        else if (Input.GetKey(up) && !_axeDown)
-        {
-            y += _speed;
-            _direction = PlayerDir.up;
+            else if (Input.GetKey(up) && !_axeDown)
+            {
+                y += _speed;
+                _direction = PlayerDir.up;
 
-        }
+            }
 
-        else if (Input.GetKey(down) && !_axeDown)
-        {
-            y -= _speed;
-            _direction = PlayerDir.down;
+            else if (Input.GetKey(down) && !_axeDown)
+            {
+                y -= _speed;
+                _direction = PlayerDir.down;
 
-        }
+            }
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            AxeDown();
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                AxeDown();
 
-        }
-        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.KeypadEnter))
-        {
-            AxeUp();
+            }
+            if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.KeypadEnter))
+            {
+                AxeUp();
 
-        }
+            }
+        } 
 
         
         transform.position += new Vector3(x, y, 0);

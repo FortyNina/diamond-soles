@@ -98,6 +98,9 @@ public class AIPlayerController : PlayerController
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
+
         if (state == AIstate.TravelPath)
         {
             if(target == null)
