@@ -6,18 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    [Header("Game Mode Settings")]
     public bool performAuctionPhase = true;
-
     public bool giveAIRandomOre = true;
+    public bool countEnergy = true;
+    public bool countDurability = true;
 
-
-    public GameObject[] players;
-
+    [Space (5)]
+    [Header("Game Levers")]
     public int amountOfResourceToLoseAfterDay = 10;
-
     public float energyDrainFactor = .5f;
 
+
+    public static bool subtractDurability;
+    public GameObject[] players;
+
+    
    
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        subtractDurability = countDurability;
         bool stillActive = false;
         for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
         {
@@ -37,7 +41,7 @@ public class GameManager : MonoBehaviour
                 stillActive = true;
             else
             {
-                players[i].GetComponent<PlayerController>().RunOutOfEnergy();
+                if(countEnergy)players[i].GetComponent<PlayerController>().RunOutOfEnergy();
             }
         }
         //TODO: remove P?
