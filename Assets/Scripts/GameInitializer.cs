@@ -14,7 +14,10 @@ public class GameInitializer : MonoBehaviour
             for (int i = 0; i < GameData.Instance.numPlayers; i++)
             {
                 //DEFINE AI PERSONALITIES
-                GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
+                if (i == 2) GameData.Instance.AIs.Add(AIPersonality.Traverser);
+                else if(i == 3) GameData.Instance.AIs.Add(AIPersonality.Basic);
+                else GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
+
                 Debug.Log("Player " + i + " Personality is " + GameData.Instance.AIs[i]);
 
                 Dictionary<Mine, int> floors = new Dictionary<Mine, int>();

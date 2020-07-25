@@ -47,6 +47,8 @@ public class AIPlayerController : PlayerController
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.R))
+            SeekRock();
         if (landedOnNewFloor)
         {
             landedOnNewFloor = false;
@@ -231,6 +233,17 @@ public class AIPlayerController : PlayerController
             TileType toSeek = AIManager.GetTileTypeToSeek(playerID, _isStuck);
             target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, toSeek, playerID,transform);
         }
+        if (target != null)
+        {
+            seeker.StartPath(rb.position, target.position, OnPathComplete);
+            currentObj = target.gameObject;
+        }
+    }
+
+    void SeekRock()
+    {
+        Collider2D[] interactableObjects = Physics2D.OverlapCircleAll(transform.position, 10); //TODO: make sure this doesnt overlap with other maps
+        target = AIManager.GetTargetedTileTransformFromMap(interactableObjects, TileType.Rock, playerID, transform);
         if (target != null)
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);

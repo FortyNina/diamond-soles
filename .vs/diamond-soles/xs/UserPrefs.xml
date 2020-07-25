@@ -1,19 +1,19 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AIPlayerController.cs">
     <Files>
       <File FileName="Assets/Scripts/Singleton.cs" Line="23" Column="48" />
       <File FileName="Assets/Scripts/AIPersonalityPreferences.cs" />
       <File FileName="Assets/Scripts/AIManager.cs" />
-      <File FileName="Assets/Scripts/UIDisplayer.cs" Line="92" Column="55" />
-      <File FileName="Assets/Scripts/AIPlayerController.cs" />
-      <File FileName="Assets/Scripts/PlayerController.cs" />
+      <File FileName="Assets/Scripts/UIDisplayer.cs" Line="48" Column="109" />
+      <File FileName="Assets/Scripts/AIPlayerController.cs" Line="176" Column="72" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="19" Column="31" />
       <File FileName="Assets/Scripts/GameInitializer.cs" />
-      <File FileName="Assets/Scripts/ElevatorButton.cs" />
-      <File FileName="Assets/Scripts/PlayerCreator.cs" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="9" Column="6" />
+      <File FileName="Assets/Scripts/ElevatorButton.cs" Line="11" Column="65" />
+      <File FileName="Assets/Scripts/PlayerCreator.cs" Line="37" Column="1" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="61" Column="14" />
       <File FileName="Assets/Scripts/GameData.cs" />
-      <File FileName="Assets/Scripts/AuctionManager.cs" />
-      <File FileName="Assets/Scripts/GridCreator.cs" />
+      <File FileName="Assets/Scripts/AuctionManager.cs" Line="347" Column="10" />
+      <File FileName="Assets/Scripts/GridCreator.cs" Line="339" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -49,6 +49,18 @@ public class GameManager : MonoBehaviour
         {
              AuctionStateSetup();
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            //drop floors?
+            for (int i = 0; i < GameData.Instance.playerFloors.Count; i++)
+            {
+                GameData.Instance.playerFloors[i][Mine.IronMine] = 0;
+                GameData.Instance.playerFloors[i][Mine.JellyMine] = 0;
+                GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
+
+            }
+            SceneManager.LoadScene("MiningScene");
+        }
     }
 
     private void AuctionStateSetup()
