@@ -68,8 +68,12 @@ public class AIPlayerController : PlayerController
                 _stuckTimer = 3f;
             if (_stuckTimer < 0)
             {
-                if (_stuckNumber > 5)
+                if (_stuckNumber > 2)
+                {
                     StartCoroutine(BreakBlock());
+                    Debug.Log("player " + playerID + " has been stuck for a long ass time");
+
+                }
                 else
                 {
                     Debug.Log("Player " + playerID + "is stuck");
@@ -104,7 +108,7 @@ public class AIPlayerController : PlayerController
         if (state == AIstate.TravelPath)
         {
             if(target == null)
-                Debug.Log(playerID + " is targeting null");
+                Debug.Log("player " + playerID + " is targeting null");
 
             //REACHED GOAL!
             if (path != null)
@@ -114,6 +118,7 @@ public class AIPlayerController : PlayerController
                     reachedEndOfPath = true;
                     state = AIstate.Wait;
                     StartCoroutine(BreakBlock());
+                    Debug.Log("player " + playerID + " reached a target!");
                     return;
                 }
             }
@@ -126,6 +131,7 @@ public class AIPlayerController : PlayerController
             {
                 DetermineNewTarget();
                 _stuckNumber = 0;
+                Debug.Log("player " + playerID + " has a null path!");
                 return;
             }
 
@@ -134,10 +140,12 @@ public class AIPlayerController : PlayerController
             {
                 _stuckNumber = 0;
                 DetermineNewTarget();
+                Debug.Log("player " + playerID + " has lost sight of its target! (it was broken)");
+
             }
 
-           
-            
+
+
 
             float xDiff = transform.position.x - path.vectorPath[currentWaypoint].x;
             float yDiff = transform.position.y - path.vectorPath[currentWaypoint].y;
@@ -178,10 +186,12 @@ public class AIPlayerController : PlayerController
         else if(state == AIstate.Wait)
         {
             //dont do anything
+            Debug.Log("player " + playerID + " is waiting");
+
         }
 
 
-        
+
 
     }
 
@@ -232,6 +242,8 @@ public class AIPlayerController : PlayerController
     {
         _breakingBlock = true;
         yield return new WaitForSeconds(.1f);
+        Debug.Log("player " + playerID + " is breaking a block!");
+
 
         //face block
         if (target != null)

@@ -336,7 +336,7 @@ public class GridCreator : MonoBehaviour
                     et.transform.parent = transform;
                     et.transform.localPosition = new Vector3(x, _elevatorStartY, 0);
                     et.GetComponent<ElevatorObj>().SetData(GameData.Instance.playerElevators[i][j]);
-                    x += .6f;
+                    x += 3f;
 ;                        
                 }
             }

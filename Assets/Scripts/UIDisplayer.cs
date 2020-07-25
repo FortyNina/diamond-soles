@@ -43,7 +43,10 @@ public class UIDisplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0;i < _playerFloorDisplay.Length;i++)
+        _p1LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[1], 1).ToString();
+        _p2LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[2], 2).ToString();
+        _p3LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[3], 3).ToString();
+        for (int i = 0;i < _playerFloorDisplay.Length;i++)
         {
              _playerFloorDisplay[i].text = "Floor: " + GameData.Instance.playerFloors[i][GameData.Instance.playerMineLocations[i]];
         }
@@ -79,16 +82,15 @@ public class UIDisplayer : MonoBehaviour
             _durabilityDisplay[i].fillAmount = (float)GameData.Instance.durabilityLevels[i] / 100f;
         }
 
-
-        _p1LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[1], 1).ToString();
-        _p2LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[2], 2).ToString();
-        _p3LevelDisplay.text = "Floor: " + GetFloor(GameData.Instance.playerMineLocations[3], 3).ToString();
+        
+        
 
 
     }
 
     private int GetFloor(Mine mt, int id)
     {
+        Debug.Log("whyyyy");
         return GameData.Instance.playerFloors[id][mt];
     }
 }

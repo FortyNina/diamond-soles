@@ -31,7 +31,7 @@ public class PlayerCreator : MonoBehaviour
 
         else
         {
-            gameObject.AddComponent<Seeker>();
+            Seeker s = gameObject.AddComponent<Seeker>();
             pc = gameObject.AddComponent<AIPlayerController>();
             pc.IsAI = true;
         }
