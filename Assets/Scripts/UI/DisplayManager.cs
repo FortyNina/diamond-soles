@@ -11,6 +11,10 @@ public class DisplayManager : MonoBehaviour
     public Transform miniDisplayParent;
 
     private int _currentMainID = 0;
+    public int CurrentMainID
+    {
+        get { return _currentMainID; }
+    }
 
     // Start is called before the first frame update
     void Start()

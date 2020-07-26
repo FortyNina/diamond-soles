@@ -61,7 +61,7 @@ public class SceneInitializer : MonoBehaviour
                 }
 
             }
-            gc.SelectMine(Mine.IronMine);
+            gc.SelectMine(AIManager.GetMineChoice(i));
 
 
             //create the "other players"

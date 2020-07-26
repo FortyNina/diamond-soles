@@ -107,7 +107,7 @@ public class AIMinerController : MonoBehaviour
                 if (_stuckNumber > 5)
                 {
                     Debug.Log("Player " + playerID + " has been stuck a while");
-                    StartCoroutine(BreakBlock());
+                    SeekRock();
                     _stuckNumber = 0;
                 }
                 else
@@ -147,7 +147,7 @@ public class AIMinerController : MonoBehaviour
                     Debug.Log("Player " + playerID + " reached a goal");
                     _hasReachedEndOfPath = true;
                     _state = AIState.Wait;
-                    StartCoroutine(BreakBlock());
+                    if(!_breakingBlock)StartCoroutine(BreakBlock());
                     return;
                 }
                 
@@ -247,6 +247,17 @@ public class AIMinerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// For interacting with rocks
+    /// </summary>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Rock>() != null)
+            target = collision.gameObject.transform;
+        _state = AIState.Wait;
+        StartCoroutine(BreakBlock());
+    }
+
     public void RunOutOfEnergy()
     {
         _canMove = false;
@@ -263,7 +274,7 @@ public class AIMinerController : MonoBehaviour
         {
             _path = p;
             _currentWaypoint = 0;
-            _state = AIState.TravelPath;
+            //_state = AIState.TravelPath;
         }
     }
 
@@ -335,6 +346,7 @@ public class AIMinerController : MonoBehaviour
     /// </summary>
     private IEnumerator BreakBlock()
     {
+
         _breakingBlock = true;
         yield return new WaitForSeconds(.1f);
 
@@ -390,6 +402,7 @@ public class AIMinerController : MonoBehaviour
 
     private void AxeDown()
     {
+        Debug.Log("Player " + playerID + " is about to put their axe down");
         Vector3 t = Vector3.zero;
         if (_direction == PlayerDir.Up)
             t = new Vector3(transform.position.x, transform.position.y + .8f, 0);
