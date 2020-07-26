@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 60054593876772578}
   - component: {fileID: 60054593876772576}
   - component: {fileID: 60054593876772607}
+  - component: {fileID: 1989773733858300315}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -261,6 +262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55b3c86d74cc42b48d203b405820bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
+  gridCreator: {fileID: 60054594963923244}
+  axe: {fileID: 60054593325399322}
+  target: {fileID: 0}
+  currentObject: {fileID: 0}
   OnEnterStairCase:
     m_PersistentCalls:
       m_Calls: []
@@ -276,11 +282,22 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  playerID: 0
-  gridCreator: {fileID: 60054594963923244}
-  axe: {fileID: 60054593325399322}
-  target: {fileID: 0}
-  currentObject: {fileID: 0}
+  OnAxeSwing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1989773733858300315}
+        m_MethodName: ModifyDurabilityLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &60054593876772607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +326,19 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &1989773733858300315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60054593876772582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a819d5ab139884c83a998dba33acc6c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerController: {fileID: 60054593876772576}
 --- !u!1 &60054594963923245
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +350,7 @@ GameObject:
   - component: {fileID: 60054594963923243}
   - component: {fileID: 60054594963923244}
   m_Layer: 0
-  m_Name: GridPlayer0
+  m_Name: GridPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

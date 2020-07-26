@@ -7,10 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Seeker))]
 public class AIMinerController : MonoBehaviour
 {
-    public UnityEvent OnEnterStairCase;
-    public UnityEvent OnEnterHole;
-    public UnityEvent OnEnterElevator;
-
+    
     private enum AIState { TravelPath, Wait }
     private enum PlayerDir { Left, Right, Up, Down}
 
@@ -52,10 +49,17 @@ public class AIMinerController : MonoBehaviour
     private int _stuckNumber = 0;
     #endregion
 
+    public UnityEvent OnEnterStairCase;
+    public UnityEvent OnEnterHole;
+    public UnityEvent OnEnterElevator;
+    public UnityEvent OnAxeSwing;
+
+
     /// <summary>
     /// Set up for the AIMinerController. Stuff like getting
     /// components and setting initial target
     /// </summary>
+
     private void Start()
     {
         _seeker = GetComponent<Seeker>();
@@ -402,6 +406,8 @@ public class AIMinerController : MonoBehaviour
 
     private void AxeDown()
     {
+        if (GameData.Instance.durabilityLevels[playerID] <= 0)
+            return;
         Debug.Log("Player " + playerID + " is about to put their axe down");
         Vector3 t = Vector3.zero;
         if (_direction == PlayerDir.Up)
@@ -424,12 +430,10 @@ public class AIMinerController : MonoBehaviour
 
     private void SwingAxe(Vector3 t)
     {
-        if (GameData.Instance.durabilityLevels[playerID] <= 0 && GameManager.subtractDurability)
-            return;
         _axeDown = true;
         axe.transform.position = t;
         axe.SetActive(true);
-        GameData.Instance.durabilityLevels[playerID]--;
+        OnAxeSwing.Invoke();
 
     }
 

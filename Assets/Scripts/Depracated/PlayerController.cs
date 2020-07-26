@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private void SwingAxe(Vector3 t)
     {
-        if (GameData.Instance.durabilityLevels[playerID] <= 0 && GameManager.subtractDurability)
+        if (GameData.Instance.durabilityLevels[playerID] <= 0 )
             return;
         _axeDown = true;
         _axe.transform.position = t;

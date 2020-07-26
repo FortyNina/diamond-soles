@@ -27,7 +27,7 @@ public class GameInitializer : MonoBehaviour
                
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
                 ores.Add(TileType.Iron, 50);
-                ores.Add(TileType.Diamond, 0);
+                ores.Add(TileType.Diamond, 50);
                 ores.Add(TileType.Food, 50);
                 ores.Add(TileType.Coal, 50);
                 GameData.Instance.playerOreSupplies.Add(ores);

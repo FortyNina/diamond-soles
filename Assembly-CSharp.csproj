@@ -78,6 +78,8 @@
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\PlayerCreator.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\SceneInitializer.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
+    <Compile Include="Assets\Scripts\GameSettingsSetter.cs" />
     <Compile Include="Assets\Scripts\MineManagement\GridCreator.cs" />
     <Compile Include="Assets\Scripts\MineManagement\MinePicker.cs" />
     <Compile Include="Assets\Scripts\MineManagement\MineRecorder.cs" />
@@ -86,9 +88,11 @@
     <Compile Include="Assets\Scripts\Pathfinding\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllers\AIMinerController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllers\AuctionPlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerControllers\MinerResourceManager.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\AIDisplayWindow.cs" />
     <Compile Include="Assets\Scripts\UI\DisplayManager.cs" />
+    <Compile Include="Assets\Scripts\UIDisplay.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

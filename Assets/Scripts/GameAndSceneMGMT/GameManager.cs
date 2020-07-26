@@ -6,46 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Game Mode Settings")]
-    public bool performAuctionPhase = true;
-    public bool giveAIRandomOre = true;
-    public bool countEnergy = true;
-    public bool countDurability = true;
-
-    [Space (5)]
-    [Header("Game Levers")]
-    public int amountOfResourceToLoseAfterDay = 10;
-    public float energyDrainFactor = .5f;
-
-
-    public static bool subtractDurability;
-    public GameObject[] players;
-
     
-   
-    // Start is called before the first frame update
-    void Awake()
-    {
-        MiningStateSetup();
 
-    }
+    public GameObject[] players;
 
     private void Update()
     {
-        subtractDurability = countDurability;
-        bool stillActive = false;
-        for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
-        {
-            GameData.Instance.energyLevels[i] -= Time.deltaTime * energyDrainFactor;
-            if (GameData.Instance.energyLevels[i] > 0)
-                stillActive = true;
-            else
-            {
-                if(countEnergy)players[i].GetComponent<AIMinerController>().RunOutOfEnergy();
-            }
-        }
-        //TODO: remove P?
-        if ((!stillActive && performAuctionPhase) || Input.GetKeyDown(KeyCode.P))
+       
+        if (Input.GetKeyDown(KeyCode.P))
         {
              AuctionStateSetup();
         }
@@ -67,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
 
         //GIVE AI SOME RANDOM NUMBERS!
-        if (giveAIRandomOre)
+        if (GameSettings.Instance.giveAIRandomOre)
         {
             for(int i = GameData.Instance.numberRealPlayers;i<GameData.Instance.AIs.Count;i++)
             {
@@ -98,41 +66,4 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //Determine stats
-    private void MiningStateSetup()
-    {
-
-        //End of day removals
-        //for (int i = 0; i < GameData.Instance.playerOreSupplies.Count; i++)
-        //{
-        //    GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
-        //    GameData.Instance.playerOreSupplies[i][TileType.Food] -= amountOfResourceToLoseAfterDay;
-        //    GameData.Instance.playerOreSupplies[i][TileType.Coal] -= amountOfResourceToLoseAfterDay;
-        //}
-
-
-        //based on how much food you have, calculate your energy level for this day
-        for (int i = 0; i < GameData.Instance.energyLevels.Count; i++)
-        {
-            int jelly = GameData.Instance.playerOreSupplies[i][TileType.Food];
-            int newEnergy = (100 * jelly) / 200;
-            GameData.Instance.energyLevels[i] = newEnergy;
-        }
-
-        //based on how much iron you have, calculate your axe durability level for this day
-        for (int i = 0; i < GameData.Instance.durabilityLevels.Count; i++)
-        {
-            int iron = GameData.Instance.playerOreSupplies[i][TileType.Iron];
-            int newDurability = (100 * iron) / 200;
-            GameData.Instance.durabilityLevels[i] = newDurability;
-        }
-
-        //based on how much iron you have, calculate your axe durability level for this day
-        for (int i = 0; i < GameData.Instance.coalLevels.Count; i++)
-        {
-            int coal = GameData.Instance.playerOreSupplies[i][TileType.Coal];
-            int newCoal = (100 * coal) / 200;
-            GameData.Instance.coalLevels[i] = newCoal;
-        }
-    }
 }

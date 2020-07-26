@@ -85,7 +85,6 @@ public class GridCreator : MonoBehaviour
     private void Start()
     {
         GameData.Instance.gridLocations[playerID] = transform.position;
-        Debug.Log(transform.position);
     }
 
     private void Update()

@@ -6,15 +6,17 @@ public class DisplayManager : MonoBehaviour
 {
     public RenderTexture[] texturePool;
     public AIDisplayWindow mainDisplay;
-    private AIDisplayWindow[] _allDisplays;
     public GameObject miniDisplayPrefab;
     public Transform miniDisplayParent;
+    public UIDisplay ui;
 
     private int _currentMainID = 0;
     public int CurrentMainID
     {
         get { return _currentMainID; }
     }
+
+    private AIDisplayWindow[] _allDisplays;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +66,8 @@ public class DisplayManager : MonoBehaviour
         Debug.Log(GameData.Instance.gridLocations[indexToShowMain]);
 
         _currentMainID = indexToShowMain;
+
+        ui.UpdateFocusID(_currentMainID);
 
     }
 
