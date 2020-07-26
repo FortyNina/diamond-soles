@@ -104,6 +104,7 @@ public class GridCreator : MonoBehaviour
             {
                 _otherPlayers[i].SetActive(true);
                 _otherPlayers[i].transform.localPosition = GameData.Instance.playerLocalLocations[i];
+                Debug.Log(GameData.Instance.playerLocalLocations[i]);
             }
             else
                 _otherPlayers[i].SetActive(false);

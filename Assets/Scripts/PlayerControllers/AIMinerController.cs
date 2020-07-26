@@ -120,6 +120,8 @@ public class AIMinerController : MonoBehaviour
             }
         }
 
+        GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
+
     }
 
     /// <summary>

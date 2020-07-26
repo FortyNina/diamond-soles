@@ -7,6 +7,7 @@ public class SceneInitializer : MonoBehaviour
     public GameManager manager;
 
     public Color[] playerColors;
+    public GameObject[] cameraPool;
 
     //The prefabs to Create
     public GameObject gridCreatorPrefab;
@@ -16,6 +17,9 @@ public class SceneInitializer : MonoBehaviour
     public float startY;
 
     public float dX;
+
+
+
 
     // Start is called before the first frame update
     void Awake()
