@@ -54,10 +54,10 @@ public class GridCreator : MonoBehaviour
 
     [Space(9)]
     [SerializeField]
-    private GameObject _playerObject;
+    public GameObject _playerObject;
 
     [SerializeField]
-    private GameObject[] _otherPlayers;
+    public GameObject[] _otherPlayers;
 
 
     private Tile[] _tiles;

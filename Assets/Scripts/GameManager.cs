@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
                 stillActive = true;
             else
             {
-                if(countEnergy)players[i].GetComponent<PlayerController>().RunOutOfEnergy();
+                if(countEnergy)players[i].GetComponent<AIMinerController>().RunOutOfEnergy();
             }
         }
         //TODO: remove P?
@@ -103,12 +103,12 @@ public class GameManager : MonoBehaviour
     {
 
         //End of day removals
-        for (int i = 0; i < GameData.Instance.playerOreSupplies.Count; i++)
-        {
-            GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
-            GameData.Instance.playerOreSupplies[i][TileType.Food] -= amountOfResourceToLoseAfterDay;
-            GameData.Instance.playerOreSupplies[i][TileType.Coal] -= amountOfResourceToLoseAfterDay;
-        }
+        //for (int i = 0; i < GameData.Instance.playerOreSupplies.Count; i++)
+        //{
+        //    GameData.Instance.playerOreSupplies[i][TileType.Iron] -= amountOfResourceToLoseAfterDay;
+        //    GameData.Instance.playerOreSupplies[i][TileType.Food] -= amountOfResourceToLoseAfterDay;
+        //    GameData.Instance.playerOreSupplies[i][TileType.Coal] -= amountOfResourceToLoseAfterDay;
+        //}
 
 
         //based on how much food you have, calculate your energy level for this day

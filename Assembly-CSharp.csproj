@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AIManager.cs" />
+    <Compile Include="Assets\Scripts\AIMinerController.cs" />
     <Compile Include="Assets\Scripts\AIPersonalityPreferences.cs" />
     <Compile Include="Assets\Scripts\AIPlayerController.cs" />
     <Compile Include="Assets\Scripts\AStarMapController.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerCreator.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
+    <Compile Include="Assets\Scripts\SceneInitializer.cs" />
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\UIDisplayer.cs" />
