@@ -18,8 +18,6 @@ public class GameInitializer : MonoBehaviour
                 else if(i == 3) GameData.Instance.AIs.Add(AIPersonality.Basic);
                 else GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
 
-                Debug.Log("Player " + i + " Personality is " + GameData.Instance.AIs[i]);
-
                 Dictionary<Mine, int> floors = new Dictionary<Mine, int>();
                 floors.Add(Mine.IronMine, 0);
                 floors.Add(Mine.JellyMine, 0);
@@ -45,6 +43,8 @@ public class GameInitializer : MonoBehaviour
                 GameData.Instance.playerMineLocations.Add(Mine.Entry);
 
                 GameData.Instance.playerElevators.Add(new List<ElevatorData>());
+
+                GameData.Instance.gridLocations.Add(Vector3.zero);
 
 
             }

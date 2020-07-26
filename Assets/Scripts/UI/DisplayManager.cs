@@ -60,8 +60,11 @@ public class DisplayManager : MonoBehaviour
 
         mainDisplay.UpdateRenderTexture(indexToShowMain);
         oldWindow.UpdateRenderTexture(_currentMainID);
+        Camera.main.transform.position = new Vector3(GameData.Instance.gridLocations[indexToShowMain].x, Camera.main.transform.position.y, -10);
+        Debug.Log(GameData.Instance.gridLocations[indexToShowMain]);
 
         _currentMainID = indexToShowMain;
+
     }
 
    

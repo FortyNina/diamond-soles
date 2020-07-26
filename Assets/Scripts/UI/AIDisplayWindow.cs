@@ -20,7 +20,6 @@ public class AIDisplayWindow : MonoBehaviour
 
     public void UpdateRenderTexture(int newID)
     {
-        Debug.Log("Updating????");
         playerID = newID;
         _currentTex = displayManager.texturePool[newID];
         _rawIm.texture = _currentTex;

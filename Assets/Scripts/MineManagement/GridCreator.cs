@@ -78,7 +78,14 @@ public class GridCreator : MonoBehaviour
     {
         _adjustedX = (-1 * ((_gridWidth * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.x;
         _adjustedY = (-1 * ((_gridHeight * _tileWidth) / 2f) + _tileWidth / 2) + transform.position.y;
+        
 
+    }
+
+    private void Start()
+    {
+        GameData.Instance.gridLocations[playerID] = transform.position;
+        Debug.Log(transform.position);
     }
 
     private void Update()

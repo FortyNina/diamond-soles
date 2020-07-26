@@ -34,6 +34,8 @@ public class GameData : Singleton<GameData>
 
 	public List<List<ElevatorData>> playerElevators = new List<List<ElevatorData>>();
 
+	public List<Vector3> gridLocations = new List<Vector3>();
+
 
 
 }
