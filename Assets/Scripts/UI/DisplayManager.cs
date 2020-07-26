@@ -47,10 +47,6 @@ public class DisplayManager : MonoBehaviour
             return;
         }
 
-        //indexToShowMain is the new
-        //_current is the old
-        //find which display has the new, set to the current.
-
         AIDisplayWindow oldWindow = null;
         for (int i = 0; i < _allDisplays.Length; i++)
         {

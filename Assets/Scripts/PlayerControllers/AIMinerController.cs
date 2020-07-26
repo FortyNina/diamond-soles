@@ -92,6 +92,7 @@ public class AIMinerController : MonoBehaviour
         //Is Stuck Check only occurs if player isnt breakinga  block
         if (!_breakingBlock)
         {
+            Debug.Log("Player " + playerID + " is not breaking a block");
             if(IsStandingStill(_previousPos, transform.position))
             {
                 _stuckTimer -= Time.deltaTime;
@@ -103,13 +104,15 @@ public class AIMinerController : MonoBehaviour
 
             if (_stuckTimer < 0)
             {
-                if(_stuckNumber > 2)
+                if (_stuckNumber > 5)
                 {
+                    Debug.Log("Player " + playerID + " has been stuck a while");
                     StartCoroutine(BreakBlock());
                     _stuckNumber = 0;
                 }
                 else
                 {
+                    Debug.Log("Player " + playerID + " is stuck");
                     _stuckTimer = 3f;
                     _isStuck = true;
                     AStarMapController.RequestScan();
@@ -120,6 +123,7 @@ public class AIMinerController : MonoBehaviour
             }
         }
 
+        _previousPos = transform.position;
         GameData.Instance.playerLocalLocations[playerID] = transform.localPosition;
 
     }
@@ -140,6 +144,7 @@ public class AIMinerController : MonoBehaviour
             {
                 if(_currentWaypoint >= _path.vectorPath.Count)
                 {
+                    Debug.Log("Player " + playerID + " reached a goal");
                     _hasReachedEndOfPath = true;
                     _state = AIState.Wait;
                     StartCoroutine(BreakBlock());
@@ -154,6 +159,7 @@ public class AIMinerController : MonoBehaviour
 
             if (_path == null)
             {
+                Debug.Log("Player " + playerID + " has a null path");
                 DetermineNewTarget();
                 _stuckNumber = 0;
                 return;
@@ -162,6 +168,7 @@ public class AIMinerController : MonoBehaviour
             //Target has disappeared. Probably was destroyed by another player
             if(target == null || !target.gameObject.activeInHierarchy)
             {
+                Debug.Log("Player " + playerID + " has a null target");
                 _stuckNumber = 0;
                 DetermineNewTarget();
             }
@@ -334,6 +341,8 @@ public class AIMinerController : MonoBehaviour
         //face the block
         if(target != null)
         {
+            Debug.Log("Player " + playerID + " is about to break a block");
+
             float xDiff = transform.position.x - target.position.x;
             float yDiff = transform.position.y - target.position.y;
 
