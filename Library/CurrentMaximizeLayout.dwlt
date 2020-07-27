@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 850
-  m_MinSize: {x: 679, y: 494}
+  m_MinSize: {x: 681, y: 494}
   m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 25030
+  controlID: 25556
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -127,10 +127,10 @@ MonoBehaviour:
     y: 0
     width: 1092
     height: 850
-  m_MinSize: {x: 404, y: 494}
+  m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 25031
+  controlID: 25557
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -152,10 +152,10 @@ MonoBehaviour:
     y: 0
     width: 1092
     height: 542
-  m_MinSize: {x: 404, y: 222}
-  m_MaxSize: {x: 8004, y: 4022}
+  m_MinSize: {x: 406, y: 222}
+  m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 25032
+  controlID: 25558
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -211,9 +211,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0eb5f9ff
-      m_LastClickedID: -412402
-      m_ExpandedIDs: 88b2f9ff0eb5f9ff06b7f9ff98b8f9ff04b9f9ff32baf9ffaabaf9ffcabaf9ff78bcf9ff4631faff5031faff7031faff387efaff587efaffaafafffff4faffff8efbffff183100002a310000be310000cc310000e0310000163200007432000080320000
+      m_SelectedIDs: 4487f9ff
+      m_LastClickedID: -424124
+      m_ExpandedIDs: e0abf9ffe4abf9ff9aacf9ff06b7f9ff04b9f9ffaabaf9ffcabaf9ff78bcf9ff4631faff5031faff7031faff387efaff587efaffaafafffff4faffff8efbffff183100002a310000be310000cc310000e0310000163200007432000080320000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -303,9 +303,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 394.4988, y: 301.4521, z: -597.1243}
+    m_Target: {x: 410.83908, y: 200.16609, z: -1841.4907}
     speed: 2
-    m_Value: {x: 395.75928, y: 301.2318, z: -596.5498}
+    m_Value: {x: 412.86472, y: 200.71452, z: -1841.3868}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -338,9 +338,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 300.7394
+    m_Target: 610.78937
     speed: 2
-    m_Value: 311.00256
+    m_Value: 618.20776
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -410966
+  m_LastSelectedObjectID: -423928
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -538,7 +538,7 @@ MonoBehaviour:
     height: 289
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: gamein
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -549,19 +549,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs/UI
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/nina/Documents/DiamondSoles/diamond-soles
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 35}
-    m_SelectedIDs: 562e0000
-    m_LastClickedID: 11862
+    m_SelectedIDs: 
+    m_LastClickedID: 0
     m_ExpandedIDs: 00000000e62a0000d22f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -615,9 +615,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 0eb5f9ff
-    m_LastClickedInstanceID: -412402
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 4487f9ff
+    m_LastClickedInstanceID: -424124
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000f62c0000905d7100a26c4401d62f0000d82b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -690,8 +690,8 @@ MonoBehaviour:
     y: 0
     width: 348
     height: 850
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}

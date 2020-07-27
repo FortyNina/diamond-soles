@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MinerSelectionScreen : MonoBehaviour
 {
@@ -12,9 +13,23 @@ public class MinerSelectionScreen : MonoBehaviour
     [SerializeField]
     private Transform _minerDataParent;
 
+    [SerializeField]
+    private TextMeshPro _familyIronDisplay;
+
+    [SerializeField]
+    private TextMeshPro _familyJellyDisplay;
+
+    [SerializeField]
+    private TextMeshPro _familyCoalDisplay;
+
     private List<MinerAddedData> _minersAdded = new List<MinerAddedData>();
 
     public int maxMiners = 4;
+
+    private void Update()
+    {
+        
+    }
 
 
 

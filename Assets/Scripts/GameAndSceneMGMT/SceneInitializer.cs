@@ -62,7 +62,7 @@ public class SceneInitializer : MonoBehaviour
 
             }
             //gc.SelectMine(AIManager.GetMineChoice(i));
-
+            player.GetComponent<AIMinerController>().SetAxeID();
 
             //create the "other players"
             //set stats for gridCreator, AIMinerController, axe, etc

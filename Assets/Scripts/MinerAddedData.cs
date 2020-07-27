@@ -26,4 +26,6 @@ public class MinerAddedData : MonoBehaviour
     {
         nameText.text = "Miner " + playerID;
     }
+
+
 }

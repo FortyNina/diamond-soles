@@ -40,7 +40,7 @@ public class Rock : MonoBehaviour
 
             if (MineRecorder.GetMineTileHealth(floorNumber, mineType, index) <= 0)
             {
-                
+                Debug.Log("Rock was hit by player " + collision.transform.GetComponent<Axe>().PlayerID);
                 if (GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID].ContainsKey(ore))
                 {
                     GameData.Instance.playerOreSupplies[collision.transform.GetComponent<Axe>().PlayerID][ore] += myTile.oreAmount;

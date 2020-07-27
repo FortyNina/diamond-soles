@@ -282,6 +282,11 @@ public class AIMinerController : MonoBehaviour
         }
     }
 
+    public void SetAxeID()
+    {
+        axe.GetComponent<Axe>().PlayerID = playerID;
+    }
+
     /// <summary>
     /// Returns whether or not a transform is standing still THIS FRAME
     /// </summary>
