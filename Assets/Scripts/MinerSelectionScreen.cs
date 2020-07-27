@@ -14,13 +14,13 @@ public class MinerSelectionScreen : MonoBehaviour
     private Transform _minerDataParent;
 
     [SerializeField]
-    private TextMeshPro _familyIronDisplay;
+    private TextMeshProUGUI _familyIronDisplay;
 
     [SerializeField]
-    private TextMeshPro _familyJellyDisplay;
+    private TextMeshProUGUI _familyJellyDisplay;
 
     [SerializeField]
-    private TextMeshPro _familyCoalDisplay;
+    private TextMeshProUGUI _familyCoalDisplay;
 
     private List<MinerAddedData> _minersAdded = new List<MinerAddedData>();
 
@@ -28,7 +28,10 @@ public class MinerSelectionScreen : MonoBehaviour
 
     private void Update()
     {
-        
+        _familyIronDisplay.text = "Total Iron: " + GameData.Instance.familyOreSupplies[TileType.Iron];
+        _familyJellyDisplay.text = "Total Food: " + GameData.Instance.familyOreSupplies[TileType.Food];
+        _familyCoalDisplay.text = "Total Coal: " + GameData.Instance.familyOreSupplies[TileType.Coal];
+
     }
 
 
@@ -41,8 +44,18 @@ public class MinerSelectionScreen : MonoBehaviour
         GameObject go = Instantiate(_minerDataPrefab, Vector3.zero, Quaternion.identity);
         go.transform.parent = _minerDataParent;
         MinerAddedData d = go.GetComponent<MinerAddedData>();
+        d.selection = this;
         _minersAdded.Add(d);
         UpdateMinerDataIDs();
+    }
+
+    public void RemoveMiner(int id)
+    {
+        GameObject go = _minersAdded[id].gameObject;
+        _minersAdded.RemoveAt(id);
+        Destroy(go);
+        UpdateMinerDataIDs();
+
     }
 
     private void UpdateMinerDataIDs()

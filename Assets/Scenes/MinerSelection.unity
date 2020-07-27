@@ -1111,9 +1111,9 @@ MonoBehaviour:
   _minerDataPrefab: {fileID: 628568227916052177, guid: 5d88b99d80642426caf23459d1a7d249,
     type: 3}
   _minerDataParent: {fileID: 1232840413}
-  _familyIronDisplay: {fileID: 0}
-  _familyJellyDisplay: {fileID: 0}
-  _familyCoalDisplay: {fileID: 0}
+  _familyIronDisplay: {fileID: 1028306229}
+  _familyJellyDisplay: {fileID: 1593022055}
+  _familyCoalDisplay: {fileID: 255558437}
   maxMiners: 4
 --- !u!114 &1659683669
 MonoBehaviour:
