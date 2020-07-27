@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\Axe.cs" />
     <Compile Include="Assets\Scripts\Depracated\AIPlayerController.cs" />
     <Compile Include="Assets\Scripts\Depracated\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Depracated\UIDisplayer.cs" />
     <Compile Include="Assets\Scripts\ElevatorButton.cs" />
     <Compile Include="Assets\Scripts\ElevatorData.cs" />
     <Compile Include="Assets\Scripts\ElevatorObj.cs" />
@@ -85,6 +84,8 @@
     <Compile Include="Assets\Scripts\MineManagement\MineRecorder.cs" />
     <Compile Include="Assets\Scripts\MineManagement\Rock.cs" />
     <Compile Include="Assets\Scripts\MineManagement\Tile.cs" />
+    <Compile Include="Assets\Scripts\MinerAddedData.cs" />
+    <Compile Include="Assets\Scripts\MinerSelectionScreen.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\AStarMapController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllers\AIMinerController.cs" />
     <Compile Include="Assets\Scripts\PlayerControllers\AuctionPlayerController.cs" />

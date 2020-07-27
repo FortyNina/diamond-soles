@@ -14,7 +14,7 @@ public class MinePicker : MonoBehaviour
         //Its an AI!
         if(id >= GameData.Instance.numberRealPlayers)
         {
-            StartCoroutine(DetermineAIChoice());
+           // StartCoroutine(DetermineAIChoice());
         }
     }
 
