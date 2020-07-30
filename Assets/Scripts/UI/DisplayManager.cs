@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DisplayManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class DisplayManager : MonoBehaviour
     }
 
     private AIDisplayWindow[] _allDisplays;
+
+
+    [SerializeField] private UnityEvent OnDisplayChanged;
 
     // Start is called before the first frame update
     void Start()
@@ -66,8 +70,10 @@ public class DisplayManager : MonoBehaviour
         Debug.Log(GameData.Instance.gridLocations[indexToShowMain]);
 
         _currentMainID = indexToShowMain;
+        GameData.Instance.playerInFocus = _currentMainID;
 
         ui.UpdateFocusID(_currentMainID);
+        OnDisplayChanged.Invoke();
 
     }
 

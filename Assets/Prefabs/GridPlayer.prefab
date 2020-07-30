@@ -263,7 +263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  gridCreator: {fileID: 60054594963923244}
   axe: {fileID: 60054593325399322}
   target: {fileID: 0}
   currentObject: {fileID: 0}
@@ -287,6 +286,22 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1989773733858300315}
         m_MethodName: ModifyDurabilityLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnFloorChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60054594963923244}
+        m_MethodName: DisplayNewLayout
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

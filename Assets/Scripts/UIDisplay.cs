@@ -30,8 +30,8 @@ public class UIDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _energyDisplay.fillAmount = (float)GameData.Instance.energyLevels[_focusedID] / 100f;
-        _durabilityDisplay.fillAmount = (float)GameData.Instance.durabilityLevels[_focusedID] / 100f;
+        _energyDisplay.fillAmount = (float)GameData.Instance.energyLevels[_focusedID] / GameSettings.Instance.maxEnergy;
+        _durabilityDisplay.fillAmount = (float)GameData.Instance.durabilityLevels[_focusedID] / GameSettings.Instance.maxDurability;
         _floorDisplay.text = "Floor: " + GameData.Instance.playerFloors[_focusedID][GameData.Instance.playerMineLocations[_focusedID]];
         _ironCollectedDisplay.text = "Iron: " + GameData.Instance.playerOreSupplies[_focusedID][TileType.Iron].ToString();
         _jellyCollectedDisplay.text = "Jelly: " + GameData.Instance.playerOreSupplies[_focusedID][TileType.Food].ToString();

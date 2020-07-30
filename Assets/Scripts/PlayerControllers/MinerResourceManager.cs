@@ -68,6 +68,9 @@ public class MinerResourceManager : MonoBehaviour
         GameData.Instance.coalLevels[_playerID] += amount;
     }
 
+
+
+
     /// <summary>
     /// Calculate energy, durability, and coal levels from the amount of Iron, Jelly, and Coal
     /// a miner has.

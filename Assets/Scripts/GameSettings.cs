@@ -13,6 +13,9 @@ public class GameSettings : Singleton<GameSettings>
     public bool giveAIRandomOre = false;
 
 
-    public float energyDrainFactor = .5f;
+    public float energyDrainFactor = .25f;
+    public float maxEnergy = 60;
+    public float maxDurability = 60;
+    public float maxCoal = 60;
 
 }

@@ -1,22 +1,30 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MinerSelectionScreen.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/NewMineSelect.cs">
     <Files>
       <File FileName="Assets/Scripts/GameAndSceneMGMT/SceneInitializer.cs" Line="65" Column="63" />
-      <File FileName="Assets/Scripts/UI/DisplayManager.cs" Line="70" Column="42" />
-      <File FileName="Assets/Scripts/MineManagement/GridCreator.cs" Line="88" Column="1" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameData.cs" Line="31" Column="32" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameInitializer.cs" Line="33" Column="59" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" Line="12" Column="1" />
-      <File FileName="Assets/Scripts/PlayerControllers/AIMinerController.cs" Line="287" Column="53" />
-      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" Line="69" Column="6" />
-      <File FileName="Assets/Scripts/MineManagement/MinePicker.cs" Line="17" Column="14" />
-      <File FileName="Assets/Scripts/MinerSelectionScreen.cs" Line="31" Column="11" />
-      <File FileName="Assets/Scripts/MinerAddedData.cs" Line="30" Column="1" />
+      <File FileName="Assets/Scripts/UI/DisplayManager.cs" Line="69" Column="58" />
+      <File FileName="Assets/Scripts/MineManagement/GridCreator.cs" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameData.cs" Line="42" Column="31" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameInitializer.cs" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" />
+      <File FileName="Assets/Scripts/PlayerControllers/AIMinerController.cs" Line="92" Column="61" />
+      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" Line="27" Column="1" />
+      <File FileName="Assets/Scripts/MineManagement/MinePicker.cs" />
+      <File FileName="Assets/Scripts/MinerSelectionScreen.cs" />
+      <File FileName="Assets/Scripts/MinerAddedData.cs" />
+      <File FileName="Assets/Scripts/GameSettings.cs" />
+      <File FileName="Assets/Scripts/GameSettingsSetter.cs" Line="35" Column="49" />
+      <File FileName="Assets/Scripts/UIDisplay.cs" Line="33" Column="1" />
+      <File FileName="Assets/Scripts/MineManagement/Tile.cs" Line="31" Column="26" />
+      <File FileName="Assets/Scripts/ElevatorButton.cs" Line="25" Column="6" />
+      <File FileName="Assets/Scripts/Depracated/AIPlayerController.cs" Line="58" Column="47" />
+      <File FileName="Assets/Scripts/MineManagement/Rock.cs" Line="43" Column="1" />
+      <File FileName="Assets/Scripts/UI/NewMineSelect.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5ab88890-0d86-42d3-bb9b-f7122cb3b5b6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5e6feada-0a65-4704-abb9-a8e1b618b8f0" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

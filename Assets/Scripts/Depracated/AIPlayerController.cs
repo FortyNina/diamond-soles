@@ -55,7 +55,7 @@ public class AIPlayerController : PlayerController
             if (AIManager.BuildElevator(playerID))
             {
                 Debug.Log("Player " + playerID + " updated their " + GameData.Instance.playerMineLocations[playerID].ToString() + " elevator location");
-                elevatorCreator.CreateNewElevator(playerID);
+                elevatorCreator.CreateElevator(playerID);
             }
         }
         if (!_breakingBlock)

@@ -28,12 +28,12 @@ public class Tile
         }
         if(t == TileType.Iron)
         {
-            oreAmount = 1;
+            oreAmount = 2;
             health = 2;
         }
         if(t == TileType.Food)
         {
-            oreAmount = 1;
+            oreAmount = 2;
             health = 2;
         }
         if (t == TileType.Diamond)

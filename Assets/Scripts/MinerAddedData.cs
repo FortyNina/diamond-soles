@@ -21,8 +21,14 @@ public class MinerAddedData : MonoBehaviour
     private TextMeshProUGUI _durabilityText;
 
     private int _durability = 0;
+    public int Durability{get{return _durability;}}
+
     private int _energy = 0;
+    public int Energy { get { return _energy; } }
+
     private int _coal = 0;
+    public int Coal { get { return _coal; } }
+
 
     // Update is called once per frame
     void Update()

@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
                 GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
 
             }
-            SceneManager.LoadScene("MiningScene");
+            SceneManager.LoadScene("MiningPhase");
         }
     }
 

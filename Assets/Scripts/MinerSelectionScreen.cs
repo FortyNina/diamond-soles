@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MinerSelectionScreen : MonoBehaviour
 {
@@ -65,6 +66,29 @@ public class MinerSelectionScreen : MonoBehaviour
             _minersAdded[i].playerID = i;
         }
     }
-    
+
+    public void SaveDataAndLoadMines()
+    {
+        GameData.Instance.numPlayers = _minersAdded.Count;
+        List<int> durability = new List<int>();
+        List<float> energy = new List<float>();
+        List<int> coal = new List<int>();
+
+        for (int i = 0; i < _minersAdded.Count; i++)
+        {
+            durability.Add(_minersAdded[i].Durability);
+            energy.Add(_minersAdded[i].Energy);
+            coal.Add(_minersAdded[i].Coal);
+
+        }
+
+        GameData.Instance.durabilityLevels = durability;
+        GameData.Instance.energyLevels = energy;
+        GameData.Instance.coalLevels = coal;
+
+        SceneManager.LoadScene("MiningPhase");
+
+    }
+
 }
 

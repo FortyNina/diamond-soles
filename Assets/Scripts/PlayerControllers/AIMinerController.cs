@@ -13,7 +13,6 @@ public class AIMinerController : MonoBehaviour
 
     //Identity variables
     public int playerID;
-    public GridCreator gridCreator;
     public GameObject axe;
 
     //Inspector-visible pathfinding elements (exposed for debugging)
@@ -40,6 +39,7 @@ public class AIMinerController : MonoBehaviour
     private bool _landedOnNewFloor;
     private bool _canMove = true;
     private bool _axeDown = false;
+    private int _savedFloor = -1;
 
     //Stuck-preventing variables
     private Vector3 _previousPos;
@@ -53,6 +53,7 @@ public class AIMinerController : MonoBehaviour
     public UnityEvent OnEnterHole;
     public UnityEvent OnEnterElevator;
     public UnityEvent OnAxeSwing;
+    public UnityEvent OnFloorChange;
 
 
     /// <summary>
@@ -67,7 +68,7 @@ public class AIMinerController : MonoBehaviour
         DetermineNewTarget();
         _previousPos = transform.position;
         _stuckTimer = 3f;
-        axe.GetComponent<Axe>().PlayerID = gridCreator.playerID;
+        axe.GetComponent<Axe>().PlayerID = playerID;
 
     }
 
@@ -83,15 +84,20 @@ public class AIMinerController : MonoBehaviour
             SeekRock();
         }
 
-        //Handle Elevator Building
-        if (_landedOnNewFloor)
-        {
-            _landedOnNewFloor = false;
-            if (AIManager.BuildElevator(playerID))
-            {
-                //TODO: event? or look at playerController
-            }
+        if(GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]] != _savedFloor){
+            _savedFloor = GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]];
+            OnFloorChange.Invoke();
         }
+
+        //Handle Elevator Building
+        //if (_landedOnNewFloor)
+        //{
+        //    _landedOnNewFloor = false;
+        //    if (AIManager.BuildElevator(playerID))
+        //    {
+        //        //TODO: event? or look at playerController
+        //    }
+        //}
 
         //Is Stuck Check only occurs if player isnt breakinga  block
         if (!_breakingBlock)
@@ -445,15 +451,14 @@ public class AIMinerController : MonoBehaviour
 
     private void TraverseStaircase()
     {
-        GameData.Instance.playerFloors[playerID][gridCreator.mineType]++;
-        gridCreator.DisplayNewLayout();
+        GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]]++;
         GameData.Instance.energyLevels[playerID] -= 1;
         _landedOnNewFloor = true;
     }
 
     private void TraverseHole()
     {
-        int currentFloor = GameData.Instance.playerFloors[playerID][gridCreator.mineType];
+        int currentFloor = GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]];
 
         int randFloors = 0;
         if (currentFloor < 15)
@@ -463,9 +468,8 @@ public class AIMinerController : MonoBehaviour
         else
             randFloors = Random.Range(5, 15);
 
-        GameData.Instance.playerFloors[playerID][gridCreator.mineType] += randFloors;
+        GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]] += randFloors;
 
-        gridCreator.DisplayNewLayout();
         GameData.Instance.energyLevels[playerID] -= randFloors;
         _landedOnNewFloor = true;
 
@@ -474,10 +478,9 @@ public class AIMinerController : MonoBehaviour
 
     protected void UseElevator(ElevatorObj eo)
     {
-        GameData.Instance.playerFloors[playerID][gridCreator.mineType] = eo.floor;
+        GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]] = eo.floor;
         GameData.Instance.playerMoney[playerID] -= eo.price;
         GameData.Instance.playerMoney[eo.playerID] += eo.price;
-        gridCreator.DisplayNewLayout();
 
     }
 
