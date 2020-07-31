@@ -100,6 +100,7 @@ public class AIManager : MonoBehaviour
         Mine mine = GameData.Instance.playerMineLocations[playerIndex];
         int floor = 0;
         Tile[] currentMineLayout = new Tile[0] ;
+        if (!GameData.Instance.playerFloors[playerIndex].ContainsKey(mine)) return TileType.Stair;
         floor = GameData.Instance.playerFloors[playerIndex][mine];
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);

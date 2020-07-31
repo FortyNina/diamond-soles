@@ -20,6 +20,7 @@ public class GameInitializer : MonoBehaviour
             floors.Add(Mine.IronMine, 0);
             floors.Add(Mine.JellyMine, 0);
             floors.Add(Mine.CoalMine, 0);
+            //floors.Add(Mine.Entry, 0);
             GameData.Instance.playerFloors.Add(floors);
         }
 

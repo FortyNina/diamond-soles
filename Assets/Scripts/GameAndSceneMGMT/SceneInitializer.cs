@@ -29,7 +29,7 @@ public class SceneInitializer : MonoBehaviour
         {
             //create new grid prefab
             GameObject go = Instantiate(gridCreatorPrefab, new Vector2(startX, startY), Quaternion.identity);
-
+            
            
 
             //Initialize grid stuff

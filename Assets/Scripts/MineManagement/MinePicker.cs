@@ -10,12 +10,18 @@ public class MinePicker : MonoBehaviour
     private void Start()
     {
         id = gridCreator.playerID;
+        Debug.Log("WTF!");
 
         //Its an AI!
         if(id >= GameData.Instance.numberRealPlayers)
         {
            // StartCoroutine(DetermineAIChoice());
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("by bye cruel world");
     }
 
 

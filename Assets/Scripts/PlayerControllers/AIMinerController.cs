@@ -143,7 +143,7 @@ public class AIMinerController : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        if (!_canMove)
+        if (!_canMove || GameData.Instance.playerMineLocations[playerID] == Mine.Entry)
             return;
 
         #region TravelPath

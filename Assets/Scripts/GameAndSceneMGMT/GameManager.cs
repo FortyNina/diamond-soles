@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] players;
 
+    private void OnEnable()
+    {
+        Reset();
+    }
+
     private void Update()
     {
        
@@ -20,13 +25,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             //drop floors?
-            for (int i = 0; i < GameData.Instance.playerFloors.Count; i++)
-            {
-                GameData.Instance.playerFloors[i][Mine.IronMine] = 0;
-                GameData.Instance.playerFloors[i][Mine.JellyMine] = 0;
-                GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
-
-            }
+           
             SceneManager.LoadScene("MiningPhase");
         }
     }
@@ -63,6 +62,19 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene("AuctionScene");
+    }
+
+    public void Reset()
+    {
+        for (int i = 0; i < GameData.Instance.playerFloors.Count; i++)
+        {
+            GameData.Instance.playerFloors[i][Mine.IronMine] = 0;
+            GameData.Instance.playerFloors[i][Mine.JellyMine] = 0;
+            GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
+
+            GameData.Instance.playerMineLocations[i] = Mine.Entry;
+
+        }
     }
 
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameSettings : Singleton<GameSettings>
 {
+    protected GameSettings() { } // guarantee this will be always a singleton only - can't use the constructor!
+
 
     //Bools to turn modeds on/off
     public bool countEnergy = false;
