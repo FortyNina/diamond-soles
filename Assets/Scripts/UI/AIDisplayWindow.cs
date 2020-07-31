@@ -11,11 +11,19 @@ public class AIDisplayWindow : MonoBehaviour
     public DisplayManager displayManager;
 
     private RenderTexture _currentTex;
-    private RawImage _rawIm;
+    [SerializeField] private RawImage _rawIm;
+    [SerializeField] private RawImage _highlight;
 
     private void OnEnable()
     {
-        _rawIm = GetComponent<RawImage>();
+        if (playerID == GameData.Instance.playerInFocus && _highlight != null)
+            _highlight.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (playerID != GameData.Instance.playerInFocus && _highlight != null)
+            _highlight.gameObject.SetActive(false);
     }
 
     public void UpdateRenderTexture(int newID)
@@ -27,6 +35,8 @@ public class AIDisplayWindow : MonoBehaviour
 
     public void RequestDisplaySwitch()
     {
-        displayManager.SwitchDisplays(playerID);
+        //displayManager.SwitchDisplays(playerID);
+        displayManager.SwitchDisplaysStatic(playerID);
+        _highlight.gameObject.SetActive(true);
     }
 }

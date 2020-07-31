@@ -92,30 +92,7 @@ public class GridCreator : MonoBehaviour
         if (!_mineSelected)
             return;
 
-        //Check to Display other Players
-        for(int i = 0;i < _otherPlayers.Length; i++)
-        {
-            bool playerOnFloor = false ;
-
-            if (i == playerID)
-                continue;
-
-            if(GameData.Instance.playerMineLocations[i] == mineType)
-            {
-                if (GameData.Instance.playerFloors[i][mineType] == GameData.Instance.playerFloors[playerID][mineType])
-                    playerOnFloor = true;
-            }
-
-            if (playerOnFloor)
-            {
-                _otherPlayers[i].SetActive(true);
-                _otherPlayers[i].transform.localPosition = GameData.Instance.playerLocalLocations[i];
-            }
-            else
-                _otherPlayers[i].SetActive(false);
-
-
-        }
+        SetOtherPlayerLocations();
 
 
 
@@ -190,6 +167,7 @@ public class GridCreator : MonoBehaviour
     public void DisplayNewLayout()
     {
         DestroyCurrentTiles();
+        mineType = GameData.Instance.playerMineLocations[playerID];
         _currentFloor = GameData.Instance.playerFloors[playerID][GameData.Instance.playerMineLocations[playerID]];
         
         if (MineRecorder.CheckMineFloorExists(mineType, _currentFloor))
@@ -203,7 +181,7 @@ public class GridCreator : MonoBehaviour
             _prevTileTypes = MakeCopyOfTileSetTypes(_tiles);
 
         }
-
+        SetOtherPlayerLocations();
         DrawGrid();
         StartCoroutine(RescanMap());
 
@@ -343,9 +321,38 @@ public class GridCreator : MonoBehaviour
                     et.transform.localPosition = new Vector3(x, _elevatorStartY, 0);
                     et.GetComponent<ElevatorObj>().SetData(GameData.Instance.playerElevators[i][j]);
                     x += 3f;
-;                        
+                        
                 }
             }
+        }
+    }
+
+    private void SetOtherPlayerLocations()
+    {
+        Debug.Log(playerID + " is at " + mineType);
+        //Check to Display other Players
+        for (int i = 0; i < _otherPlayers.Length; i++)
+        {
+            bool playerOnFloor = false;
+
+            if (i == playerID)
+                continue;
+
+            if (GameData.Instance.playerMineLocations[i] == mineType)
+            {
+                if (GameData.Instance.playerFloors[i][mineType] == GameData.Instance.playerFloors[playerID][mineType])
+                    playerOnFloor = true;
+            }
+
+            if (playerOnFloor)
+            {
+                _otherPlayers[i].SetActive(true);
+                _otherPlayers[i].transform.localPosition = GameData.Instance.playerLocalLocations[i];
+            }
+            else
+                _otherPlayers[i].SetActive(false);
+
+
         }
     }
 

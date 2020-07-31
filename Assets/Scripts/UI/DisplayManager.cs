@@ -27,20 +27,21 @@ public class DisplayManager : MonoBehaviour
     {
         _allDisplays = new AIDisplayWindow[GameData.Instance.numPlayers];
 
-        for(int i = 0; i < GameData.Instance.numPlayers; i++)
+        for (int i = 0; i < GameData.Instance.numPlayers; i++)
         {
             //Main Display
-            if(i == 0)
-            {
-                _allDisplays[i] = mainDisplay.GetComponent<AIDisplayWindow>();
-                _currentMainID = 0;
-            }
+            //if(i == 0)
+            //{
+            //    _allDisplays[i] = mainDisplay.GetComponent<AIDisplayWindow>();
+            //    _currentMainID = 0;
+            //}
 
-            //Mini Displays
-            else
+            ////Mini Displays
+            //else
             {
                 GameObject go = Instantiate(miniDisplayPrefab, new Vector2(0, 0), Quaternion.identity);
                 go.transform.parent = miniDisplayParent;
+                go.transform.localScale = new Vector2(1, 1);
                 _allDisplays[i] = go.GetComponent<AIDisplayWindow>();
             }
 
@@ -50,7 +51,7 @@ public class DisplayManager : MonoBehaviour
     }
 
 
-    public void SwitchDisplays(int indexToShowMain)
+    public void SwitchDisplaysWithRotate(int indexToShowMain)
     {
         if (indexToShowMain == _currentMainID)
         {
@@ -67,7 +68,6 @@ public class DisplayManager : MonoBehaviour
         mainDisplay.UpdateRenderTexture(indexToShowMain);
         oldWindow.UpdateRenderTexture(_currentMainID);
         Camera.main.transform.position = new Vector3(GameData.Instance.gridLocations[indexToShowMain].x, Camera.main.transform.position.y, -10);
-        Debug.Log(GameData.Instance.gridLocations[indexToShowMain]);
 
         _currentMainID = indexToShowMain;
         GameData.Instance.playerInFocus = _currentMainID;
@@ -77,5 +77,15 @@ public class DisplayManager : MonoBehaviour
 
     }
 
-   
+    public void SwitchDisplaysStatic(int indexToShowMain)
+    {
+        Camera.main.transform.position = new Vector3(GameData.Instance.gridLocations[indexToShowMain].x, Camera.main.transform.position.y, -10);
+        _currentMainID = indexToShowMain;
+        GameData.Instance.playerInFocus = _currentMainID;
+
+        ui.UpdateFocusID(_currentMainID);
+        OnDisplayChanged.Invoke();
+    }
+
+
 }
