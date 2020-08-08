@@ -1,31 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class AuctionPlayerController : MonoBehaviour
 {
 
-    public bool isBuyer;
+    public KeyCode up;
+    public KeyCode down;
 
-    public int playerID;
+    public AuctionManager am;
+    
+    [SerializeField] private GameObject _playerGroup;
+    [SerializeField] private GameObject _buyerSellerSelectGroup;
+    [SerializeField] private TextMeshProUGUI _decisionText;
+    [SerializeField] private TextMeshProUGUI _unitsText;
+    [SerializeField] private TextMeshProUGUI _moneyText;
+    [SerializeField] private GameObject _playerObj;
 
-    public int currentPrice;
+    [HideInInspector] public bool isBuyer;
+    [HideInInspector] public int playerID;
+    [HideInInspector] public int currentPrice;
+    [HideInInspector] public bool isAI;
 
-    public bool isAI;
+
 
     private TileType currentOre;
 
     private int _max = 50;
     private int _min = 15;
 
-    [SerializeField]
-    private Transform _ceiling;
+    [HideInInspector]
+    public Transform _ceiling;
 
-    [SerializeField]
-    private Transform _floor;
+    [HideInInspector]
+    public Transform _floor;
 
-    public KeyCode up;
-    public KeyCode down;
+
 
     private int upperBound;
     private int lowerBound;
@@ -40,6 +51,9 @@ public class AuctionPlayerController : MonoBehaviour
     void Update()
     {
         _timer -= Time.deltaTime;
+
+        _moneyText.text = "Money: " + Money();
+        _unitsText.text = currentOre + ": " + Ore(currentOre);
 
 
        
@@ -61,9 +75,9 @@ public class AuctionPlayerController : MonoBehaviour
             if (_timer < 0)
             {
                 if (isBuyer)
-                    _AItargetPrice = AIManager.GetBuyPrice(playerID, currentOre);
+                    _AItargetPrice = AIAuctionManager.GetBuyPrice(playerID-1, currentOre);
                 else
-                    _AItargetPrice = AIManager.GetSellPrice(playerID, currentOre);
+                    _AItargetPrice = AIAuctionManager.GetSellPrice(playerID-1, currentOre);
 
                 if (currentPrice > _AItargetPrice)
                     currentPrice--;
@@ -82,7 +96,7 @@ public class AuctionPlayerController : MonoBehaviour
 
         float pricePercent = (currentPrice - (float)_min) / (_max - (float)_min);
         float newY = Mathf.Lerp(_floor.position.y, _ceiling.position.y, pricePercent);
-        gameObject.transform.position = new Vector3(transform.position.x, newY, 0);
+        _playerObj.transform.position = new Vector3(_playerObj.transform.position.x, newY, 0);
 
 
         
@@ -97,6 +111,45 @@ public class AuctionPlayerController : MonoBehaviour
     public void SetOreType(TileType ore)
     {
         currentOre = ore;
+    }
+
+    public void SetAuctionPhase()
+    {
+        _buyerSellerSelectGroup.SetActive(false);
+        _playerGroup.SetActive(true);
+    }
+
+    public void SetBuyerSellerSelectPhase()
+    {
+        _buyerSellerSelectGroup.SetActive(true);
+        _decisionText.gameObject.SetActive(false);
+        _playerGroup.SetActive(false);
+
+    }
+
+    public void ClickBuyer()
+    {
+        am.SellerSelectionMade(playerID);
+        _decisionText.text = "Buyer";
+    }
+
+    public void ClickSeller()
+    {
+        am.BuyerSelectionMade(playerID);
+        _decisionText.text = "Seller";
+
+    }
+
+    private int Money()
+    {
+        if (isAI) return GameData.Instance.auctionAIMoney[playerID - 1];
+        return GameData.Instance.familyMoney;
+    }
+
+    private int Ore(TileType t)
+    {
+        if (isAI) return GameData.Instance.auctionAIOreSupplies[playerID - 1][t];
+        return GameData.Instance.familyOreSupplies[t];
     }
 
 

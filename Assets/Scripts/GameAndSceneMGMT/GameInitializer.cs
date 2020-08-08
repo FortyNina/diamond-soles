@@ -74,57 +74,36 @@ public class GameInitializer : MonoBehaviour
             GameData.Instance.gridLocations.Add(Vector3.zero);
         }
 
-        //ONLY DO THIS SHIT ONCE AT THE BEGINNING OF THE GAME!
-        //TODO: MOve this block to a title sCreen that happens when play is clicked?
+        
         if (!GameData.Instance.setUpComplete)
         {
-            for (int i = 0; i < GameData.Instance.numPlayers; i++)
+            
+            GameData.Instance.familyMoney = 1000;
+            GameData.Instance.familyOreSupplies.Add(TileType.Iron,40);
+            GameData.Instance.familyOreSupplies.Add(TileType.Food, 40);
+            GameData.Instance.familyOreSupplies.Add(TileType.Coal, 40);
+
+            GameData.Instance.setUpComplete = true;
+
+            for(int i = 0; i < GameData.Instance.numAuctionAi; i++)
             {
-                //DEFINE AI PERSONALITIES
-                if (i == 2) GameData.Instance.AIs.Add(AIPersonality.Traverser);
-                else if(i == 3) GameData.Instance.AIs.Add(AIPersonality.Basic);
-                else GameData.Instance.AIs.Add(AIManager.GetRandomPersonality());
+                GameData.Instance.auctionAIs.Add(AIAuctionManager.GetRandomPersonality());
 
-                Dictionary<Mine, int> floors = new Dictionary<Mine, int>();
-                floors.Add(Mine.IronMine, 0);
-                floors.Add(Mine.JellyMine, 0);
-                floors.Add(Mine.CoalMine, 0);
-                GameData.Instance.playerFloors.Add(floors);
-
-               
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
-                ores.Add(TileType.Iron, 0);
+                ores.Add(TileType.Iron, 40);
                 ores.Add(TileType.Diamond, 0);
-                ores.Add(TileType.Food, 0);
-                ores.Add(TileType.Coal, 0);
-                GameData.Instance.playerOreSupplies.Add(ores);
+                ores.Add(TileType.Food, 40);
+                ores.Add(TileType.Coal, 40);
+                GameData.Instance.auctionAIOreSupplies.Add(ores);
 
-                GameData.Instance.durabilityLevels.Add(60);
-                GameData.Instance.energyLevels.Add(60);
-                GameData.Instance.coalLevels.Add(60);
-
-                GameData.Instance.playerMoney.Add(1000);
-
-                GameData.Instance.playerLocalLocations.Add(Vector3.zero);
-
-                GameData.Instance.playerMineLocations.Add(Mine.Entry);
-
-                GameData.Instance.playerElevators.Add(new List<ElevatorData>());
-
-                GameData.Instance.gridLocations.Add(Vector3.zero);
-
-
-
+                GameData.Instance.auctionAIMoney.Add(1000);
 
             }
 
-            GameData.Instance.familyMoney = 1000;
-            GameData.Instance.familyOreSupplies[TileType.Iron] = 40;
-            GameData.Instance.familyOreSupplies[TileType.Coal] = 40;
-            GameData.Instance.familyOreSupplies[TileType.Food] = 40;
-
-            GameData.Instance.setUpComplete = true;
         }
+
+
+
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum AIPersonality { Basic, Traverser }
+public enum AIAuctionPersonality { Basic}
 
 
 public class AIPersonalityPreferences : MonoBehaviour

@@ -7,117 +7,85 @@ using TMPro;
 
 public class AuctionManager : MonoBehaviour
 {
+    private enum AuctionState { Wait, BuyerSellerSelect, AuctionSetup, AuctionHappening, EndAuction }
 
-    private enum AuctionState { BuyerSellerSetup, BuyerSellerWait, AuctionSetup, AuctionHappening, EndAuction, Wait}
-
-    [SerializeField]
-    private GameObject[] _buyerSellerSelectGroups;
-
-    [SerializeField]
-    private TextMeshProUGUI[] _buyerSellerChoiceDisplays;
-
-    [SerializeField]
-    private TextMeshProUGUI[] _moneyDisplay;
-
-    [SerializeField]
-    private TextMeshProUGUI[] _oreAmountDisplay;
-
-    [SerializeField]
     private TextMeshProUGUI _auctionMaterialTitle;
 
-    [SerializeField]
-    private GameObject[] _playerObjects;
+    [SerializeField] private GameObject _sellLine;
 
-    [SerializeField]
-    private GameObject _sellLine;
+    [SerializeField] private GameObject _buyLine;
 
-    [SerializeField]
-    private GameObject _buyLine;
+    [SerializeField] private Transform _ceilingLoc;
 
-    [SerializeField]
-    private Transform _ceilingLoc;
+    [SerializeField] private Transform _floorLoc;
 
-    [SerializeField]
-    private Transform _floorLoc;
 
-    private int currentSellMin = 0;
-    private int currentBuyMax = 0;
+    private AuctionState _state = AuctionState.Wait;
+
+    private AuctionPlayerController[] _players;
 
     private bool[] _buyerSellerSelected;
     private bool[] _isBuyer;
-    private AuctionState state;
-    private int _resourceIndex = 0;
-    private TileType[] _resourcesToTrade = { TileType.Iron, TileType.Food };
-
 
     private int _currentSellerPlayer = -1;
     private int _currentBuyerPlayer = -1;
 
+    private int _currentSellMin = 0;
+    private int _currentBuyMax = 0;
+
+    private int _resourceIndex = 0;
+    private TileType[] _resourcesToTrade = { TileType.Iron, TileType.Food };
+
     private float _transactionTimer = 1f;
     private float _auctionTimer = 40;
 
-    private int _auctionScenario = 0;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void BeginSequences(AuctionPlayerController[] players)
     {
-        _buyerSellerSelected = new bool[_buyerSellerSelectGroups.Length];
-        _isBuyer = new bool[_buyerSellerSelectGroups.Length];
-        state = AuctionState.BuyerSellerSetup;
+        _players = players;
+        _buyerSellerSelected = new bool[_players.Length]; 
+        _isBuyer = new bool[_players.Length];
+        _state = AuctionState.BuyerSellerSelect;
+
     }
+
 
     private void Update()
     {
-        if(state == AuctionState.BuyerSellerSetup)
+        Debug.Log("State : " + _state.ToString());
+        #region Wait
+        if (_state == AuctionState.Wait)
         {
-            //Create displays
-            for(int i = 0; i < _buyerSellerSelectGroups.Length; i++)
-            {
-                _buyerSellerSelectGroups[i].SetActive(true);
-            }
-
-            for(int i = 0; i < _moneyDisplay.Length; i++)
-            {
-                _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
-            }
-
-            for (int i = 0; i < _oreAmountDisplay.Length; i++)
-            {
-                _oreAmountDisplay[i].text = _resourcesToTrade[_resourceIndex].ToString() + " " + GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]];
-            }
-
-            for (int i = GameData.Instance.numberRealPlayers; i < _buyerSellerSelectGroups.Length; i++)
-            {
-                StartCoroutine(AIBuyerSellerDecisions(i, _resourcesToTrade[_resourceIndex]));
-                _playerObjects[i].GetComponent<AuctionPlayerController>().isAI = true;
-            }
-
-            _auctionMaterialTitle.text = "current auction: " + _resourcesToTrade[_resourceIndex].ToString();
-
-            state = AuctionState.BuyerSellerWait;
+            //nothing
         }
+        #endregion
 
-
-        else if(state == AuctionState.BuyerSellerWait)
+        #region Buyer / Seller Select
+        else if (_state == AuctionState.BuyerSellerSelect) //wait for everyone to choose if theyre a buyer or seller
         {
             bool allDone = true;
-            for(int i =0;i< _buyerSellerSelected.Length; i++)
+
+            for (int i = 0; i < _buyerSellerSelected.Length; i++)
             {
-                if(!_buyerSellerSelected[i])
+                if (!_buyerSellerSelected[i])
                     allDone = false;
             }
 
             if (allDone)
             {
-                state = AuctionState.Wait;
+                _state = AuctionState.Wait;
                 StartCoroutine(ShowChoices());
             }
-        }
-        else if(state == AuctionState.AuctionSetup)
-        {
 
-            currentBuyMax = 15;
-            currentSellMin = 50;
+        }
+        #endregion
+
+        #region Setup Auction
+        else if (_state == AuctionState.AuctionSetup)
+        {
+            _currentBuyMax = 15;
+            _currentSellMin = 50;
 
             _sellLine.SetActive(true);
             _buyLine.SetActive(true);
@@ -125,174 +93,90 @@ public class AuctionManager : MonoBehaviour
             _sellLine.transform.position = _ceilingLoc.position;
             _buyLine.transform.position = _floorLoc.position;
 
-
-            for (int i = 0; i < _playerObjects.Length; i++)
+            for (int i = 0; i < _players.Length; i++)
             {
 
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                apc.SetOreType(_resourcesToTrade[_resourceIndex]);
-                apc.isBuyer = _isBuyer[i];
-                if (apc.isBuyer)
+                _players[i].SetOreType(_resourcesToTrade[_resourceIndex]);
+                _players[i].isBuyer = _isBuyer[i];
+                if (_players[i].isBuyer)
                 {
-                    apc.currentPrice = currentBuyMax;
+                    _players[i].currentPrice = _currentBuyMax;
                 }
                 else
                 {
-                    apc.currentPrice = currentSellMin;
+                    _players[i].currentPrice = _currentSellMin;
                 }
-                _playerObjects[i].SetActive(true);
+                _players[i].SetAuctionPhase();
             }
 
-            state = AuctionState.AuctionHappening;
-
-
-
+            _state = AuctionState.AuctionHappening;
         }
 
-        else if(state  == AuctionState.AuctionHappening)
+
+
+        #endregion
+
+        #region Auction Phase
+        else if (_state == AuctionState.AuctionHappening)
         {
 
-            //find out where the sell line should b
-            int minSell = 50;
-            int playerIndex = -1;
-            for(int i = 0; i < _playerObjects.Length; i++)
+            int minSell = SetSellLine();
+
+            int maxBuy = SetBuyLine();
+
+            for (int i = 0; i < _players.Length; i++)
             {
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                if (!apc.isBuyer)
-                {
-                    if(apc.currentPrice < minSell) {
-                        minSell = apc.currentPrice;
-                        playerIndex = i;
-                    }
-
-                }
-            }
-            for (int i = 0; i < _playerObjects.Length; i++)
-            {
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                if (i == _currentSellerPlayer && apc.currentPrice != minSell)
-                {
-                    _currentSellerPlayer = playerIndex;
-                }
-
-            }
-            if (minSell != currentSellMin)
-            {
-                currentSellMin = minSell;
-                _currentSellerPlayer = playerIndex;
-            }
-                    
-
-            float pricePercent = (minSell - 15f) / (50 -15);
-            float newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
-            _sellLine.transform.position = new Vector3(_sellLine.transform.position.x, newY, 0);
-            _sellLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = minSell.ToString();
-
-
-
-            int maxBuy = 15;
-            playerIndex = -1;
-            for (int i = 0; i < _playerObjects.Length; i++)
-            {
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                if (apc.isBuyer)
-                {
-                    if (apc.currentPrice > maxBuy)
-                    {
-                        maxBuy = apc.currentPrice;
-                        playerIndex = i;
-                    }
-
-                }
-            }
-
-            for (int i = 0; i < _playerObjects.Length; i++)
-            {
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                if (i == _currentBuyerPlayer && apc.currentPrice != maxBuy)
-                {
-                    _currentBuyerPlayer = playerIndex;
-                }
-
-            }
-            if (maxBuy != currentBuyMax)
-            {
-                currentBuyMax = maxBuy;
-                _currentBuyerPlayer = playerIndex;
-            }
-
-           
-
-
-            pricePercent = (maxBuy - 15f) / (50 - 15);
-            newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
-            _buyLine.transform.position = new Vector3(_buyLine.transform.position.x, newY, 0);
-            _buyLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = maxBuy.ToString();
-
-
-            for (int i = 0; i < _playerObjects.Length; i++)
-            {
-                AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                if (apc.isBuyer)
-                    apc.SetNewBounds(15, minSell);
+                if (_players[i].isBuyer)
+                    _players[i].SetNewBounds(15, minSell);
                 else
-                    apc.SetNewBounds(maxBuy, 50);
+                    _players[i].SetNewBounds(maxBuy, 50);
 
             }
 
-            _auctionMaterialTitle.text = "buyer: Player " + _currentBuyerPlayer + " seller: Player " + _currentSellerPlayer;
+//            _auctionMaterialTitle.text = "buyer: Player " + _currentBuyerPlayer + " seller: Player " + _currentSellerPlayer;
 
 
             //ok now see if we have a sale on our hands
             if (_transactionTimer < 0)
             {
-                for (int i = 0; i < _playerObjects.Length; i++)
+                for (int i = 0; i < _players.Length; i++)
                 {
-                    AuctionPlayerController apc = _playerObjects[i].GetComponent<AuctionPlayerController>();
-                    if (apc.isBuyer)
+                    if (_players[i].isBuyer)
                     {
                         //there is a buyer in our midst
-                        if(apc.currentPrice == maxBuy && i == _currentBuyerPlayer && maxBuy == minSell)
+                        if (_players[i].currentPrice == maxBuy && i == _currentBuyerPlayer && maxBuy == minSell)
                         {
                             GameData.Instance.playerMoney[i] -= maxBuy;
                             GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] += 5;
-                            _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
-                            _oreAmountDisplay[i].text = _resourcesToTrade[_resourceIndex].ToString() + " " + GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]];
-
-
                         }
                     }
                     else
                     {
                         //there is a seller in our midst
-                        if (apc.currentPrice == minSell && i == _currentSellerPlayer && maxBuy == minSell)
+                        if (_players[i].currentPrice == minSell && i == _currentSellerPlayer && maxBuy == minSell)
                         {
                             GameData.Instance.playerMoney[i] += maxBuy;
                             GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] -= 5;
-                            _moneyDisplay[i].text = "Money: $" + GameData.Instance.playerMoney[i];
-                            _oreAmountDisplay[i].text = _resourcesToTrade[_resourceIndex].ToString() + " " + GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]];
-
-
+                            
                         }
                     }
 
 
 
-                   
+
                 }
                 _transactionTimer = 1;
             }
 
-
             _transactionTimer -= Time.deltaTime;
             _auctionTimer -= Time.deltaTime;
-            if(_auctionTimer < 0 || Input.GetKeyUp(KeyCode.P))
+            if (_auctionTimer < 0 || Input.GetKeyUp(KeyCode.P))
             {
                 _resourceIndex++;
                 if (_resourceIndex >= _resourcesToTrade.Length)
                     LeaveAuction();
                 else
-                    state = AuctionState.EndAuction;
+                    _state = AuctionState.EndAuction;
 
 
                 _auctionTimer = 40;
@@ -301,44 +185,146 @@ public class AuctionManager : MonoBehaviour
 
 
 
+
         }
 
+        #endregion
 
-        else if(state == AuctionState.EndAuction)
+
+        #region End of Auction
+
+        else if(_state == AuctionState.EndAuction)
         {
-            for (int i = 0; i < _playerObjects.Length; i++)
+            for (int i = 0; i < _players.Length; i++)
             {
-                _playerObjects[i].SetActive(false);
+                _players[i].SetBuyerSellerSelectPhase();
             }
 
             _sellLine.SetActive(false);
             _buyLine.SetActive(false);
 
-            for (int i = 0; i < _buyerSellerSelected.Length; i++)
-            {
-                _buyerSellerSelected[i] = false;
-            }
-
-            state = AuctionState.BuyerSellerSetup;
-
-
+           
+            _state = AuctionState.BuyerSellerSelect;
 
         }
 
-        else if(state == AuctionState.Wait)
-        {
 
-            //do nothing! just wait xD
-        }
+        #endregion
     }
 
 
 
+    private int SetSellLine()
+    {
+        //find out where the sell line should be 
+        int minSell = 50;
+        int playerIndex = -1;
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (!_players[i].isBuyer)
+            {
+                if (_players[i].currentPrice < minSell)
+                {
+                    minSell = _players[i].currentPrice;
+                    playerIndex = i;
+                }
+
+            }
+        }
+
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (i == _currentSellerPlayer && _players[i].currentPrice != minSell)
+            {
+                _currentSellerPlayer = playerIndex;
+            }
+
+        }
+        if (minSell != _currentSellMin)
+        {
+            _currentSellMin = minSell;
+            _currentSellerPlayer = playerIndex;
+        }
+
+
+        float pricePercent = (minSell - 15f) / (50 - 15);
+        float newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
+        _sellLine.transform.position = new Vector3(_sellLine.transform.position.x, newY, 0);
+        _sellLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = minSell.ToString();
+
+        return minSell;
+    }
+
+
+    private int SetBuyLine()
+    {
+
+        int maxBuy = 15;
+        int playerIndex = -1;
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (_players[i].isBuyer)
+            {
+                if (_players[i].currentPrice > maxBuy)
+                {
+                    maxBuy = _players[i].currentPrice;
+                    playerIndex = i;
+                }
+
+            }
+        }
+
+        for (int i = 0; i < _players.Length; i++)
+        {
+            if (i == _currentBuyerPlayer && _players[i].currentPrice != maxBuy)
+            {
+                _currentBuyerPlayer = playerIndex;
+            }
+
+        }
+        if (maxBuy != _currentBuyMax)
+        {
+            _currentBuyMax = maxBuy;
+            _currentBuyerPlayer = playerIndex;
+        }
+
+
+
+
+        float pricePercent = (maxBuy - 15f) / (50 - 15);
+        float newY = Mathf.Lerp(_floorLoc.position.y, _ceilingLoc.position.y, pricePercent);
+        _buyLine.transform.position = new Vector3(_buyLine.transform.position.x, newY, 0);
+        _buyLine.transform.Find("Num").GetComponent<TextMeshProUGUI>().text = maxBuy.ToString();
+
+        return maxBuy;
+
+    }
+
+    public IEnumerator ShowChoices()
+    {
+        yield return new WaitForSeconds(5);
+  
+        _state = AuctionState.AuctionSetup;
+
+    }
+
+    public void BuyerSelectionMade(int index)
+    {
+        _buyerSellerSelected[index] = true;
+        _isBuyer[index] = true;
+    }
+
+    public void SellerSelectionMade(int index)
+    {
+        _buyerSellerSelected[index] = true;
+        _isBuyer[index] = false;
+
+    }
 
     public void LeaveAuction()
     {
         //drop floors?
-        for(int i = 0;i < GameData.Instance.playerFloors.Count; i++)
+        for (int i = 0; i < GameData.Instance.playerFloors.Count; i++)
         {
             GameData.Instance.playerFloors[i][Mine.IronMine] = 0;
             GameData.Instance.playerFloors[i][Mine.JellyMine] = 0;
@@ -347,56 +333,8 @@ public class AuctionManager : MonoBehaviour
         }
 
 
-        SceneManager.LoadScene("MiningScene");
+        SceneManager.LoadScene("MiningPhase");
     }
 
 
-
-    public void BuyerSelectionMade(int index)
-    {
-        _buyerSellerSelectGroups[index].SetActive(false);
-        _buyerSellerSelected[index] = true;
-        _isBuyer[index] = true;
-        _buyerSellerChoiceDisplays[index].text = "Buyer";
-    }
-
-    public void SellerSelectionMade(int index)
-    {
-        _buyerSellerSelectGroups[index].SetActive(false);
-        _buyerSellerSelected[index] = true;
-        _isBuyer[index] = false;
-        _buyerSellerChoiceDisplays[index].text = "Seller";
-
-
-    }
-
-    public IEnumerator ShowChoices()
-    {
-        yield return new WaitForSeconds(5);
-        for (int i = 0; i < _buyerSellerChoiceDisplays.Length; i++)
-            _buyerSellerChoiceDisplays[i].text = "";
-        state = AuctionState.AuctionSetup;
-
-    }
-
-
-
-
-
-    public IEnumerator AIBuyerSellerDecisions(int index, TileType oreType)
-    {
-        yield return new WaitForSeconds((float)Random.Range(.75f, 3.2f));
-        if (AIManager.DetermineBuyer(index, oreType))
-        {
-            BuyerSelectionMade(index);
-        }
-        else
-        {
-            SellerSelectionMade(index);
-        }
-    }
-
-    
-
-    
 }

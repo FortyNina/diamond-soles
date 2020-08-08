@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AI\AIAuctionManager.cs" />
     <Compile Include="Assets\Scripts\AI\AIManager.cs" />
     <Compile Include="Assets\Scripts\AI\AIPersonalityPreferences.cs" />
     <Compile Include="Assets\Scripts\Axe.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Assets\Scripts\ElevatorData.cs" />
     <Compile Include="Assets\Scripts\ElevatorObj.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\AuctionManager.cs" />
+    <Compile Include="Assets\Scripts\GameAndSceneMGMT\AuctionSceneInitializer.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameData.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameInitializer.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameManager.cs" />
