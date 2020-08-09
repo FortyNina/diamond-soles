@@ -24,7 +24,7 @@ public class AIAuctionManager : MonoBehaviour
         {
             if (pers == AIAuctionPersonality.Basic)
             {
-                if (GameData.Instance.auctionAIOreSupplies[playerIndex][ore] > 50) return false;
+                if (GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore] > 50) return false;
             } 
         }
 
@@ -37,7 +37,7 @@ public class AIAuctionManager : MonoBehaviour
     public static int GetSellPrice(int playerIndex, TileType ore)
     {
         AIAuctionPersonality pers = GameData.Instance.auctionAIs[playerIndex];
-        int oreAmount = GameData.Instance.auctionAIOreSupplies[playerIndex][ore];
+        int oreAmount = GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore];
 
         if (pers == AIAuctionPersonality.Basic)
         {
@@ -58,7 +58,7 @@ public class AIAuctionManager : MonoBehaviour
     public static int GetBuyPrice(int playerIndex, TileType ore)
     {
         AIAuctionPersonality pers = GameData.Instance.auctionAIs[playerIndex];
-        int oreAmount = GameData.Instance.auctionAIOreSupplies[playerIndex][ore];
+        int oreAmount = GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore];
 
         if (pers == AIAuctionPersonality.Basic)
         {

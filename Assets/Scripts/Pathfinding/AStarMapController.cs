@@ -13,11 +13,7 @@ public class AStarMapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.L))
-        {
-            RequestScan();
-        }
-
+       
         if(_scanRequests > 0)
         {
             if (!path.isScanning)

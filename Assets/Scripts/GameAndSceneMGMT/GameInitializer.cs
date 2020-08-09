@@ -85,7 +85,7 @@ public class GameInitializer : MonoBehaviour
 
             GameData.Instance.setUpComplete = true;
 
-            for(int i = 0; i < GameData.Instance.numAuctionAi; i++)
+            for(int i = 0; i < GameData.Instance.numAuctionAi + 1; i++)
             {
                 GameData.Instance.auctionAIs.Add(AIAuctionManager.GetRandomPersonality());
 
@@ -94,9 +94,9 @@ public class GameInitializer : MonoBehaviour
                 ores.Add(TileType.Diamond, 0);
                 ores.Add(TileType.Food, 40);
                 ores.Add(TileType.Coal, 40);
-                GameData.Instance.auctionAIOreSupplies.Add(ores);
+                GameData.Instance.auctionPlayerOreSupplies.Add(ores);
 
-                GameData.Instance.auctionAIMoney.Add(1000);
+                GameData.Instance.auctionPlayerMoney.Add(1000);
 
             }
 

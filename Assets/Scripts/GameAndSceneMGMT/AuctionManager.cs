@@ -7,9 +7,9 @@ using TMPro;
 
 public class AuctionManager : MonoBehaviour
 {
-    private enum AuctionState { Wait, BuyerSellerSelect, AuctionSetup, AuctionHappening, EndAuction }
+    private enum AuctionState { Wait, BuyerSellerSetup, BuyerSellerSelect, AuctionSetup, AuctionHappening, EndAuction }
 
-    private TextMeshProUGUI _auctionMaterialTitle;
+    public TextMeshProUGUI _auctionMaterialTitle;
 
     [SerializeField] private GameObject _sellLine;
 
@@ -46,7 +46,7 @@ public class AuctionManager : MonoBehaviour
         _players = players;
         _buyerSellerSelected = new bool[_players.Length]; 
         _isBuyer = new bool[_players.Length];
-        _state = AuctionState.BuyerSellerSelect;
+        _state = AuctionState.BuyerSellerSetup;
 
     }
 
@@ -59,6 +59,24 @@ public class AuctionManager : MonoBehaviour
         {
             //nothing
         }
+        #endregion
+
+        #region Buyer / Seller Setup
+        else if (_state == AuctionState.BuyerSellerSetup)
+        {
+            for (int i = 0; i < _players.Length; i++)
+            {
+                _buyerSellerSelected = new bool[_players.Length];
+                _isBuyer = new bool[_players.Length];
+                _players[i].SetOreType(_resourcesToTrade[_resourceIndex]);
+                _players[i].SetBuyerSellerSelectPhase();
+
+            }
+            _auctionMaterialTitle.text = "current auction: " + _resourcesToTrade[_resourceIndex];
+
+            _state = AuctionState.BuyerSellerSelect;
+        }
+
         #endregion
 
         #region Buyer / Seller Select
@@ -95,8 +113,6 @@ public class AuctionManager : MonoBehaviour
 
             for (int i = 0; i < _players.Length; i++)
             {
-
-                _players[i].SetOreType(_resourcesToTrade[_resourceIndex]);
                 _players[i].isBuyer = _isBuyer[i];
                 if (_players[i].isBuyer)
                 {
@@ -133,7 +149,6 @@ public class AuctionManager : MonoBehaviour
 
             }
 
-//            _auctionMaterialTitle.text = "buyer: Player " + _currentBuyerPlayer + " seller: Player " + _currentSellerPlayer;
 
 
             //ok now see if we have a sale on our hands
@@ -146,8 +161,8 @@ public class AuctionManager : MonoBehaviour
                         //there is a buyer in our midst
                         if (_players[i].currentPrice == maxBuy && i == _currentBuyerPlayer && maxBuy == minSell)
                         {
-                            GameData.Instance.playerMoney[i] -= maxBuy;
-                            GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] += 5;
+                            GameData.Instance.auctionPlayerMoney[i] -= maxBuy;
+                            GameData.Instance.auctionPlayerOreSupplies[i][_resourcesToTrade[_resourceIndex]] += 5;
                         }
                     }
                     else
@@ -155,9 +170,9 @@ public class AuctionManager : MonoBehaviour
                         //there is a seller in our midst
                         if (_players[i].currentPrice == minSell && i == _currentSellerPlayer && maxBuy == minSell)
                         {
-                            GameData.Instance.playerMoney[i] += maxBuy;
-                            GameData.Instance.playerOreSupplies[i][_resourcesToTrade[_resourceIndex]] -= 5;
-                            
+                            GameData.Instance.auctionPlayerMoney[i] += maxBuy;
+                            GameData.Instance.auctionPlayerOreSupplies[i][_resourcesToTrade[_resourceIndex]] -= 5;
+
                         }
                     }
 
@@ -193,18 +208,14 @@ public class AuctionManager : MonoBehaviour
 
         #region End of Auction
 
-        else if(_state == AuctionState.EndAuction)
+        else if (_state == AuctionState.EndAuction)
         {
-            for (int i = 0; i < _players.Length; i++)
-            {
-                _players[i].SetBuyerSellerSelectPhase();
-            }
+           
 
             _sellLine.SetActive(false);
             _buyLine.SetActive(false);
 
-           
-            _state = AuctionState.BuyerSellerSelect;
+            _state = AuctionState.BuyerSellerSetup;
 
         }
 
@@ -332,8 +343,10 @@ public class AuctionManager : MonoBehaviour
 
         }
 
+        GameData.Instance.familyMoney = GameData.Instance.auctionPlayerMoney[0];
+        GameData.Instance.familyOreSupplies = GameData.Instance.auctionPlayerOreSupplies[0];
 
-        SceneManager.LoadScene("MiningPhase");
+        SceneManager.LoadScene("MinerSelection");
     }
 
 

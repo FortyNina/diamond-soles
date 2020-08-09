@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821fc47b9e9ba4de081c9acaabf8b3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _auctionMaterialTitle: {fileID: 932834690}
   _sellLine: {fileID: 2013049463}
   _buyLine: {fileID: 230492554}
   _ceilingLoc: {fileID: 272031403}

@@ -11,6 +11,14 @@ public class AuctionSceneInitializer : MonoBehaviour
     [SerializeField] private Transform _ceiling;
     [SerializeField] private Transform _floor;
 
+    private void Awake()
+    {
+        // set real player's stats (also need to set back in LeaveAuction in AuctionManager
+        GameData.Instance.auctionPlayerMoney[0] = GameData.Instance.familyMoney;
+        GameData.Instance.auctionPlayerOreSupplies[0] = GameData.Instance.familyOreSupplies;
+            
+     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +41,6 @@ public class AuctionSceneInitializer : MonoBehaviour
             players[i].am = _auctionManager;
             players[i]._floor = _floor;
             players[i]._ceiling = _ceiling;
-
-
         }
 
 

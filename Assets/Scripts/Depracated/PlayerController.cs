@@ -118,12 +118,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (playerID == 0 && Input.GetKeyDown(KeyCode.M))
-            TraverseHole();
-
-
-
-
+        
 
         
         transform.position += new Vector3(x, y, 0);

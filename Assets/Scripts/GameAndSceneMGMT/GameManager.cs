@@ -22,46 +22,21 @@ public class GameManager : MonoBehaviour
         {
              AuctionStateSetup();
         }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            //drop floors?
-           
-            SceneManager.LoadScene("MiningPhase");
-        }
+
     }
 
     private void AuctionStateSetup()
     {
 
-        //GIVE AI SOME RANDOM NUMBERS!
-        if (GameSettings.Instance.giveAIRandomOre)
+        for(int i = 0; i < players.Length; i++)
         {
-            for(int i = GameData.Instance.numberRealPlayers;i<GameData.Instance.AIs.Count;i++)
-            {
-                int rand = Random.Range(0, 3);
-                if(rand == 0)
-                {
-                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(5, 15);
-                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
-                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(0, 2);
-                }
-                else if(rand == 1)
-                {
-                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(5, 15);
-                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
-                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(0, 2);
-                }
-                else
-                {
-                    GameData.Instance.playerOreSupplies[i][TileType.Coal] += Random.Range(5, 15);
-                    GameData.Instance.playerOreSupplies[i][TileType.Food] += Random.Range(0, 2);
-                    GameData.Instance.playerOreSupplies[i][TileType.Iron] += Random.Range(0, 2);
-                }
+            GameData.Instance.familyOreSupplies[TileType.Iron] += GameData.Instance.playerOreSupplies[i][TileType.Iron];
+            GameData.Instance.familyOreSupplies[TileType.Food] += GameData.Instance.playerOreSupplies[i][TileType.Food];
+            GameData.Instance.familyOreSupplies[TileType.Coal] += GameData.Instance.playerOreSupplies[i][TileType.Coal];
 
-            }
         }
 
-        SceneManager.LoadScene("AuctionScene");
+        SceneManager.LoadScene("AuctionPhase");
     }
 
     public void Reset()

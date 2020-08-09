@@ -10,6 +10,7 @@ public class AIManager : MonoBehaviour
     /// </summary>
     public static AIPersonality GetRandomPersonality()
     {
+        return AIPersonality.Basic;
         int rand = Random.Range(0, 2);
         if (rand == 0)
             return AIPersonality.Traverser;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class AuctionPlayerController : MonoBehaviour
 {
@@ -46,15 +47,17 @@ public class AuctionPlayerController : MonoBehaviour
 
     private int _AItargetPrice = 0;
 
+    public UnityEvent OnBuyerSellerStart;
+    public UnityEvent OnAuctionPhaseStart;
+
    
     // Update is called once per frame
     void Update()
     {
         _timer -= Time.deltaTime;
 
-        _moneyText.text = "Money: " + Money();
-        _unitsText.text = currentOre + ": " + Ore(currentOre);
-
+        _moneyText.text = "Money: " + GameData.Instance.auctionPlayerMoney[playerID];
+        _unitsText.text = currentOre + ": " + GameData.Instance.auctionPlayerOreSupplies[playerID][currentOre];
 
        
         if (!isAI)
@@ -75,9 +78,9 @@ public class AuctionPlayerController : MonoBehaviour
             if (_timer < 0)
             {
                 if (isBuyer)
-                    _AItargetPrice = AIAuctionManager.GetBuyPrice(playerID-1, currentOre);
+                    _AItargetPrice = AIAuctionManager.GetBuyPrice(playerID, currentOre);
                 else
-                    _AItargetPrice = AIAuctionManager.GetSellPrice(playerID-1, currentOre);
+                    _AItargetPrice = AIAuctionManager.GetSellPrice(playerID, currentOre);
 
                 if (currentPrice > _AItargetPrice)
                     currentPrice--;
@@ -117,6 +120,7 @@ public class AuctionPlayerController : MonoBehaviour
     {
         _buyerSellerSelectGroup.SetActive(false);
         _playerGroup.SetActive(true);
+        OnAuctionPhaseStart.Invoke();
     }
 
     public void SetBuyerSellerSelectPhase()
@@ -124,33 +128,24 @@ public class AuctionPlayerController : MonoBehaviour
         _buyerSellerSelectGroup.SetActive(true);
         _decisionText.gameObject.SetActive(false);
         _playerGroup.SetActive(false);
+        OnBuyerSellerStart.Invoke();
 
     }
 
     public void ClickBuyer()
     {
-        am.SellerSelectionMade(playerID);
+        am.BuyerSelectionMade(playerID);
         _decisionText.text = "Buyer";
     }
 
     public void ClickSeller()
     {
-        am.BuyerSelectionMade(playerID);
+        am.SellerSelectionMade(playerID);
         _decisionText.text = "Seller";
 
     }
 
-    private int Money()
-    {
-        if (isAI) return GameData.Instance.auctionAIMoney[playerID - 1];
-        return GameData.Instance.familyMoney;
-    }
-
-    private int Ore(TileType t)
-    {
-        if (isAI) return GameData.Instance.auctionAIOreSupplies[playerID - 1][t];
-        return GameData.Instance.familyOreSupplies[t];
-    }
+   
 
 
 

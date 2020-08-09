@@ -28,12 +28,12 @@ public class Tile
         }
         if(t == TileType.Iron)
         {
-            oreAmount = 2;
+            oreAmount = 5;
             health = 2;
         }
         if(t == TileType.Food)
         {
-            oreAmount = 2;
+            oreAmount = 5;
             health = 2;
         }
         if (t == TileType.Diamond)
@@ -43,7 +43,7 @@ public class Tile
         }
         if(t == TileType.Coal)
         {
-            oreAmount = 4;
+            oreAmount = 8;
             health = 3;
         }
 
