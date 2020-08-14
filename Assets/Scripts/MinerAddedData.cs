@@ -11,6 +11,7 @@ public class MinerAddedData : MonoBehaviour
 
     public int playerID;
 
+
     [SerializeField]
     private TextMeshProUGUI _nameText;
 
@@ -29,11 +30,20 @@ public class MinerAddedData : MonoBehaviour
     private int _coal = 0;
     public int Coal { get { return _coal; } }
 
+    private AIPersonality _pers;
+    public AIPersonality Personality
+    {
+        get { return _pers; }
+        set { _pers = value;}
+    }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
-        _nameText.text = "Miner " + playerID;
+        _nameText.text = _pers.ToString() + " Miner " + playerID;
         _energyText.text = "Energy: " + _energy;
         _durabilityText.text = "Durability: " + _durability;
 

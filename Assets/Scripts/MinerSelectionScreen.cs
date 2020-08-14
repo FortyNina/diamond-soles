@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MinerSelectionScreen : MonoBehaviour
 {
@@ -37,14 +38,21 @@ public class MinerSelectionScreen : MonoBehaviour
 
 
 
-    public void AddMiner()
+    public void AddMiner(string s)
     {
         if (_minersAdded.Count >= maxMiners)
             return;
 
+        AIPersonality pers = AIPersonality.Basic;
+        var values = Enum.GetValues(typeof(AIPersonality));
+        foreach (AIPersonality v in values){
+            if (s == v.ToString()) pers = v;
+        }
+
         GameObject go = Instantiate(_minerDataPrefab, Vector3.zero, Quaternion.identity);
         go.transform.parent = _minerDataParent;
         MinerAddedData d = go.GetComponent<MinerAddedData>();
+        d.Personality = pers;
         d.selection = this;
         _minersAdded.Add(d);
         UpdateMinerDataIDs();
@@ -73,18 +81,21 @@ public class MinerSelectionScreen : MonoBehaviour
         List<int> durability = new List<int>();
         List<float> energy = new List<float>();
         List<int> coal = new List<int>();
+        List<AIPersonality> personalities = new List<AIPersonality>();
 
         for (int i = 0; i < _minersAdded.Count; i++)
         {
             durability.Add(_minersAdded[i].Durability);
             energy.Add(_minersAdded[i].Energy);
             coal.Add(_minersAdded[i].Coal);
+            personalities.Add(_minersAdded[i].Personality);
 
         }
 
         GameData.Instance.durabilityLevels = durability;
         GameData.Instance.energyLevels = energy;
         GameData.Instance.coalLevels = coal;
+        GameData.Instance.AIs = personalities;
 
         SceneManager.LoadScene("MiningPhase");
 

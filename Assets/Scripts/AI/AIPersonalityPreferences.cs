@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AIPersonality { Basic, Traverser }
+[System.Serializable] public enum AIPersonality { Basic, Explorer }
 public enum AIAuctionPersonality { Basic}
 
 
@@ -21,7 +21,7 @@ public class AIPersonalityPreferences : MonoBehaviour
             types.Add(TileType.Diamond);
         }
 
-        if(personality == AIPersonality.Traverser)
+        if(personality == AIPersonality.Explorer)
         {
             types.Add(TileType.Hole);
             types.Add(TileType.Rock);
