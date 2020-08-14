@@ -8,6 +8,7 @@ TagManager:
   - Axe
   - Hole
   - Elevator
+  - GridEssential
   layers:
   - Default
   - TransparentFX

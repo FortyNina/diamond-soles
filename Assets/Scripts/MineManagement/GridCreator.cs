@@ -291,7 +291,7 @@ public class GridCreator : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if(child.tag != "Player" && child.tag != "Axe")
+            if(child.tag != "Player" && child.tag != "Axe" && child.tag != "GridEssential")
                Destroy(child.gameObject);
         }
     }

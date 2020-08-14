@@ -38,6 +38,7 @@ public class AIMinerController : MonoBehaviour
     private PlayerDir _direction;
     private bool _landedOnNewFloor;
     private bool _canMove = true;
+    private bool _canUseAxe = true;
     private bool _axeDown = false;
     private int _savedFloor = -1;
 
@@ -89,15 +90,6 @@ public class AIMinerController : MonoBehaviour
             OnFloorChange.Invoke();
         }
 
-        //Handle Elevator Building
-        //if (_landedOnNewFloor)
-        //{
-        //    _landedOnNewFloor = false;
-        //    if (AIManager.BuildElevator(playerID))
-        //    {
-        //        //TODO: event? or look at playerController
-        //    }
-        //}
 
         //Is Stuck Check only occurs if player isnt breakinga  block
         if (!_breakingBlock)
@@ -268,10 +260,14 @@ public class AIMinerController : MonoBehaviour
         StartCoroutine(BreakBlock());
     }
 
-    public void RunOutOfEnergy()
+    public void SetCanMove(bool b)
     {
-        _canMove = false;
-        //_runOutOfEnergyDisplay.SetActive(true); //TODO!
+        _canMove = b;
+    }
+
+    public void SetCanUseAxe(bool b)
+    {
+        _canUseAxe = b;
     }
 
     /// <summary>
@@ -397,7 +393,7 @@ public class AIMinerController : MonoBehaviour
 
             while (health > 0)
             {
-
+                Debug.Log("um hello!!!!!");
                 AxeDown();
 
                 yield return new WaitForSeconds(.5f);
@@ -417,7 +413,7 @@ public class AIMinerController : MonoBehaviour
 
     private void AxeDown()
     {
-        if (GameData.Instance.durabilityLevels[playerID] <= 0)
+        if (!_canUseAxe)
             return;
         Debug.Log("Player " + playerID + " is about to put their axe down");
         Vector3 t = Vector3.zero;

@@ -14,7 +14,8 @@ public class MinerResourceManager : MonoBehaviour
     private AIMinerController minerController;
     private int _playerID;
 
-    public UnityEvent OnRunOutOfEnergy;
+    public UnityEvent OnRunOutOfEnergy, OnRunOutOfDurability;
+
 
     private void Start()
     {
@@ -25,6 +26,17 @@ public class MinerResourceManager : MonoBehaviour
     void Update()
     {
         ModifyEnergyLevel(-Time.deltaTime * GameSettings.Instance.energyDrainFactor);
+
+        if(GameData.Instance.energyLevels[_playerID] <= 0 && GameSettings.Instance.countEnergy)
+        {
+            OnRunOutOfEnergy.Invoke();
+
+        }
+
+        if (GameData.Instance.durabilityLevels[_playerID] <= 0 && GameSettings.Instance.countDurability)
+        {
+            OnRunOutOfDurability.Invoke();
+        }
     }
 
     /// <summary>
@@ -41,6 +53,7 @@ public class MinerResourceManager : MonoBehaviour
     public void ModifyEnergyLevel(float amount)
     {
          GameData.Instance.energyLevels[_playerID] += amount;
+        Debug.Log("bitch!!!");
     }
 
     /// <summary>

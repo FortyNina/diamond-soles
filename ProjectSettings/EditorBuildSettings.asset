@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiningPhase.unity
     guid: 79c397658d4204e0798a4fb8ffc36214
+  - enabled: 1
+    path: Assets/Scenes/AuctionPhase.unity
+    guid: 647de2f6fb57c42f5b732211227a5431
   m_configObjects: {}

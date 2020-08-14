@@ -4097,9 +4097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5243fc69b33494c0da1fcc974f56f293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countEnergy: 0
-  countDurability: 0
-  countCoal: 0
+  countEnergy: 1
+  countDurability: 1
+  countCoal: 1
   performAuctionPhase: 0
   giveAIRandomOre: 0
   energyDrainFactor: 0.2

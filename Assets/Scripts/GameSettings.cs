@@ -8,7 +8,7 @@ public class GameSettings : Singleton<GameSettings>
 
 
     //Bools to turn modeds on/off
-    public bool countEnergy = false;
+    public bool countEnergy = true;
     public bool countDurability = true;
     public bool countCoal = false;
     public bool performAuctionPhase = false;
