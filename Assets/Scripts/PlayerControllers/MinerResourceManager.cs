@@ -17,7 +17,7 @@ public class MinerResourceManager : MonoBehaviour
     public UnityEvent OnRunOutOfEnergy, OnRunOutOfDurability;
 
 
-    private void Start()
+    private void OnEnable()
     {
         _playerID = minerController.playerID;
     }
@@ -94,16 +94,16 @@ public class MinerResourceManager : MonoBehaviour
         int jelly = GameData.Instance.playerOreSupplies[_playerID][TileType.Food];
         int newEnergy = (100 * jelly) / 200;
         GameData.Instance.energyLevels[_playerID] = newEnergy;
+        GameData.Instance.playerOreSupplies[_playerID][TileType.Food] = 0;
+
 
         //based on how much iron you have, calculate your axe durability level for this day
         int iron = GameData.Instance.playerOreSupplies[_playerID][TileType.Iron];
         int newDurability = (100 * iron) / 200;
         GameData.Instance.durabilityLevels[_playerID] = newDurability;
+        GameData.Instance.playerOreSupplies[_playerID][TileType.Iron] = 0;
 
-        //based on how much iron you have, calculate your axe durability level for this day
-        int coal = GameData.Instance.playerOreSupplies[_playerID][TileType.Coal];
-        int newCoal = (100 * coal) / 200;
-        GameData.Instance.coalLevels[_playerID] = newCoal;
+        
     }
 
 
