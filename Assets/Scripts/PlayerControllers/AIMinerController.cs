@@ -55,6 +55,7 @@ public class AIMinerController : MonoBehaviour
     public UnityEvent OnEnterElevator;
     public UnityEvent OnAxeSwing;
     public UnityEvent OnFloorChange;
+    public UnityEvent OnMinerPulled;
 
 
     /// <summary>
@@ -480,7 +481,12 @@ public class AIMinerController : MonoBehaviour
 
     }
 
-    
+
+    public void PullThisMiner()
+    {
+        _canMove = false;
+        OnMinerPulled.Invoke();
+    }
 
 
 

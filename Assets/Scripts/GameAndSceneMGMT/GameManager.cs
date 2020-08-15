@@ -42,5 +42,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PullMiner()
+    {
+        AIMinerController aic = players[GameData.Instance.playerInFocus].GetComponent<AIMinerController>();
+        aic.PullThisMiner();
+    }
+
 
 }

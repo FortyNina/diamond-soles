@@ -53,7 +53,6 @@ public class MinerResourceManager : MonoBehaviour
     public void ModifyEnergyLevel(float amount)
     {
          GameData.Instance.energyLevels[_playerID] += amount;
-        Debug.Log("bitch!!!");
     }
 
     /// <summary>
@@ -81,6 +80,16 @@ public class MinerResourceManager : MonoBehaviour
         GameData.Instance.coalLevels[_playerID] += amount;
     }
 
+    /// <summary>
+    /// Set all collected resources to zero for this round
+    /// </summary>
+    public void LoseAllResources()
+    {
+        foreach(KeyValuePair<TileType,int> entry in GameData.Instance.playerOreSupplies[_playerID])
+        {
+            GameData.Instance.playerOreSupplies[_playerID][entry.Key] = 0;
+        }
+    }
 
 
 

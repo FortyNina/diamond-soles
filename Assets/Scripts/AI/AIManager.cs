@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AIManager : MonoBehaviour
+public class AIManager
 {
     /// <summary>
     /// Return a randomly generated personality
     /// </summary>
     public static AIPersonality GetRandomPersonality()
     {
-        return AIPersonality.Basic;
         int rand = Random.Range(0, 2);
         if (rand == 0)
             return AIPersonality.Explorer;
@@ -21,6 +20,11 @@ public class AIManager : MonoBehaviour
 
     public static TileType GetTileTypeToSeek(int playerIndex, bool random)
     {
+        if(GameData.Instance.durabilityLevels[playerIndex] <= 0) //if can't use axe anymore, just try traversing as much as possible
+        {
+            return TileType.Stair;
+        }
+
         AIPersonality pers = GameData.Instance.AIs[playerIndex];
         Mine mine = GameData.Instance.playerMineLocations[playerIndex];
         int floor = 0;
@@ -183,4 +187,5 @@ public class AIManager : MonoBehaviour
         return false;
     }
 
+    
 }

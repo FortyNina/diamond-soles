@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameAndSceneMGMT/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/NewMineSelect.cs">
     <Files>
       <File FileName="Assets/Scripts/GameAndSceneMGMT/AuctionManager.cs" Line="188" Column="38" />
       <File FileName="Assets/Scripts/PlayerControllers/AuctionPlayerController.cs" />
@@ -7,20 +7,23 @@
       <File FileName="Assets/Scripts/GameAndSceneMGMT/GameInitializer.cs" />
       <File FileName="Assets/Scripts/GameAndSceneMGMT/AuctionSceneInitializer.cs" />
       <File FileName="Assets/Scripts/GameAndSceneMGMT/GameData.cs" />
-      <File FileName="Assets/Scripts/PlayerControllers/AIMinerController.cs" />
+      <File FileName="Assets/Scripts/PlayerControllers/AIMinerController.cs" Line="173" Column="1" />
       <File FileName="Assets/Scripts/Depracated/AIPlayerController.cs" />
       <File FileName="Assets/Scripts/Pathfinding/AStarMapController.cs" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" Line="24" Column="10" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" Line="16" Column="6" />
       <File FileName="Assets/Scripts/Depracated/PlayerController.cs" />
-      <File FileName="Assets/Scripts/AI/AIManager.cs" />
+      <File FileName="Assets/Scripts/AI/AIManager.cs" Line="13" Column="39" />
       <File FileName="Assets/Scripts/MineManagement/Tile.cs" />
-      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" />
+      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" Line="90" Column="75" />
       <File FileName="Assets/Scripts/GameSettings.cs" />
       <File FileName="Assets/Scripts/MineManagement/MinePicker.cs" />
       <File FileName="Assets/Scripts/MineManagement/GridCreator.cs" />
       <File FileName="Assets/Scripts/MinerSelectionScreen.cs" />
       <File FileName="Assets/Scripts/AI/AIPersonalityPreferences.cs" />
       <File FileName="Assets/Scripts/MinerAddedData.cs" Line="46" Column="31" />
+      <File FileName="Assets/Scripts/MineManagement/Rock.cs" Line="47" Column="1" />
+      <File FileName="Assets/Scripts/Axe.cs" Line="7" Column="37" />
+      <File FileName="Assets/Scripts/UI/NewMineSelect.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
