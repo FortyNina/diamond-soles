@@ -15,17 +15,7 @@ public class GameManager : MonoBehaviour
         Reset();
     }
 
-    private void Update()
-    {
-       
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-             AuctionStateSetup();
-        }
-
-    }
-
-    private void AuctionStateSetup()
+    public void GoToAuction()
     {
 
         for(int i = 0; i < players.Length; i++)

@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 850
-  m_MinSize: {x: 681, y: 344}
-  m_MaxSize: {x: 12006, y: 8044}
+  m_MinSize: {x: 683, y: 344}
+  m_MaxSize: {x: 12008, y: 8044}
   vertical: 0
-  controlID: 60
+  controlID: 68
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 344}
   m_MaxSize: {x: 8006, y: 8044}
   vertical: 1
-  controlID: 61
+  controlID: 69
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 62
+  controlID: 70
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -240,8 +240,8 @@ MonoBehaviour:
     y: 545
     width: 1069
     height: 305
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 122}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 18}
@@ -267,8 +267,8 @@ MonoBehaviour:
     y: 0
     width: 371
     height: 850
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 72}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -386,7 +386,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6800fdff7a00fdfff4b1fdffa6b4fdff6cb9fdff7c4cfeffb656feffbc56feff0463feff0a63feff3086feff126fffff9c6fffff92d8ffff82fbffff5c31000082310000b63f0000ba3f0000f83f00006e40000092400000684600008e460000
+      m_ExpandedIDs: fa66feff84dafeff96dafeff1ae0feff3ae0feff4ce0feff7af0feff8cf0feff0c06ffff1e06ffff5411ffff7411ffff8611ffff3e14ffff5a14ffff7c20fffffc48ffff404dffff3a60ffff8efbfffff4ffffff0a4600003c460000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 50.162632, y: -2.6050425, z: -7553.3115}
+    m_Target: {x: 373.1445, y: 242.88536, z: -7884.495}
     speed: 2
-    m_Value: {x: 50.162632, y: -2.6050425, z: -7553.3115}
+    m_Value: {x: 373.1445, y: 242.88536, z: -7884.495}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -481,9 +481,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 12.869799
+    m_Target: 680.4415
     speed: 2
-    m_Value: 12.869799
+    m_Value: 680.4415
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 22596
+  m_LastSelectedObjectID: 17930
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -654,7 +654,7 @@ MonoBehaviour:
     height: 286
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: player
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -665,20 +665,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/AI
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/AI
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/nina/Documents/DiamondSoles/diamond-soles
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 117.99988}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 00000000002b0000e02d0000f62f000000ca9a3b
+    m_SelectedIDs: da2d0000
+    m_LastClickedID: 11738
+    m_ExpandedIDs: 00000000fa2a0000da2d0000f02f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -706,7 +706,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000002b0000e02d0000f62f0000
+    m_ExpandedIDs: 00000000fa2a0000da2d0000f02f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000f62c0000905d7100a26c4401d62f0000d82b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -758,7 +758,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 25}
     m_GridSize: 64
   m_DirectoriesAreaWidth: 276
 --- !u!114 &19
