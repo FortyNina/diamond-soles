@@ -31,6 +31,8 @@ public class AIPlayerController : PlayerController
     private bool _isStuck;
     private int _stuckNumber = 0;
 
+    private int _prevInFocus;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,12 @@ public class AIPlayerController : PlayerController
 
     private void Update()
     {
+        if(_prevInFocus != GameData.Instance.playerInFocus)
+        {
+
+        }
+
+
         if (Input.GetKeyUp(KeyCode.R))
             SeekRock();
         if (landedOnNewFloor)

@@ -14,7 +14,7 @@ public class MinerResourceManager : MonoBehaviour
     private AIMinerController minerController;
     private int _playerID;
 
-    public UnityEvent OnRunOutOfEnergy, OnRunOutOfDurability;
+    public UnityEvent OnRunOutOfEnergy, OnRunOutOfDurability, OnLowEnergy;
 
 
     private void OnEnable()
@@ -26,6 +26,11 @@ public class MinerResourceManager : MonoBehaviour
     void Update()
     {
         ModifyEnergyLevel(-Time.deltaTime * GameSettings.Instance.energyDrainFactor);
+
+        if(GameData.Instance.energyLevels[_playerID] <= 5 && GameSettings.Instance.countEnergy)
+        {
+            OnLowEnergy.Invoke();
+        }
 
         if(GameData.Instance.energyLevels[_playerID] <= 0 && GameSettings.Instance.countEnergy)
         {

@@ -48,6 +48,8 @@ public class AIMinerController : MonoBehaviour
     private bool _breakingBlock;
     private bool _isStuck;
     private int _stuckNumber = 0;
+
+    private int _prevInFocus;
     #endregion
 
     public UnityEvent OnEnterStairCase;
@@ -56,6 +58,8 @@ public class AIMinerController : MonoBehaviour
     public UnityEvent OnAxeSwing;
     public UnityEvent OnFloorChange;
     public UnityEvent OnMinerPulled;
+    public UnityEvent OnMinerComeToFocus;
+    public UnityEvent OnMinerLeaveFocus;
 
 
     /// <summary>
@@ -80,6 +84,17 @@ public class AIMinerController : MonoBehaviour
     /// </summary>
     private void Update()
     {
+
+        if (_prevInFocus != GameData.Instance.playerInFocus)
+        {
+            if (GameData.Instance.playerInFocus == playerID) OnMinerComeToFocus.Invoke();
+            else if (_prevInFocus == playerID) OnMinerLeaveFocus.Invoke();
+        }
+
+        _prevInFocus = GameData.Instance.playerInFocus;
+            
+
+
         //Debug
         if (Input.GetKeyUp(KeyCode.R)) //TODO: remove input
         {
