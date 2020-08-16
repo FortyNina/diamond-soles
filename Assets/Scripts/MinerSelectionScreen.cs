@@ -30,9 +30,9 @@ public class MinerSelectionScreen : MonoBehaviour
 
     private void Update()
     {
-        _familyIronDisplay.text = "Total Iron: " + GameData.Instance.familyOreSupplies[TileType.Iron];
-        _familyJellyDisplay.text = "Total Food: " + GameData.Instance.familyOreSupplies[TileType.Food];
-        _familyCoalDisplay.text = "Total Coal: " + GameData.Instance.familyOreSupplies[TileType.Coal];
+        _familyIronDisplay.text = "Total Iron: " + GameData.Instance.co.oreSupplies[TileType.Iron];
+        _familyJellyDisplay.text = "Total Food: " + GameData.Instance.co.oreSupplies[TileType.Food];
+        _familyCoalDisplay.text = "Total Coal: " + GameData.Instance.co.oreSupplies[TileType.Coal];
 
     }
 

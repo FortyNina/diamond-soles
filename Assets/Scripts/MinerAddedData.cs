@@ -52,41 +52,41 @@ public class MinerAddedData : MonoBehaviour
     public void AddEnergy()
     {
         _energy += 5;
-        GameData.Instance.familyOreSupplies[TileType.Food]-=5;
+        GameData.Instance.co.oreSupplies[TileType.Food]-=5;
     }
     public void SubtractEnergy()
     {
         _energy -= 5;
-        GameData.Instance.familyOreSupplies[TileType.Food]+=5;
+        GameData.Instance.co.oreSupplies[TileType.Food]+=5;
     }
 
     public void AddDurability()
     {
         _durability += 5;
-        GameData.Instance.familyOreSupplies[TileType.Iron]-=5;
+        GameData.Instance.co.oreSupplies[TileType.Iron]-=5;
     }
     public void SubtractDurability()
     {
         _durability -= 5;
-        GameData.Instance.familyOreSupplies[TileType.Iron]+=5;
+        GameData.Instance.co.oreSupplies[TileType.Iron]+=5;
     }
 
     public void AddCoal()
     {
         _coal += 5;
-        GameData.Instance.familyOreSupplies[TileType.Coal] -= 5;
+        GameData.Instance.co.oreSupplies[TileType.Coal] -= 5;
     }
     public void SubtractCoal()
     {
         _coal -= 5;
-        GameData.Instance.familyOreSupplies[TileType.Coal] += 5;
+        GameData.Instance.co.oreSupplies[TileType.Coal] += 5;
     }
 
     public void ReturnAllResources()
     {
-        GameData.Instance.familyOreSupplies[TileType.Iron] += _durability;
-        GameData.Instance.familyOreSupplies[TileType.Food] += _energy;
-        GameData.Instance.familyOreSupplies[TileType.Coal] += _coal;
+        GameData.Instance.co.oreSupplies[TileType.Iron] += _durability;
+        GameData.Instance.co.oreSupplies[TileType.Food] += _energy;
+        GameData.Instance.co.oreSupplies[TileType.Coal] += _coal;
         RemoveThisMiner();
 
     }

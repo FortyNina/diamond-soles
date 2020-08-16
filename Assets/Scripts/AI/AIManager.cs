@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[System.Serializable] public enum AIPersonality { Basic, Explorer }
+
 public class AIManager
 {
     /// <summary>
@@ -15,6 +17,30 @@ public class AIManager
             return AIPersonality.Explorer;
         else
             return AIPersonality.Basic;
+    }
+
+    public static List<TileType> GetTilePreferences(AIPersonality personality)
+    {
+        List<TileType> types = new List<TileType>();
+
+        if (personality == AIPersonality.Basic)
+        {
+            types.Add(TileType.Iron);
+            types.Add(TileType.Food);
+            types.Add(TileType.Coal);
+            types.Add(TileType.Diamond);
+        }
+
+        if (personality == AIPersonality.Explorer)
+        {
+            types.Add(TileType.Hole);
+            types.Add(TileType.Rock);
+            types.Add(TileType.Diamond);
+            types.Add(TileType.Stair);
+
+        }
+
+        return types;
     }
 
 
@@ -34,7 +60,7 @@ public class AIManager
 
         currentMineLayout = MineRecorder.GetMineFloor(mine, floor);
         Dictionary<TileType, int> tileKinds = new Dictionary<TileType, int>();
-        List<TileType> preferences = AIPersonalityPreferences.GetTilePreferences(pers);
+        List<TileType> preferences = GetTilePreferences(pers);
         for (int i = 0; i < currentMineLayout.Length; i++)
         {
             TileType t = currentMineLayout[i].tileType;

@@ -9,9 +9,7 @@ public class WarningController : MonoBehaviour
 {
 
     [SerializeField] private GameObject _warningIcon;
-
     [SerializeField] private GameObject _notificationIcon;
-
     [SerializeField] private Image _overlay;
 
 
@@ -28,6 +26,27 @@ public class WarningController : MonoBehaviour
     public void SetOverlay(bool setting)
     {
         _overlay.gameObject.SetActive(setting);
+        if(setting) StartCoroutine(FadeOverlayInAndOut());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    private IEnumerator FadeOverlayInAndOut()
+    {
+        _overlay.color = new Color(_overlay.color.r, _overlay.color.g, _overlay.color.b, 1);
+        float alpha = 1;
+        int dir = -1;
+        while (true)
+        {
+            yield return new WaitForSeconds(.2f);
+            if (alpha < 0) dir = 1;
+            if (alpha > 1) dir = -1;
+            alpha += .1f * dir;
+            _overlay.color = new Color(_overlay.color.r, _overlay.color.g, _overlay.color.b, alpha);
+        }
     }
     
 }

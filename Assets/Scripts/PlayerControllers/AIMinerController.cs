@@ -499,8 +499,11 @@ public class AIMinerController : MonoBehaviour
 
     public void PullThisMiner()
     {
-        _canMove = false;
-        OnMinerPulled.Invoke();
+        if (GameData.Instance.energyLevels[playerID] > 0)
+        {
+            _canMove = false;
+            OnMinerPulled.Invoke();
+        }
     }
 
 

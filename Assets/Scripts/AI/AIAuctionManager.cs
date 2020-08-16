@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AIAuctionPersonality { Robots, Humans, Cyborgs }
+
 
 public class AIAuctionManager : MonoBehaviour
 {
@@ -10,8 +12,32 @@ public class AIAuctionManager : MonoBehaviour
     /// </summary>
     public static AIAuctionPersonality GetRandomPersonality()
     { 
-        return AIAuctionPersonality.Basic;
+        return AIAuctionPersonality.Robots;
     }
+
+
+    /// <summary>
+    /// Will be used to select a contract from a list of contracts
+    /// in future will probably account for personality/stats,
+    /// but right now, just choose the one with the highest reward
+    /// </summary>
+    public static Contract ChooseContractFromList(List<Contract> contracts)
+    {
+        int index = 0;
+        int maxPrice = -1;
+        for(int i = 0;i < contracts.Count; i++)
+        {
+            if(contracts[i].rewardMoney > maxPrice)
+            {
+                index = i;
+                maxPrice = contracts[i].rewardMoney;
+            }
+        }
+        return contracts[index];
+    }
+
+
+
 
     /// <summary>
     /// Return, based on the players ore and money, whether or not this character will
@@ -19,12 +45,12 @@ public class AIAuctionManager : MonoBehaviour
     /// </summary>
     public static bool DetermineBuyer(int playerIndex, TileType ore)
     {
-        AIAuctionPersonality pers = GameData.Instance.auctionAIs[playerIndex];
+        AIAuctionPersonality pers = GameData.Instance.companies[playerIndex].personality;
         if (ore == TileType.Iron)
         {
-            if (pers == AIAuctionPersonality.Basic)
+            if (pers == AIAuctionPersonality.Robots)
             {
-                if (GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore] > 50) return false;
+                if (GameData.Instance.companies[playerIndex].oreSupplies[ore] > 50) return false;
             } 
         }
 
@@ -36,10 +62,10 @@ public class AIAuctionManager : MonoBehaviour
     /// </summary>
     public static int GetSellPrice(int playerIndex, TileType ore)
     {
-        AIAuctionPersonality pers = GameData.Instance.auctionAIs[playerIndex];
-        int oreAmount = GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore];
+        AIAuctionPersonality pers = GameData.Instance.companies[playerIndex].personality;
+        int oreAmount = GameData.Instance.companies[playerIndex].oreSupplies[ore];
 
-        if (pers == AIAuctionPersonality.Basic)
+        if (pers == AIAuctionPersonality.Robots)
         {
             if (oreAmount > 90) return 20;
             if (oreAmount > 70) return 25;
@@ -57,10 +83,10 @@ public class AIAuctionManager : MonoBehaviour
     /// </summary>
     public static int GetBuyPrice(int playerIndex, TileType ore)
     {
-        AIAuctionPersonality pers = GameData.Instance.auctionAIs[playerIndex];
-        int oreAmount = GameData.Instance.auctionPlayerOreSupplies[playerIndex][ore];
+        AIAuctionPersonality pers = GameData.Instance.companies[playerIndex].personality;
+        int oreAmount = GameData.Instance.companies[playerIndex].oreSupplies[ore];
 
-        if (pers == AIAuctionPersonality.Basic)
+        if (pers == AIAuctionPersonality.Robots)
         {
             if (oreAmount < 20)
                 return 40;

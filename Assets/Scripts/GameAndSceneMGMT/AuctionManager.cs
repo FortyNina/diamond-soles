@@ -161,8 +161,8 @@ public class AuctionManager : MonoBehaviour
                         //there is a buyer in our midst
                         if (_players[i].currentPrice == maxBuy && i == _currentBuyerPlayer && maxBuy == minSell)
                         {
-                            GameData.Instance.auctionPlayerMoney[i] -= maxBuy;
-                            GameData.Instance.auctionPlayerOreSupplies[i][_resourcesToTrade[_resourceIndex]] += 5;
+                            GameData.Instance.companies[i].money -= maxBuy;
+                            GameData.Instance.companies[i].oreSupplies[_resourcesToTrade[_resourceIndex]] += 5;
                         }
                     }
                     else
@@ -170,8 +170,8 @@ public class AuctionManager : MonoBehaviour
                         //there is a seller in our midst
                         if (_players[i].currentPrice == minSell && i == _currentSellerPlayer && maxBuy == minSell)
                         {
-                            GameData.Instance.auctionPlayerMoney[i] += maxBuy;
-                            GameData.Instance.auctionPlayerOreSupplies[i][_resourcesToTrade[_resourceIndex]] -= 5;
+                            GameData.Instance.companies[i].money += maxBuy;
+                            GameData.Instance.companies[i].oreSupplies[_resourcesToTrade[_resourceIndex]] -= 5;
 
                         }
                     }
@@ -342,9 +342,6 @@ public class AuctionManager : MonoBehaviour
             GameData.Instance.playerFloors[i][Mine.CoalMine] = 0;
 
         }
-
-        GameData.Instance.familyMoney = GameData.Instance.auctionPlayerMoney[0];
-        GameData.Instance.familyOreSupplies = GameData.Instance.auctionPlayerOreSupplies[0];
 
         SceneManager.LoadScene("MinerSelection");
     }

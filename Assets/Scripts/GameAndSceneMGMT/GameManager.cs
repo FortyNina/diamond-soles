@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
 
         for(int i = 0; i < players.Length; i++)
         {
-            GameData.Instance.familyOreSupplies[TileType.Iron] += GameData.Instance.playerOreSupplies[i][TileType.Iron];
-            GameData.Instance.familyOreSupplies[TileType.Food] += GameData.Instance.playerOreSupplies[i][TileType.Food];
-            GameData.Instance.familyOreSupplies[TileType.Coal] += GameData.Instance.playerOreSupplies[i][TileType.Coal];
+            GameData.Instance.co.oreSupplies[TileType.Iron] += GameData.Instance.playerOreSupplies[i][TileType.Iron];
+            GameData.Instance.co.oreSupplies[TileType.Food] += GameData.Instance.playerOreSupplies[i][TileType.Food];
+            GameData.Instance.co.oreSupplies[TileType.Coal] += GameData.Instance.playerOreSupplies[i][TileType.Coal];
 
         }
 
@@ -46,6 +46,23 @@ public class GameManager : MonoBehaviour
     {
         AIMinerController aic = players[GameData.Instance.playerInFocus].GetComponent<AIMinerController>();
         aic.PullThisMiner();
+    }
+
+    public void PullAllMiners()
+    {
+        for(int i = 0; i < players.Length; i++)
+        {
+            AIMinerController aic = players[i].GetComponent<AIMinerController>();
+            aic.PullThisMiner();
+
+        }
+        StartCoroutine(GoToAuctionAfterDelay(2f));
+    }
+
+    private IEnumerator GoToAuctionAfterDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        GoToAuction();
     }
 
 

@@ -77,26 +77,27 @@ public class GameInitializer : MonoBehaviour
         
         if (!GameData.Instance.setUpComplete)
         {
-            
-            GameData.Instance.familyMoney = 1000;
-            GameData.Instance.familyOreSupplies.Add(TileType.Iron,40);
-            GameData.Instance.familyOreSupplies.Add(TileType.Food, 40);
-            GameData.Instance.familyOreSupplies.Add(TileType.Coal, 40);
-
             GameData.Instance.setUpComplete = true;
 
+            //Note: index 0 is the player
             for(int i = 0; i < GameData.Instance.numAuctionAi + 1; i++)
             {
-                GameData.Instance.auctionAIs.Add(AIAuctionManager.GetRandomPersonality());
+                Company c = new Company();
+
+                c.personality = AIAuctionManager.GetRandomPersonality();
 
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
                 ores.Add(TileType.Iron, 40);
                 ores.Add(TileType.Diamond, 0);
                 ores.Add(TileType.Food, 40);
                 ores.Add(TileType.Coal, 40);
-                GameData.Instance.auctionPlayerOreSupplies.Add(ores);
+                c.oreSupplies = ores;
 
-                GameData.Instance.auctionPlayerMoney.Add(1000);
+                c.money = 1000;
+                c.rating = 5;
+
+                GameData.Instance.companies.Add(c);
+
 
             }
 

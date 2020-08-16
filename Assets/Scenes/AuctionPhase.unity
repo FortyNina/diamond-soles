@@ -736,6 +736,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b92ae99df0ea4222aaa3ac755131303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerColors:
+  - {r: 0.8490566, g: 0.244304, b: 0.244304, a: 1}
+  - {r: 0.22694907, g: 0.48070636, b: 0.9433962, a: 1}
+  - {r: 1, g: 0.71628076, b: 0.16509432, a: 1}
+  - {r: 0.21026166, g: 0.7075472, b: 0.39949283, a: 1}
   _auctionPlayerPrefab: {fileID: 1953058306169542982, guid: 6fc6ea5a269d14b9db5888653b952b68,
     type: 3}
   _auctionPlayerParent: {fileID: 2006547740}

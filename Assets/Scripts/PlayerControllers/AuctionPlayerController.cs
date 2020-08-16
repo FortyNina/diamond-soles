@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class AuctionPlayerController : MonoBehaviour
 {
@@ -23,6 +24,15 @@ public class AuctionPlayerController : MonoBehaviour
     [HideInInspector] public int playerID;
     [HideInInspector] public int currentPrice;
     [HideInInspector] public bool isAI;
+
+    private Color _playerColor;
+    public Color PlayerColor
+    {
+        set {
+            _playerColor = value;
+            _playerObj.GetComponent<Image>().color = value;
+        }
+    }
 
 
 
@@ -56,8 +66,8 @@ public class AuctionPlayerController : MonoBehaviour
     {
         _timer -= Time.deltaTime;
 
-        _moneyText.text = "Money: " + GameData.Instance.auctionPlayerMoney[playerID];
-        _unitsText.text = currentOre + ": " + GameData.Instance.auctionPlayerOreSupplies[playerID][currentOre];
+        _moneyText.text = "Money: " + GameData.Instance.companies[playerID].money;
+        _unitsText.text = currentOre + ": " + GameData.Instance.companies[playerID].oreSupplies[currentOre];
 
        
         if (!isAI)
