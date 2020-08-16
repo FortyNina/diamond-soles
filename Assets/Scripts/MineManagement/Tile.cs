@@ -8,9 +8,7 @@ public class Tile
 {
 
     public TileType tileType;
-    
-    private int _playerID;
-
+   
     public int oreAmount;
     public int health;
 
@@ -19,7 +17,6 @@ public class Tile
     public Tile(TileType t, int id, int index)
     {
         tileType = t;
-        _playerID = id;
 
         if(t == TileType.Rock)
         {
@@ -28,22 +25,22 @@ public class Tile
         }
         if(t == TileType.Iron)
         {
-            oreAmount = 5;
+            oreAmount = Random.Range(8,10);
             health = 2;
         }
         if(t == TileType.Food)
         {
-            oreAmount = 5;
+            oreAmount = Random.Range(8, 10);
             health = 2;
         }
         if (t == TileType.Diamond)
         {
-            oreAmount = 5;
+            oreAmount = 10;
             health = 5;
         }
         if(t == TileType.Coal)
         {
-            oreAmount = 8;
+            oreAmount = Random.Range(8, 10);
             health = 3;
         }
 

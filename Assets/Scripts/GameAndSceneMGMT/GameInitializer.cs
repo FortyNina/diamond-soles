@@ -96,6 +96,8 @@ public class GameInitializer : MonoBehaviour
                 c.money = 1000;
                 c.rating = 5;
 
+                c.contract = new Contract();
+
                 GameData.Instance.companies.Add(c);
 
 

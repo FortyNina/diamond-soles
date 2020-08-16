@@ -10,26 +10,34 @@ public class Contract
 
     public string contractTitle = "";
     public string contractDescription = "";
+    public string requirementSynopsis => GetSynopsis();
 
     public Contract() {
         CreateRandomContract();
     }
 
+    private string GetSynopsis()
+    {
+        string s = "";
+        foreach(KeyValuePair<TileType,int> entry in requirements)
+        {
+            s += entry.Value + " " + entry.Key + " ";
+        }
+        return s;
+    }
+
     private void CreateRandomContract()
     {
-        rewardMoney = Random.Range(500, 1500);
+        rewardMoney = Random.Range(300, 600);
         numRounds = 1;
 
         TileType tile;
-        int rand = Random.Range(0, 3);
+        int rand = Random.Range(0, 2);
         if (rand == 1)
         {
             tile = TileType.Iron;
         }
-        else if (rand == 2)
-        {
-            tile = TileType.Coal;
-        }
+       
         else
         {
             tile = TileType.Food;

@@ -343,7 +343,7 @@ public class AuctionManager : MonoBehaviour
 
         }
 
-        SceneManager.LoadScene("MinerSelection");
+        SceneManager.LoadScene("ContractFulFillment");
     }
 
 

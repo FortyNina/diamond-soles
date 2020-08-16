@@ -21,12 +21,8 @@ public class ContractButton : MonoBehaviour
         contract = c;
         _title.text = contract.contractTitle;
         _description.text = contract.contractDescription;
-        string req = "Needed: ";
-        foreach(KeyValuePair<TileType,int> entry in c.requirements)
-        {
-            req += entry.Value + " " + entry.Key + " ";
-        }
-        _requirement.text = req;
+        
+        _requirement.text = contract.requirementSynopsis;
         _reward.text = "Payment : $" + c.rewardMoney;
     }
 }

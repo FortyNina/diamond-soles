@@ -46,7 +46,7 @@ public class ContractSelectionScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _playerTurnTitle.text = "Player " + _currentPlayer + "'s turn";
+        _playerTurnTitle.text = "Company " + _currentPlayer + "'s turn";
     }
 
     private void ContractSelected(int contractID)

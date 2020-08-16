@@ -17,11 +17,12 @@ public class AuctionSceneInitializer : MonoBehaviour
     void Start()
     {
 
-        int totalNumPlayers = GameData.Instance.numAuctionAi + 1;
-        AuctionPlayerController[] players = new AuctionPlayerController[totalNumPlayers];
+        AuctionPlayerController[] players = new AuctionPlayerController[GameData.Instance.companies.Count];
 
-        for(int i = 0; i< totalNumPlayers; i++)
+        for(int i = 0; i< GameData.Instance.companies.Count; i++)
         {
+
+            if (i != 0) GameData.Instance.companies[i].SimulateMiningPhase(); // simulate the mining phase for the AI companies
 
             GameObject go = Instantiate(_auctionPlayerPrefab, Vector3.zero, Quaternion.identity);
             go.transform.parent = _auctionPlayerParent;
