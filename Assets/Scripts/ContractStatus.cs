@@ -8,6 +8,9 @@ public class ContractStatus : MonoBehaviour
 
     public int  playerID;
 
+    [HideInInspector] public ContractFulFillmentScreen cfs;
+
+
     [SerializeField] private TextMeshProUGUI _contractStatusTitle;
     [SerializeField] private TextMeshProUGUI _contractDesc;
     [SerializeField] private GameObject _buttons;
@@ -28,6 +31,7 @@ public class ContractStatus : MonoBehaviour
         _contractStatusTitle.text = "Contract Fulfilled";
         GameData.Instance.companies[playerID].FulfillContract();
         _buttons.SetActive(false);
+        cfs.DecisionSubmitted(playerID);
     }
 
     public void DeclineContract()
@@ -36,6 +40,8 @@ public class ContractStatus : MonoBehaviour
         _contractStatusTitle.text = "Contract Not Fulfilled";
         GameData.Instance.companies[playerID].DeclineContract();
         _buttons.SetActive(false);
+        cfs.DecisionSubmitted(playerID);
+
 
 
     }

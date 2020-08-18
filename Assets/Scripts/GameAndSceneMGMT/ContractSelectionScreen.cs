@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class ContractSelectionScreen : MonoBehaviour
 {
@@ -114,6 +113,6 @@ public class ContractSelectionScreen : MonoBehaviour
 
     public void EndContractSelect()
     {
-        SceneManager.LoadScene("MinerSelection");
+        SceneManager.GoToNextSceneInLoop();
     }
 }

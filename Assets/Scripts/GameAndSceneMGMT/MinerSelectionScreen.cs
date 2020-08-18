@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System;
 
 public class MinerSelectionScreen : MonoBehaviour
@@ -97,7 +96,7 @@ public class MinerSelectionScreen : MonoBehaviour
         GameData.Instance.coalLevels = coal;
         GameData.Instance.AIs = personalities;
 
-        SceneManager.LoadScene("MiningPhase");
+        SceneManager.GoToNextSceneInLoop();
 
     }
 

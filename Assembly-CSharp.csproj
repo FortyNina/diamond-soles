@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\SceneManager.cs" />
     <Compile Include="Assets\Scripts\AI\AIAuctionManager.cs" />
     <Compile Include="Assets\Scripts\AI\AIManager.cs" />
     <Compile Include="Assets\Scripts\ContractButton.cs" />
