@@ -38,7 +38,7 @@ public class ContractSelectionScreen : MonoBehaviour
         }
 
 
-        _currentPlayer = GetNextRankedCompanyID();
+        SetNextPlayer();
 
     }
 

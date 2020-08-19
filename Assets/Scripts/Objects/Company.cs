@@ -57,21 +57,26 @@ public class Company
     {
         //Simulate resources that were allotted
         int allottedIron = (int)(oreSupplies[TileType.Iron] * Random.Range(.6f, 1));
+        oreSupplies[TileType.Iron] -= allottedIron;
+
         int allottedFood = (int)(oreSupplies[TileType.Food] * Random.Range(.6f, 1));
+        oreSupplies[TileType.Food] -= allottedFood;
+
+
         //int allottedCoal = (int)(oreSupplies[TileType.Coal] * Random.Range(.6f, 1));
 
-        if(contract != null) 
+        if (contract != null) 
         {
             if (contract.requirements.ContainsKey(TileType.Iron))
             {
-                oreSupplies[TileType.Iron] += (int)((float)allottedIron * Random.Range(1f, 1.1f));
-                oreSupplies[TileType.Food] += (int)((float)allottedFood * Random.Range(.8f, 1f));
+                oreSupplies[TileType.Iron] += (int)((float)allottedIron * Random.Range(1f, 1.25f));
+                oreSupplies[TileType.Food] += (int)((float)allottedFood * Random.Range(.8f, 1.1f));
 
             }
             else if(contract.requirements.ContainsKey(TileType.Food))
             {
-                oreSupplies[TileType.Iron] += (int)((float)allottedIron * Random.Range(.8f, 1f));
-                oreSupplies[TileType.Food] += (int)((float)allottedFood * Random.Range(1f, 1.1f));
+                oreSupplies[TileType.Iron] += (int)((float)allottedIron * Random.Range(.8f, 1.1f));
+                oreSupplies[TileType.Food] += (int)((float)allottedFood * Random.Range(1f, 1.25f));
             }
         }
         else
