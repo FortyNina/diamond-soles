@@ -22,6 +22,12 @@ public class GridCreator : MonoBehaviour
     private float _tileWidth = .64f;
 
     [Space(9)]
+    [SerializeField] private Color _ironFloor;
+    [SerializeField] private Color _jellyFloor;
+    [SerializeField] private Color _coalFloor;
+
+    [Space(9)]
+
 
     [SerializeField]
     private GameObject _rockTile;
@@ -205,7 +211,9 @@ public class GridCreator : MonoBehaviour
 
                 GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
                 SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-
+                if (mineType == Mine.IronMine) sr.color = _ironFloor;
+                if (mineType == Mine.JellyMine) sr.color = _jellyFloor;
+                if (mineType == Mine.CoalMine) sr.color = _coalFloor;
                 go.transform.parent = transform;
                 go.transform.position = new Vector3(x, y, 0);
 

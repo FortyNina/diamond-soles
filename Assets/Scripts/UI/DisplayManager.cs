@@ -11,6 +11,8 @@ public class DisplayManager : MonoBehaviour
     public Transform miniDisplayParent;
     public UIDisplay ui;
 
+    public Vector2 camOffset;
+
     private int _currentMainID = 0;
     public int CurrentMainID
     {
@@ -79,7 +81,7 @@ public class DisplayManager : MonoBehaviour
 
     public void SwitchDisplaysStatic(int indexToShowMain)
     {
-        Camera.main.transform.position = new Vector3(GameData.Instance.gridLocations[indexToShowMain].x, Camera.main.transform.position.y, -10);
+        Camera.main.transform.position = new Vector3(GameData.Instance.gridLocations[indexToShowMain].x + camOffset.x, GameData.Instance.gridLocations[indexToShowMain].y + camOffset.y, -10);
         _currentMainID = indexToShowMain;
         GameData.Instance.playerInFocus = _currentMainID;
 

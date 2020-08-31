@@ -535,6 +535,9 @@ MonoBehaviour:
   _gridWidth: 12
   _gridHeight: 9
   _tileWidth: 0.96
+  _ironFloor: {r: 0.63529414, g: 0.5882353, b: 0.6431373, a: 1}
+  _jellyFloor: {r: 0.63529414, g: 0.5882353, b: 0.6431373, a: 1}
+  _coalFloor: {r: 0.63529414, g: 0.5882353, b: 0.6431373, a: 1}
   _rockTile: {fileID: 7685913699832719715, guid: 19187ee1a410942a88d95ff4bc3c555f,
     type: 3}
   _blankTile: {fileID: 5619140856051859509, guid: 9f17003998a53492da48e44421837b1e,

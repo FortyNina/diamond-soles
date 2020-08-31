@@ -1,37 +1,40 @@
 ﻿<Properties StartupConfiguration="{32CE38D4-1CE8-9C6E-D34B-6069D343F060}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/Company.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/UI/UIDisplay.cs">
     <Files>
       <File FileName="Assets/Scripts/PlayerControllers/AIMinerController.cs" Line="506" Column="10" IsPinned="True" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/AuctionManager.cs" Line="345" Column="44" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/AuctionManager.cs" />
       <File FileName="Assets/Scripts/PlayerControllers/AuctionPlayerController.cs" />
       <File FileName="Assets/Scripts/AI/AIAuctionManager.cs" />
       <File FileName="Assets/Scripts/GameAndSceneMGMT/GameInitializer.cs" />
       <File FileName="Assets/Scripts/GameAndSceneMGMT/AuctionSceneInitializer.cs" />
       <File FileName="Assets/Scripts/GameAndSceneMGMT/GameData.cs" />
       <File FileName="Assets/Scripts/Pathfinding/AStarMapController.cs" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" Line="28" Column="44" />
-      <File FileName="Assets/Scripts/Depracated/PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/GameManager.cs" />
+      <File FileName="Assets/Scripts/Depracated/PlayerController.cs" />
       <File FileName="Assets/Scripts/AI/AIManager.cs" />
       <File FileName="Assets/Scripts/MineManagement/Tile.cs" />
-      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerControllers/MinerResourceManager.cs" />
       <File FileName="Assets/Scripts/MineManagement/MinePicker.cs" />
-      <File FileName="Assets/Scripts/MineManagement/GridCreator.cs" />
+      <File FileName="Assets/Scripts/MineManagement/GridCreator.cs" Line="216" Column="69" />
       <File FileName="Assets/Scripts/MinerAddedData.cs" />
       <File FileName="Assets/Scripts/MineManagement/Rock.cs" />
       <File FileName="Assets/Scripts/UI/NewMineSelect.cs" />
       <File FileName="Assets/Scripts/UI/WarningController.cs" />
-      <File FileName="Assets/Scripts/ContractButton.cs" Line="24" Column="9" />
-      <File FileName="Assets/Scripts/ContractStatus.cs" Line="44" Column="1" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/ContractFulFillmentScreen.cs" Line="48" Column="44" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/ContractSelectionScreen.cs" Line="41" Column="25" />
+      <File FileName="Assets/Scripts/ContractButton.cs" />
+      <File FileName="Assets/Scripts/ContractStatus.cs" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/ContractFulFillmentScreen.cs" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/ContractSelectionScreen.cs" />
       <File FileName="Assets/Scenes/SceneManager.cs" />
-      <File FileName="Assets/Scripts/GameAndSceneMGMT/MinerSelectionScreen.cs" Line="99" Column="44" />
-      <File FileName="Assets/Scripts/Objects/Company.cs" Line="68" Column="88" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/MinerSelectionScreen.cs" />
+      <File FileName="Assets/Scripts/Objects/Company.cs" Line="68" Column="31" />
+      <File FileName="Assets/Scripts/GameAndSceneMGMT/SceneInitializer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/UI/DisplayManager.cs" Line="84" Column="170" />
+      <File FileName="Assets/Scripts/UI/UIDisplay.cs" Line="35" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="99bf02e4-fbe9-45be-a89b-1fec1dc2355b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cc0bec2b-1c83-445b-ac6f-3958c69419c8" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
