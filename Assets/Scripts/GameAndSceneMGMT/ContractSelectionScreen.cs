@@ -45,7 +45,7 @@ public class ContractSelectionScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _playerTurnTitle.text = "Company " + _currentPlayer + "'s turn";
+        _playerTurnTitle.text = GameData.Instance.companies[_currentPlayer].companyName + " Select";
     }
 
     private void ContractSelected(int contractID)

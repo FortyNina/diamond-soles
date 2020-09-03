@@ -29,9 +29,9 @@ public class MinerSelectionScreen : MonoBehaviour
 
     private void Update()
     {
-        _familyIronDisplay.text = "Total Iron: " + GameData.Instance.co.oreSupplies[TileType.Iron];
-        _familyJellyDisplay.text = "Total Food: " + GameData.Instance.co.oreSupplies[TileType.Food];
-        _familyCoalDisplay.text = "Total Coal: " + GameData.Instance.co.oreSupplies[TileType.Coal];
+        _familyIronDisplay.text = GameData.Instance.co.oreSupplies[TileType.Iron].ToString();
+        _familyJellyDisplay.text = GameData.Instance.co.oreSupplies[TileType.Food].ToString();
+        _familyCoalDisplay.text = GameData.Instance.co.oreSupplies[TileType.Coal].ToString();
 
     }
 
@@ -50,6 +50,7 @@ public class MinerSelectionScreen : MonoBehaviour
 
         GameObject go = Instantiate(_minerDataPrefab, Vector3.zero, Quaternion.identity);
         go.transform.parent = _minerDataParent;
+        go.transform.localScale = new Vector3(1, 1, 1);
         MinerAddedData d = go.GetComponent<MinerAddedData>();
         d.Personality = pers;
         d.selection = this;

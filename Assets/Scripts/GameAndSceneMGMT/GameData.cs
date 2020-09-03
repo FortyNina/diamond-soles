@@ -42,6 +42,8 @@ public class GameData : Singleton<GameData>
 
 	public List<Vector3> gridLocations = new List<Vector3>();
 
+	public CompanyNameData nameData;
+
 	public int playerInFocus = 0;
 
 

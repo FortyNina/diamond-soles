@@ -79,12 +79,14 @@ public class GameInitializer : MonoBehaviour
         {
             GameData.Instance.setUpComplete = true;
 
+            //COMPANY SETUP
             //Note: index 0 is the player
             for(int i = 0; i < GameData.Instance.numAuctionAi + 1; i++)
             {
                 Company c = new Company();
-
                 c.personality = AIAuctionManager.GetRandomPersonality();
+                c.companyName = (i == 0)? "Lucky Vale Mining" : GameData.Instance.nameData.GetRandomName();
+                Debug.Log(c.companyName);
 
                 Dictionary<TileType, int> ores = new Dictionary<TileType, int>();
                 ores.Add(TileType.Iron, 40);

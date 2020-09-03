@@ -33,9 +33,9 @@ public class UIDisplay : MonoBehaviour
         _energyDisplay.fillAmount = (float)GameData.Instance.energyLevels[_focusedID] / GameSettings.Instance.maxEnergy;
         _durabilityDisplay.fillAmount = (float)GameData.Instance.durabilityLevels[_focusedID] / GameSettings.Instance.maxDurability;
         _floorDisplay.text = "Floor: #" + GameData.Instance.playerFloors[_focusedID][GameData.Instance.playerMineLocations[_focusedID]];
-        _ironCollectedDisplay.text = "Iron: " + GameData.Instance.playerOreSupplies[_focusedID][TileType.Iron].ToString();
-        _jellyCollectedDisplay.text = "Jelly: " + GameData.Instance.playerOreSupplies[_focusedID][TileType.Food].ToString();
-        _coalCollectedDisplay.text = "Coal: " + GameData.Instance.playerOreSupplies[_focusedID][TileType.Coal].ToString();
+        _ironCollectedDisplay.text = GameData.Instance.playerOreSupplies[_focusedID][TileType.Iron].ToString();
+        _jellyCollectedDisplay.text = GameData.Instance.playerOreSupplies[_focusedID][TileType.Food].ToString();
+        _coalCollectedDisplay.text = GameData.Instance.playerOreSupplies[_focusedID][TileType.Coal].ToString();
 
 
     }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7634739260841253238}
   - component: {fileID: 3221413408693580386}
+  - component: {fileID: 815123056974993634}
   m_Layer: 0
   m_Name: GameInitializer
   m_TagString: Untagged
@@ -43,4 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709620bb02abe467d946ef1687617e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPlayers: 4
+--- !u!114 &815123056974993634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615522007349690883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4773ee19dd4f4ef8a495c12ba78f785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

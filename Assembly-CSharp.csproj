@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\AuctionSceneInitializer.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\ContractFulFillmentScreen.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\ContractSelectionScreen.cs" />
+    <Compile Include="Assets\Scripts\GameAndSceneMGMT\DataLoader.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameData.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameInitializer.cs" />
     <Compile Include="Assets\Scripts\GameAndSceneMGMT\GameManager.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Scripts\MineManagement\Tile.cs" />
     <Compile Include="Assets\Scripts\MinerAddedData.cs" />
     <Compile Include="Assets\Scripts\Objects\Company.cs" />
+    <Compile Include="Assets\Scripts\Objects\CompanyNameData.cs" />
     <Compile Include="Assets\Scripts\Objects\Contract.cs" />
     <Compile Include="Assets\Scripts\Objects\ElevatorData.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\AStarMapController.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Assets\Scripts\UI\NewMineSelect.cs" />
     <Compile Include="Assets\Scripts\UI\UIDisplay.cs" />
     <Compile Include="Assets\Scripts\UI\WarningController.cs" />
+    <Compile Include="Assets\Scripts\Utils\JSONReader.cs" />
     <Compile Include="Assets\Scripts\Utils\Singleton.cs" />
     <Compile Include="Assets\Scripts\Utils\UIOpacityModifier.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
