@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2317990320660517127}
   - component: {fileID: 6682229746474015101}
   - component: {fileID: 2656178857688728010}
-  - component: {fileID: 2449842081190871587}
+  - component: {fileID: 5987703944916880371}
+  - component: {fileID: 4230488975270500668}
   m_Layer: 8
   m_Name: Iron
   m_TagString: Untagged
@@ -129,7 +130,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &2449842081190871587
+--- !u!114 &5987703944916880371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,11 +139,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 5287908624698679013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8f4c1a8f6d74257ae9409ae624b4cc, type: 3}
+  m_Script: {fileID: 11500000, guid: d75c1a7da67e04f72b63285b7ce75cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ore: 5
-  oreAmount: 1
-  health: 2
+  floorNumber: 0
+  mineType: 0
+  index: 0
+  tileType: 0
   holePrefab: {fileID: 3662389117727181755, guid: dc36d928979b34d44b2b9105183d8a36,
     type: 3}
+  oreAmount: 0
+  health: 0
+--- !u!114 &4230488975270500668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287908624698679013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a2bf7ccc7794d23ad8249238c4bdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

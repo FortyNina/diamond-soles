@@ -258,7 +258,7 @@ public class GridCreator : MonoBehaviour
 
                     GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
                     SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-                    Rock r = go.GetComponent<Rock>();
+                    BreakableRock r = go.GetComponent<BreakableRock>();
 
                     if (r != null)
                     {

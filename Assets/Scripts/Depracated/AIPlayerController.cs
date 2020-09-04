@@ -290,9 +290,9 @@ public class AIPlayerController : PlayerController
             }
 
             int health = 0;
-            if (target.gameObject.GetComponent<Rock>() != null)
+            if (target.gameObject.GetComponent<BreakableRock>() != null)
             {
-                health = target.gameObject.GetComponent<Rock>().health;
+                health = target.gameObject.GetComponent<BreakableRock>().health;
             }
 
             while (health > 0)

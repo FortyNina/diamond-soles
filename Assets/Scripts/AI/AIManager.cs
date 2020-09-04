@@ -111,9 +111,9 @@ public class AIManager
             {
                 tileTransforms.Add(interactableObjects[i].transform);
             }
-            if (interactableObjects[i].GetComponent<Rock>() != null)
+            if (interactableObjects[i].GetComponent<BreakableRock>() != null)
             {
-                if (interactableObjects[i].GetComponent<Rock>().ore == toSeek)
+                if (interactableObjects[i].GetComponent<BreakableRock>().tileType == toSeek)
                 {
                     tileTransforms.Add(interactableObjects[i].transform);
                 }

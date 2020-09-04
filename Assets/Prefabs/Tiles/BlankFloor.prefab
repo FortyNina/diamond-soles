@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9212435141816451201}
   - component: {fileID: 2644309920106352599}
+  - component: {fileID: -1810913609298935053}
+  - component: {fileID: -3366434545500149914}
   m_Layer: 0
   m_Name: BlankFloor
   m_TagString: Untagged
@@ -79,3 +81,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1810913609298935053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619140856051859509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26e8c1c494264f7cb91633b884f05ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorNumber: 0
+  mineType: 0
+  index: 0
+  tileType: 0
+--- !u!114 &-3366434545500149914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619140856051859509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a2bf7ccc7794d23ad8249238c4bdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
