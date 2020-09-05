@@ -207,15 +207,21 @@ public class GridCreator : MonoBehaviour
             for (int j = 0; j < _gridWidth; j++)
             {
                 Tile currentTile = _tiles[i + j];
-                GameObject prefabToGenerate = _blankTile;
 
-                GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
-                SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-                if (mineType == Mine.IronMine) sr.color = _ironFloor;
-                if (mineType == Mine.JellyMine) sr.color = _jellyFloor;
-                if (mineType == Mine.CoalMine) sr.color = _coalFloor;
+                GameObject go = TilePool.Instance.PullInactiveObjectOfTileType(TileType.Blank);
+                Vector3 scl = go.transform.localScale;
                 go.transform.parent = transform;
                 go.transform.position = new Vector3(x, y, 0);
+                go.transform.localScale = scl;
+
+                go.SetActive(true);
+
+
+                //GameObject prefabToGenerate = _blankTile;
+
+                //GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
+                //go.transform.parent = transform;
+                //go.transform.position = new Vector3(x, y, 0);
 
 
                 if (currentTile.tileType == TileType.Spawn)
@@ -236,48 +242,27 @@ public class GridCreator : MonoBehaviour
             for (int j = 0; j < _gridWidth;j++)
             {
                 Tile currentTile = _tiles[i + j];
-                GameObject prefabToGenerate = _blankTile;
-
-                if (currentTile.tileType == TileType.Rock)
-                    prefabToGenerate = _rockTile;
-                else if (currentTile.tileType == TileType.Stair)
-                    prefabToGenerate = _stairTile;
-                else if (currentTile.tileType == TileType.Iron)
-                    prefabToGenerate = _ironTile;
-                else if (currentTile.tileType == TileType.Food)
-                    prefabToGenerate = _jellyTile;
-                else if (currentTile.tileType == TileType.Hole)
-                    prefabToGenerate = _holeTile;
-                else if (currentTile.tileType == TileType.Coal)
-                    prefabToGenerate = _coalTile;
-                else if (currentTile.tileType == TileType.Diamond)
-                    prefabToGenerate = _diamondTile;
-
-                if (prefabToGenerate != _blankTile)
+                if(currentTile.tileType != TileType.Blank && currentTile.tileType!= TileType.Spawn)
                 {
 
-                    GameObject go = Instantiate(prefabToGenerate, new Vector3(0, 0, 0), Quaternion.identity);
-                    SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
-                    BreakableRock r = go.GetComponent<BreakableRock>();
-
-                    if (r != null)
-                    {
-                        r.CreateSettings(currentTile.oreAmount, currentTile.health, _currentFloor, mineType, i + j, currentTile);
-                    }
-
-
+                    GameObject go = TilePool.Instance.PullInactiveObjectOfTileType(currentTile.tileType);
+                    Vector3 scl = go.transform.localScale;
                     go.transform.parent = transform;
+                    go.transform.localScale = scl;
                     go.transform.position = new Vector3(x, y, 0);
 
 
-                    if (currentTile.tileType == TileType.Spawn)
-                        _playerObject.transform.position = new Vector3(x, y, 0);
+                    BreakableRock r = go.GetComponent<BreakableRock>();
+                    if (r != null) r.CreateSettings(currentTile.oreAmount, currentTile.health, _currentFloor, mineType, i + j, currentTile);
+
+                    go.SetActive(true);
 
                     _tilesInScene[i+j] = go;
 
+                    //    if (currentTile.tileType == TileType.Spawn)
+                    //        _playerObject.transform.position = new Vector3(x, y, 0);
+
                 }
-
-
                 x += _tileWidth;
             }
             x = _adjustedX;
@@ -299,8 +284,10 @@ public class GridCreator : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if(child.tag != "Player" && child.tag != "Axe" && child.tag != "GridEssential")
-               Destroy(child.gameObject);
+            //if(child.tag != "Player" && child.tag != "Axe" && child.tag != "GridEssential")
+            //   Destroy(child.gameObject);
+            PooledObject o = child.GetComponent<PooledObject>();
+            if (o != null) TilePool.Instance.ReturnObject(o);
         }
     }
 

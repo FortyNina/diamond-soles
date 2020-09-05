@@ -93,6 +93,7 @@ public abstract class GameObjectPool : MonoBehaviour, IPool
     {
         o.Active = false;
         o.transform.parent = transform.parent;
+        o.transform.localPosition = Vector3.zero;
     }
 
     

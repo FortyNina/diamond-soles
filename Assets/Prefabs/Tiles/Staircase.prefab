@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2265519292155366237}
   - component: {fileID: 7426459832836051946}
   - component: {fileID: 7157222622709404004}
+  - component: {fileID: 2243542782608215293}
   m_Layer: 0
   m_Name: Staircase
   m_TagString: Staircase
@@ -141,3 +142,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a2bf7ccc7794d23ad8249238c4bdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2243542782608215293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769796296754416837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26e8c1c494264f7cb91633b884f05ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorNumber: 0
+  mineType: 0
+  index: 0
+  tileType: 3
