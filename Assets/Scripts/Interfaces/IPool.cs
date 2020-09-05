@@ -9,10 +9,6 @@ public interface IPool
     void DestroyPool();
     void ExpandPool();
 
-    List<T> FindPooledObjectsOfType<T>();
-    List<T> FindActiveObjectsOfType<T>();
-    List<T> FindInactiveObjectsOfType<T>();
-
-    T PullActiveObjectOfType<T>();
+    T PullInactiveObjectOfType<T>();
     void ReturnObject(PooledObject o);
 }

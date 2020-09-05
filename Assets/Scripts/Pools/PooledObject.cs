@@ -22,8 +22,8 @@ public class PooledObject : MonoBehaviour
     public IPool ParentPool
     {
         get { return _parentPool; }
-        set { ParentPool = value; }
+        set { _parentPool = value; }
     }
 
-
+   
 }
